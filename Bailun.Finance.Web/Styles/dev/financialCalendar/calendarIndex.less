@@ -1,0 +1,170 @@
+﻿@import (reference) "../../glup/PublicDefind.less";//引入方法
+@import (reference) "../../glup/Animation.less";//引入方法
+@calendarImg:'@{ImgUrl}/calendar/';
+body{background:@Default_bg;color:@FontColor_1;}
+
+.area{   
+    margin-bottom:25px; 
+    .heading{
+        border-top:1px solid @border_color;
+        h3{font-size:16px;font-weight:bold;padding:8px 17px;border-top:3px solid @MainColor_5;display: inline-block;position: relative;top: -1px;float:left;}
+        span{float:right;line-height:40px;color:@FontColor_3;}
+    }       
+}
+.main{
+    margin:20px auto;width:@DefindWidth;position:relative;
+    .left{
+        width:100%;float:left;
+        .week-pick{
+            margin-bottom:20px;
+            .next,.prev{
+                color:@MainColor_5;line-height:1.5;padding:0 12px;border:1px solid @MainColor_5;.border-radius(12px);cursor:pointer;
+                &:hover{background:@MainColor_5;color:#fff;}
+            }
+            .next{float:left;}
+            .prev{float:left;}
+            .week-date{
+                margin-left:20px;float:left;margin-top:3px;
+                li{
+                    display:inline-block;margin-right:22px;color:@FontColor_2;position:relative;cursor:pointer;width:75px;*display:inline;*zoom:1;
+                    em{margin-right:5px;}
+                    b{font-weight:normal;}
+                    i{position:absolute;.triangle(up,8px,8px,@MainColor_5);left:50%;.transform(translateX(-50%));margin-top:-5px;display:none;}
+                    &.active{
+                        color:@MainColor_5;
+                        i{display:block;}
+                    }
+                }
+            }
+        }
+        .main-board{
+            background:#fff;.box-shadow( 0,0,16px,0,rgba(195, 195, 195, 0.18));
+            .step-pick{
+                padding:12px;border-bottom:1px solid @border_color;color:@FontColor_2;
+                .title{float:left;margin-right:30px;line-height:1.5;padding:0 5px;color:@FontColor_3;}
+                .item{
+                    float:left;
+                    dd{
+                        display:inline-block;margin-right:30px;line-height:1.5;padding:0 5px;.border-radius(3px);cursor:pointer;*display:inline;*zoom:1;
+                        &.active{background:@MainColor_5;color:#fff;}
+                    }
+                }
+                .date-picker{
+                    float:right;position:relative;
+                    input{line-height:26px;height:26px;line-height:26px\9;height:26px\9;background:#e6f5fb /*url('@{calendarImg}calendar.png')*/ no-repeat 5px center;color:@MainColor_5;.border-radius(3px);padding: 0 10px 0 26px;cursor:pointer;width:120px;box-sizing:border-box;font-size:14px;vertical-align:middle;}
+                    img{width:16px;vertical-align:middle;position: absolute; margin: 5px 0 0 5px;}
+                    em{vertical-align:middle;margin:0 5px;}
+                    i{display:inline-block;.triangle(up,4px,4px,@MainColor_5);position:absolute;position: absolute;right: 6px;top: 7px;*top:-15px;}
+                }
+            }
+            .loading{
+                height:300px;
+            }
+            .info-main{
+                color:@FontColor_1;border-collapse: collapse;text-align:center;width: 100%;
+                th{font-weight:bold;border-bottom:1px solid @border_color;line-height: 2;padding:0 6px;line-height:2.5;}
+                tbody{
+                    tr{
+                        td{
+                            border-bottom:1px dotted @border_color;padding:6px 8px;line-height: 2.4;
+                            &.no-public{
+                                img{width:16px;vertical-align:middle;height:16px}
+                                em{vertical-align:middle;/*margin-left:3px;*/}
+                            }
+                            &.no-data{
+                                font-size: 14px;line-height: 2;height:40px;padding: 50px 0;
+                                img{margin-right:10px;vertical-align:middle;width: 30px;height:33px}
+                                em{vertical-align:middle;}
+                            }
+                            &.content{                                
+                                img{width:40px;vertical-align:middle;margin-right: 10px;height:40px;}
+                                p{display:inline-block;vertical-align:middle;line-height:1.6;width: 370px;}
+                            }
+                            
+                            .front-val{
+                                position:relative;
+                                &:hover{span{display:block;}}
+                                &:after{position:absolute;content:'';width: 5px;height: 5px;border-radius: 50%;background-color: #ffae29;right: -3px;top: -2px;}
+                                span{position:absolute;display: none;left: 0;top: 28px;width: 60px;padding: 2px;font-size: 12px;color: #ffae29;background-color: #fff;border: 1px solid #eaeaea;z-index: 99;line-height:1.5;text-align:center;}
+                            }
+                        }
+                    }
+                }
+                .highlight{color:#ff1a30;}
+                .time{color:@FontColor_2;border-right:1px solid @border_color;}
+                .ensign{
+                    border-right:1px solid @border_color;
+                    img{width:22px;height:22px;/*.border-radius(50%);*/vertical-align:middle;.border-radius(2px);.box-shadow(0, 0 ,4.5px ,0, rgba(0, 0, 0, 0.22));}
+                }
+                .star-level{
+                     &.low{
+                        i{background:#fff url('@{calendarImg}star-y.png') 0 0 no-repeat;}
+                    }
+                    width:69px;height:14px;background: #fff url('@{calendarImg}star.png') 0 -14px no-repeat;position:relative;display: inline-block;
+                    i{display:inline-block;position:absolute;background:#fff url('@{calendarImg}star.png') 0 0 no-repeat;height:100%;top:0;left:0;}
+                }
+                .trend{
+                    line-height:1.6;
+                    span{
+                        display:inline-block;padding:0 8px;
+                        width:118px;box-sizing:border-box;
+                        em{margin-right:5px;}
+                    }
+                    .red{color:#ff1a30;border:1px solid #ff1a30;}
+                    .green{color:#14b971;border:1px solid #14b971;}
+                    .blue{/*color:@MainColor_5;border:1px solid @MainColor_5;*/}
+                    .yellow{color:#ffae29;border:1px solid #ffae29;}
+                    &.greater{
+                        span{color:#fff;}
+                        .red{background:#ff1a30;}
+                        .green{background:#14b971;}
+                        .blue{/*background:@MainColor_5;*/color:inherit;}
+                        .yellow{background:#ffae29;width: 83px;box-sizing: border-box;width:118px;box-sizing:border-box;}
+                    }
+                }
+                .detail{
+                    img{width:17px;height:15px}
+                }
+            }
+        }
+        .area.economic{
+            margin-top:30px;
+        }
+    }
+    .right{
+        float:right;width:326px;               
+    }
+}
+#effect{
+    img{margin-left:8px;vertical-align:middle;}
+    cursor:pointer;
+}
+.effect{
+  width:242px;background-color:#fff;padding: 10px 10px 0 10px;box-sizing:border-box;position: absolute;top: 180px;right: 40px;.box-shadow(0, 0, 6.5px, 0 ,rgba(195,195,195,.8));display:none;z-index:1000;/*border:1px solid #dedede;*/
+  &.active{display:block;}
+  ul{
+      li{
+        float:left;width:63px;cursor:pointer;color:@FontColor_2;line-height: 16px;margin-bottom:15px;
+        span{
+            background-color:#ccc;border-radius:5px;padding: 0 3px;display: table-cell;margin-right:5px;
+             &.brisk{background-color:#00aded}
+             img{width:10px;vertical-align:middle;}            
+        }
+         em{display:table-cell;vertical-align:middle;padding-left:5px;}
+     }
+      margin-left: 30px;float: left;
+  }
+  .title-a,.title-b{
+   font-weight:bold;position: absolute;left:0px;
+  }  
+  .variety-a{
+      border-bottom:1px solid #eaeaea;height: 92px;position:relative;
+  }
+  .variety-b{
+    padding-top:8px; position:relative;
+  }
+  .profit{
+      font-size:14px;color:@FontColor_1;font-weight:bold;margin-bottom:8px;
+  }
+}
+

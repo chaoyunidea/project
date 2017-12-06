@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="/Scripts/glup/jquery/jquery-1.8.3.min.js?v=e128811631"></script>
+    <script src="https://gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="https://gajsapi.fx110.com/script/public/signalr/signalr.1.0.1.min.js?4"></script>
+    <script>
+
+        var Datetime = 0, ajaxPoll, isPoll = true, isLongSingalr = false,isFast = false,FastDate = 0;
+        //debugger;
+       
+        pollingNews = (function () {
+           
+            var ajax = function () {
+                    $.ajax({
+                        type: 'post',
+                        url: '/news/GetFinanceBriefByTime',                     
+                        data: { currentTime: Datetime },
+                        success: function (data) {
+                                isFast = FastDate == 0 ? 10000 : false;
+                                FastDate++;
+                                if (data.code == 0) { 
+                                    var dataMain = eval('(' + data.bodyMessage + ')');
+                                    if (dataMain.length > 0) { Datetime = dataMain[0].ReleasedDate; }
+                                    for (var i = dataMain.length - 1; i >= 0; i--) {
+                                      //  console.log(JSON.stringify(dataMain[i]));
+                                        window.parent.newsSignalrFn(JSON.stringify(dataMain[i]), isFast);
+                                    }
+                                }
+                        }
+                    })
+
+             
+            }
+            return {
+                start: function () {
+                        this.ajax()
+                },
+                stop: function () { clearTimeout(ajaxPoll) },
+                ajax: ajax
+            }
+        })();
+        
+
+        var ul = $(window.parent.document).find('.news-content .news-list');
+        for (var i = 0; i < ul.length; i++)
+        {
+            Datetime = Datetime <= 0 ? $(ul[i]).find('li:eq(0)').data('date') : Math.max(Datetime, $(ul[i]).find('li:eq(0)').data('date'));
+        }
+
+        function singalr() {
+            signalrServer = new signalr(
+                        {
+                            hubjs: '/Scripts/glup/OCS/newshubs.js?v=cfbc6af0f0',
+                            hubConnection: 'https://news' + (Math.floor(Math.random() * 40) + 1) + '.bailun.com/signalr',
+                            createHubProxy: 'NewsHub',
+                            connHunProxyOn: 'ReceiveNews',
+                            disconnected: function () {
+                                isLongSingalr = true;
+                            }
+                            
+            },
+            function (that) {
+            },
+            function (json) {
+                window.parent.newsSignalrFn(json);
+                time = JSON.parse(json).ReleasedDateLong.replace('T', ' ').replace('Z', '').replace(/-/g, "/");
+                Datetime = new Date(time).getTime()
+           
+            },
+            function (state) {//: 0正在连接 1已连接 2重新连接 4断开连接
+                            if (state.newState == 1) {
+                        pollingNews.start();
+                            } else if (state.newState == 4) {
+                                singalr();
+                }
+            });
+        }
+
+
+        singalr();
+    </script>
+
+
+
+
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿<link href="~/Styles/dist/Public/footer.css?v=c586fdfd1c" rel="stylesheet" />
+<div id="footer">
+    <div class="Bottom_nav">
+        <div class="Bottom clearfix">
+            <div class="QR_code">
+                @*<img src="~/Images/public/scan.png" />                
+                <p>扫码关注微信公众号</p>*@
+                @*<dl class="share">
+                    <dd>
+                        <img src="~/Images/public/share-weibo.png" />
+                    </dd>
+                    <dd>
+                        <img src="~/Images/public/share-qq.png" />
+                    </dd>
+                    <dd>
+                        <img src="~/Images/public/share-wechat.png" />
+                    </dd>                    
+                </dl>*@
+            </div>
+            <div class="left-part">
+                <div class="foot-logo">
+                    <img src="~/Images/public/logo.png" />
+                    <em>最全的财经新闻和产品报价</em>
+                </div>
+                @*
+                <div class="Bottom_Link">
+                    <a href="/home/about#bg_one" target="_blank">关于拜仑财经</a>
+                    <a>|</a>
+                    <a href="/home/about#bg_even" target="_blank">联系我们</a>
+                    <a>|</a>
+                    <a href="/home/about#bg_one" target="_blank">欢迎投稿</a>
+                    <a>|</a>
+                    <a href="/home/about#bg_even" target="_blank">Advertise</a>
+                    <a>|</a>
+                    <a href="/home/about#bg_six" target="_blank">友情链接</a>
+                    <a>|</a>
+                    <a href="/home/about#bg_one" target="_blank">负责声明</a>
+                </div>*@
+                <div class="font_div">
+                    <p class="max_top"><em>反馈建议：</em> service@bailun.com</p>
+                    @*<p class="min_top"><em>客服电话：</em> 400-8737-110</p>*@
+                    <p class="min_top"><em>工作时间：</em> 周一到周五 8:30-18:00</p>  
+                    <p class="min_top">Copyright &copy; <em>@DateTime.Now.Year BaiLun.COM </em>| ALL Rights Resrved | 湘ICP备17017611号-1</p>                  
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="bot">
+        <div class="max_bot">
+            <p>Copyright &copy; <em>@DateTime.Now.Year BaiLun.COM </em>| ALL Rights Resrved | 湘ICP备17017611号-1</p>
+        </div>
+    </div>*@
+    @if (!string.IsNullOrEmpty(CustomConfig.Cnzz))
+    {
+        <span style="filter:alpha(opacity=0);-moz-opacity:0;opacity:0;display:none"><script src="@CustomConfig.Cnzz" language="JavaScript"></script></span>
+    }   
+</div>

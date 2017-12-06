@@ -1,0 +1,92 @@
+﻿@import (reference) "../../glup/PublicDefind.less";//引入方法
+@import (reference) "../../glup/Animation.less";//引入方法
+@priceImg:'@{ImgUrl}/marketPrice/';
+body{background:@Default_bg;color:@FontColor_1;}
+
+.area{   
+    margin-bottom:25px; 
+    .heading{
+        border-top:1px solid @border_color;
+        h3{font-size:16px;font-weight:bold;padding:8px 17px;border-top:3px solid @MainColor_5;display: inline-block;position: relative;top: -1px;float:left;}
+        span{float:right;line-height:40px;color:@FontColor_3;}
+    }       
+}
+.main .left.reverse .area .content ul li .inside .total.down {color:#ff1a30;}
+.main .left.reverse .area .content ul li .inside .total.up {color:#14b971;}
+.main .left.reverse .area .content ul li .inside .total.up i{background-image:url(/Images/marketPrice/g-up-2.png);}
+.main .left.reverse .area .content ul li .inside .total.down i{background-image:url(/Images/marketPrice/r-down-2.png);}
+
+.main{
+    margin:10px auto 20px;width:@DefindWidth;
+    .left{
+        width:823px;float:left;
+        .price{
+            .heading{}
+            .content{
+                .box-shadow(0 ,0, 16px ,0 ,rgba(195, 195, 195, 0.18));padding-bottom:50px;background:#fff;min-height:800px;
+                ul{
+                   padding:10px 0; 
+                    li{
+                        background:#fff;padding:0 20px;
+                        a{display:block;}
+                        &:hover{background:#f7f7f7;}
+                        &.bit-list{
+                            .name{width:140px;}
+                            .param{width:200px;}
+                            .chart{width:160px;}
+                            .exchange{width:80px;display:inline-block;vertical-align:middle;}
+                        }
+                        .inside{padding:8px 0 10px;border-bottom:1px solid #f5f5f5;}
+                        .f-l{float:left;}
+                        .name{
+                            display:inline-block;width:180px;vertical-align: middle;*display:inline;*zoom:1;
+                            h2{font-size:18px;font-weight:bold;margin-top: 3px;}
+                            p{font-size:14px;color:@FontColor_3; margin-top: 8px;}
+                        }
+                        .param{
+                            display:inline-block;vertical-align: middle;width: 240px;*display:inline;*zoom:1;/*margin-right:10px;*/
+                            dd{
+                                display:inline-block;/*width: 70px;*/vertical-align:top;*display:inline;*zoom:1;/*text-align:center;*/width:50%;line-height:1.8;
+                                h5{color:@FontColor_3;/*display: block;*/margin-right: 8px;*zoom:1;display:inline-block;}
+                                p{color:@FontColor_1;display: inline-block;*zoom:1;}
+                            }
+                        }
+                        .data-area{display:inline-block;vertical-align:middle;}
+                        .total{
+                            display:inline-block;text-align:left;vertical-align: middle;width:155px; margin:0 10px 0 10px;*display:inline;*zoom:1;text-align:left;
+                            &.up{
+                                color:#ff1a30;
+                                i{background:url('@{priceImg}r-up-2.png');}
+                            }
+                            &.down{
+                                color:#14b971;
+                                i{background:url('@{priceImg}g-down-2.png');}
+                            }
+                            &.none{
+                                color:#999;
+                                i{display:inline;}
+                            }
+                            .big{em{font-size:24px;vertical-align:middle;font-weight:bold;line-height:28px;}}
+                            .small{em{font-size:14px;vertical-align:middle;}}
+                            
+                            i{display:inline-block;width:7px;height:9px;margin-right:5px;vertical-align:middle;*display:inline;*zoom:1;}
+                        }
+                        .chart{
+                            width:180px;height:54px;float:right;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+    .right{
+        float:right;width:326px;padding-top: 62px;        
+    }
+}
+
+
+.divScrollBar{
+    top:34px !important;
+    &>div{background:rgba(0,0,0,.3);.border-radius(2px)}
+}

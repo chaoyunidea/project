@@ -1,0 +1,26 @@
+﻿//字体大小计算
+ .adaptationSize(@type,@values:12px,@num:1) when (@num <4){
+        [data-dpr="@{num}"] &{
+            @{type}:@values * @num;
+        }
+        .adaptationSize(@type,@values,@num+1);
+    }
+
+  //边距大小计算
+.adaptationPM(@type,@top:0,@right:0,@btm:0,@left:0){
+        [data-dpr="1"] &{
+        @{type}:@top @right @btm @left;
+    }
+    [data-dpr="2"] &{
+          @{type}:@top * 2 @right * 2 @btm * 2 @left * 2;
+    }
+    [data-dpr="3"] &{
+          @{type}:@top * 3 @right * 3 @btm * 3 @left * 3;
+    }
+}
+
+
+
+
+   
+

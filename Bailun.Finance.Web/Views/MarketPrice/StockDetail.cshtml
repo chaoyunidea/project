@@ -1,0 +1,144 @@
+﻿@using Bailun.Finance.Model.Quote;
+@using Bailun.Common.Extensions;
+
+@{
+    ViewBag.Title = "拜仑财经" + '-' + ViewBag.Title;
+    ViewBag.Keywords = "拜仑财经市场报价,拜仑财经实时报价";
+    ViewBag.Description = "拜仑财经实时报价";
+    Layout = "/Views/Shared/_LayoutPrice.cshtml";
+
+    var model = Model as QueryTimelyModel;
+    if (model == null)
+    {
+        model = new QueryTimelyModel();
+    }
+}
+
+@section style{    
+    <link href="~/Styles/dist/marketPrice/stockDetail.css?v=a03e413237" rel="stylesheet" />  
+    <link href="~/IconFont/iconfont.css" rel="stylesheet" />
+    <script type="text/javascript">
+        var productId = '@ViewBag.productId';
+        var plateId = '@ViewBag.plateId';
+        var marketId = '@ViewBag.marketId';
+    </script>
+    <script type="text/javascript" src="http://www.fx110.com/Script/jquery-1.7.1.js"></script>
+    <script src="~/Scripts/glup/charting_library/charting_library.min.js?v=2c386db710"></script>
+    <script src="~/Scripts/glup/charting_library/datafeed/udf/datafeed.js?v=a38a334136"></script>
+}
+<div class="main clearfix stockDetail" id="main">
+    <div class="left">
+        @Html.Partial("~/Views/SharedView/ControlBar.cshtml")
+        <div class="bread clearfix">
+            @*<span><a href="/marketprice/index">市场报价</a> > </span> <span><a href="/marketprice/hkstock">港股</a>  > </span> <span class="type"><a href="/marketprice/hkstock/">创业板  > </a></span><span id="stockName">上证指数</span>*@
+        </div>
+        <div class="market" >
+            <div class="share">
+                @*分享*@
+                @Html.Partial("~/Views/SharedView/BeShare.cshtml")
+            </div>
+            <div class="data clearfix" id="marketData">
+                @*<div class="title">
+                    <div class="name">
+                        <h2>上证指数</h2>
+                        <p> · (0.000001)</p>
+                    </div>
+                    <div class="digital up">
+                        <h2>3147.45<i></i></h2>
+                        <p class="updowns"><em>+8.76</em><em class="percent">+0.76%</em></p>
+                        <p class="status"><em>已收盘</em><em class="time">2017-07-17 22:41</em></p>
+                    </div>
+                </div>
+                <dl class="compares">
+                    <dd><p>今开:</p><em>564.25</em></dd>
+                    <dd><p>最高:</p><em>465.36</em></dd>
+                    <dd><p>成交额:</p><em></em>456.55</dd>
+                    <dd><p>市值:</p><em>56.32</em></dd>
+                </dl>
+                <dl class="compares">
+                    <dd><p>昨收:</p><em>564.25</em></dd>
+                    <dd><p>最低:</p><em>465.36</em></dd>
+                    <dd><p>成交量:</p><em></em>456.55</dd>
+                    <dd><p>振幅:</p><em>56.32</em></dd>
+                </dl>
+                <dl class="compares">
+                    <dd><p>市盈率:</p><em>564.25</em></dd>
+                    <dd><p>市净率:</p><em>465.36</em></dd>
+                    <dd><p>换手率:</p><em></em>456.55</dd>
+                    <dd><p>委比:</p><em>56.32</em></dd>
+                </dl>*@
+            </div>
+            <div id="tv_chart_container" class="highcharts">
+
+            </div>
+        </div>
+     </div>
+    <div class="right">
+        <div class="area rightTop">
+            <div class="heading clearfix">
+                <h3>五档盘口</h3>
+            </div>
+            <div class="content stock" id="stock">
+                @*<div class="thead">
+                    <p class="tleft">委比<em>+26.00%</em></p>
+                    <p class="tright">委差<em>+480</em></p>
+                </div>
+                <ul>
+                    <li>
+                        <p class="tleft">卖⑤<em>16.73</em></p>
+                        <p class="tright">465</p>
+                    </li>
+                    <li>
+                        <p class="tleft">卖⑤<em>16.73</em></p>
+                        <p class="tright">465</p>
+                    </li>
+                </ul>*@
+            </div>
+        </div>
+        <div class="area timeDeal">
+            <div class="heading clearfix">
+                <h3>分时成交</h3>
+            </div>
+            <div class="content deal" id="deal">
+                @*<div class="thead">
+                    <p class="tleft">时间</p>
+                    <p class="tmiddle">成交价(元)</p>
+                    <p class="tright">成交量(股)</p>
+                </div>
+                <ul>
+                    <li>
+                        <p class="tleft">12:30</p>
+                        <p class="tmiddle">465</p>
+                        <p class="tright">465</p>
+                    </li>
+                    <li>
+                        <p class="tleft">12:30</p>
+                        <p class="tmiddle">465</p>
+                        <p class="tright">465</p>
+                    </li>
+                    <li>
+                        <p class="tleft">12:30</p>
+                        <p class="tmiddle">465</p>
+                        <p class="tright">465</p>
+                    </li>
+                </ul>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section script{
+    <script src="~/gulp/gulp/requireBuilder/jsFileRoute.js?v=654db78f43"></script>
+    <script src="/Scripts/glup/jquery/json2.js?v=39b6ed277e"></script>
+    <script src="//gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="~/Scripts/glup/OCS/jquery.signalR-2.2.1.js?v=f12635d330"></script>
+    <script src="http://fxchatnews.fx110.com:1009/signalr/hubs" type="text/javascript"></script>
+    <script src="//gajsapi.fx110.com/script/public/masklayer/masklayer.min.js"></script>
+    <script src="~/Scripts/glup/highStock/highstock.js?v=c3d47eb237"></script>
+    <script src="//gajsapi.fx110.com/script/public/jsScroll/jsScroll.min.js"></script>  
+    <script src="~/Scripts/glup/avalon_two/avalon.js?v=975735a0e4"></script>
+    <script src="/Scripts/glup/require.min.js?v=7658ede0c2" data-main="/Scripts/dist/marketPrice/stockDetail.js?v=258bdf357f"></script>
+    <script src="~/Scripts/glup/charting_library/charting_library.min.js?v=2c386db710"></script>
+    <script src="~/Scripts/glup/charting_library/datafeed/udf/datafeed.js?v=a38a334136"></script>
+}

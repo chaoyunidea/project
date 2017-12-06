@@ -1,0 +1,32 @@
+﻿@import (reference) "../../glup/PublicDefind.less";//引入方法
+@import (reference) "../../glup/Animation.less";//引入方法
+
+.quote{
+    .content{
+        background:#fff;padding:10px 0;
+        .chart{width:100%;height:200px;padding: 0 5px;box-sizing: border-box;}
+        table{
+            width:100%;border-collapse:collapse;text-align:left;
+            tr{
+                height:51px;padding:0 10px;cursor:pointer;border-bottom:1px solid #eaeaea; 
+                &:hover{background: #fafafa;}
+                &.active{background: #e4f0f7;}
+                td{
+                    padding:0 5px;
+                    &.title{ color:#323232;padding-left: 10px;}
+                    &.td3{ text-align:left; margin-left:10px;text-indent:10px;}
+                    &.td4{text-align:right;padding-right: 10px;}
+                }
+                em img{width:7px;padding-right:2px;}
+                &.up{.td3,.td4{color: #ff4a68; }}
+                &.down{.td3,.td4{color: #14b971;}}
+                &.none{.td3,.td4{color: #999;}}
+                &:last-child{border:none;}
+            }
+        }
+        //loading
+        ._mask_loadDiv{
+            z-index:999 !important;
+        }
+    }
+}

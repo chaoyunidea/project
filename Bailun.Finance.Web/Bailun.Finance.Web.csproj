@@ -1,0 +1,1091 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EA6EF7DA-3DB3-4235-A882-21C67D504877}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bailun.Finance.Web</RootNamespace>
+    <AssemblyName>Bailun.Finance.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FX110.Cache">
+      <HintPath>..\packages\FX110.Cache.1.1.2\lib\FX110.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="FX110.ClientSecurity">
+      <HintPath>..\packages\ClientSecurity.1.1.4\lib\FX110.ClientSecurity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\DomainRoute.cs" />
+    <Compile Include="App_Start\TimerTaskConfig.cs" />
+    <Compile Include="Controllers\DownloadController.cs" />
+    <Compile Include="Controllers\IndicatorController.cs" />
+    <Compile Include="Controllers\ChartDataController.cs" />
+    <Compile Include="Controllers\MarketPriceViewController.cs" />
+    <Compile Include="Controllers\OpenBetaController.cs" />
+    <Compile Include="Controllers\SmsCodeController.cs" />
+    <Compile Include="Service\CookieService.cs" />
+    <Compile Include="Service\FinanceNewsService.cs" />
+    <Compile Include="Service\FinanceCalendarService.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\CustomConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\MarketPriceController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\SharedViewController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\FinanceIndicatorService.cs" />
+    <Compile Include="Service\FinanceQuoteService.cs" />
+    <Compile Include="Service\Helper\BaojiaSvgHelper.cs" />
+    <Compile Include="Service\Helper\StaticPageHelper.cs" />
+    <Compile Include="Service\RegisterService.cs" />
+    <Compile Include="Service\SmsService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Txt\exclude_url.txt" />
+    <Content Include="Data\Txt\url_generatestaticpages_1.txt" />
+    <Content Include="Data\Txt\url_generatestaticpages_2.txt" />
+    <Content Include="Data\Txt\url_generatestaticpages_3.txt" />
+    <Content Include="Data\Txt\url_generatestaticpages_4.txt" />
+    <Content Include="error.html" />
+    <Content Include="favicon.ico" />
+    <Content Include="flash\ocs\ocsmsg.mp3" />
+    <Content Include="flash\ocs\sound-tip.mp3" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="gulp\gulp\Config.js" />
+    <Content Include="gulp\gulp\requireBuildemin\jsFileRoute.js" />
+    <Content Include="gulp\gulp\requireBuilder\builder.js" />
+    <Content Include="gulp\gulp\requireBuilder\jsFileRoute.js" />
+    <Content Include="gulp\gulp\requireBuilder\requireConfig.js" />
+    <Content Include="gulp\gulp\util\handleError.js" />
+    <Content Include="gulp\lib\jquery-1.8.3.min.js" />
+    <Content Include="gulp\lib\require.js" />
+    <Content Include="gulp\lib\underscore.js" />
+    <Content Include="IconFont\iconfont.css" />
+    <Content Include="IconFont\iconfont.svg" />
+    <Content Include="Images\banner\rectangle\America.png" />
+    <Content Include="Images\banner\rectangle\Australian.png" />
+    <Content Include="Images\banner\rectangle\Austria.png" />
+    <Content Include="Images\banner\rectangle\Belgium.png" />
+    <Content Include="Images\banner\rectangle\Cambodia.png" />
+    <Content Include="Images\banner\rectangle\Canada.png" />
+    <Content Include="Images\banner\rectangle\Chech.png" />
+    <Content Include="Images\banner\rectangle\China.png" />
+    <Content Include="Images\banner\rectangle\default_country.png" />
+    <Content Include="Images\banner\rectangle\Denmark.png" />
+    <Content Include="Images\banner\rectangle\Ecuador.png" />
+    <Content Include="Images\banner\rectangle\England.png" />
+    <Content Include="Images\banner\rectangle\Europe.png" />
+    <Content Include="Images\banner\rectangle\Finland.png" />
+    <Content Include="Images\banner\rectangle\France.png" />
+    <Content Include="Images\banner\rectangle\Germany.png" />
+    <Content Include="Images\banner\rectangle\Greece.png" />
+    <Content Include="Images\banner\rectangle\Holland.png" />
+    <Content Include="Images\banner\rectangle\Hongkong.png" />
+    <Content Include="Images\banner\rectangle\Iceland.png" />
+    <Content Include="Images\banner\rectangle\India.png" />
+    <Content Include="Images\banner\rectangle\Indonesia.png" />
+    <Content Include="Images\banner\rectangle\Iran.png" />
+    <Content Include="Images\banner\rectangle\Ireland.png" />
+    <Content Include="Images\banner\rectangle\Italy.png" />
+    <Content Include="Images\banner\rectangle\Japan.png" />
+    <Content Include="Images\banner\rectangle\Katar.png" />
+    <Content Include="Images\banner\rectangle\Korea.png" />
+    <Content Include="Images\banner\rectangle\Liechtenstein.png" />
+    <Content Include="Images\banner\rectangle\Luxembourg.png" />
+    <Content Include="Images\banner\rectangle\Malaysia.png" />
+    <Content Include="Images\banner\rectangle\Mexico.png" />
+    <Content Include="Images\banner\rectangle\NewZealand.png" />
+    <Content Include="Images\banner\rectangle\Norway.png" />
+    <Content Include="Images\banner\rectangle\Peru.png" />
+    <Content Include="Images\banner\rectangle\Philippines.png" />
+    <Content Include="Images\banner\rectangle\Portugal.png" />
+    <Content Include="Images\banner\rectangle\Puerto Rico.png" />
+    <Content Include="Images\banner\rectangle\Russia.png" />
+    <Content Include="Images\banner\rectangle\Singapore.png" />
+    <Content Include="Images\banner\rectangle\Slovakia.png" />
+    <Content Include="Images\banner\rectangle\Slovenia.png" />
+    <Content Include="Images\banner\rectangle\Spain.png" />
+    <Content Include="Images\banner\rectangle\Sweden.png" />
+    <Content Include="Images\banner\rectangle\Switzerland.png" />
+    <Content Include="Images\banner\rectangle\Taiwan.png" />
+    <Content Include="Images\banner\rectangle\Thailand.png" />
+    <Content Include="Images\banner\rectangle\Ukraine.png" />
+    <Content Include="Images\banner\rectangle\Viet Nam.png" />
+    <Content Include="Images\banner\square\America.png" />
+    <Content Include="Images\banner\square\Australian.png" />
+    <Content Include="Images\banner\square\Austria.png" />
+    <Content Include="Images\banner\square\Belgium.png" />
+    <Content Include="Images\banner\square\Cambodia.png" />
+    <Content Include="Images\banner\square\Canada.png" />
+    <Content Include="Images\banner\square\Chech.png" />
+    <Content Include="Images\banner\square\China.png" />
+    <Content Include="Images\banner\square\default_country.png" />
+    <Content Include="Images\banner\square\Denmark.png" />
+    <Content Include="Images\banner\square\Ecuador.png" />
+    <Content Include="Images\banner\square\England.png" />
+    <Content Include="Images\banner\square\Europe.png" />
+    <Content Include="Images\banner\square\Finland.png" />
+    <Content Include="Images\banner\square\France.png" />
+    <Content Include="Images\banner\square\Germany.png" />
+    <Content Include="Images\banner\square\Greece.png" />
+    <Content Include="Images\banner\square\Holland.png" />
+    <Content Include="Images\banner\square\Hongkong.png" />
+    <Content Include="Images\banner\square\Iceland.png" />
+    <Content Include="Images\banner\square\India.png" />
+    <Content Include="Images\banner\square\Indonesia.png" />
+    <Content Include="Images\banner\square\Iran.png" />
+    <Content Include="Images\banner\square\Ireland.png" />
+    <Content Include="Images\banner\square\Italy.png" />
+    <Content Include="Images\banner\square\Japan.png" />
+    <Content Include="Images\banner\square\Katar.png" />
+    <Content Include="Images\banner\square\Korea.png" />
+    <Content Include="Images\banner\square\Liechtenstein.png" />
+    <Content Include="Images\banner\square\Luxembourg.png" />
+    <Content Include="Images\banner\square\Malaysia.png" />
+    <Content Include="Images\banner\square\Mexico.png" />
+    <Content Include="Images\banner\square\NewZealand.png" />
+    <Content Include="Images\banner\square\Norway.png" />
+    <Content Include="Images\banner\square\Peru.png" />
+    <Content Include="Images\banner\square\Philippines.png" />
+    <Content Include="Images\banner\square\Portugal.png" />
+    <Content Include="Images\banner\square\Puerto Rico.png" />
+    <Content Include="Images\banner\square\Russia.png" />
+    <Content Include="Images\banner\square\Singapore.png" />
+    <Content Include="Images\banner\square\Slovakia.png" />
+    <Content Include="Images\banner\square\Slovenia.png" />
+    <Content Include="Images\banner\square\SouthAfrica.png" />
+    <Content Include="Images\banner\square\Spain.png" />
+    <Content Include="Images\banner\square\Sweden.png" />
+    <Content Include="Images\banner\square\Switzerland.png" />
+    <Content Include="Images\banner\square\Taiwan.png" />
+    <Content Include="Images\banner\square\Thailand.png" />
+    <Content Include="Images\banner\square\Ukraine.png" />
+    <Content Include="Images\banner\square\Viet Nam.png" />
+    <Content Include="Images\calendar\bg-show.png" />
+    <Content Include="Images\calendar\calendar1.png" />
+    <Content Include="Images\calendar\go.png" />
+    <Content Include="Images\calendar\goo.png" />
+    <Content Include="Images\calendar\gre.png" />
+    <Content Include="Images\calendar\hui.png" />
+    <Content Include="Images\calendar\loding.gif" />
+    <Content Include="Images\calendar\no-event.png" />
+    <Content Include="Images\calendar\no-holiday.png" />
+    <Content Include="Images\calendar\no-info.png" />
+    <Content Include="Images\calendar\star-y.png" />
+    <Content Include="Images\calendar\top.png" />
+    <Content Include="Images\calendar\triangle.png" />
+    <Content Include="Images\calendar\xia.png" />
+    <Content Include="Images\calendar\zhexian.png" />
+    <Content Include="Images\calendar\zhexian1.png" />
+    <Content Include="Images\calendar\zhuzhuang.png" />
+    <Content Include="Images\calendar\zhuzhuang1.png" />
+    <Content Include="Images\calendar\calendar.png" />
+    <Content Include="Images\calendar\detail-link.png" />
+    <Content Include="Images\calendar\star.png" />
+    <Content Include="Images\download\android.png" />
+    <Content Include="Images\download\apple.png" />
+    <Content Include="Images\download\calendar-bg.jpg" />
+    <Content Include="Images\download\data-bg.jpg" />
+    <Content Include="Images\download\guide.png" />
+    <Content Include="Images\download\m-calendar-bg.jpg" />
+    <Content Include="Images\download\m-data-bg.jpg" />
+    <Content Include="Images\download\m-news-bg.jpg" />
+    <Content Include="Images\download\m-price-bg.jpg" />
+    <Content Include="Images\download\news-bg.jpg" />
+    <Content Include="Images\download\next.png" />
+    <Content Include="Images\download\price-bg.jpg" />
+    <Content Include="Images\indicator\banner-shape.png" />
+    <Content Include="Images\indicator\bar.png" />
+    <Content Include="Images\indicator\close.png" />
+    <Content Include="Images\indicator\close2.png" />
+    <Content Include="Images\indicator\column-hover.png" />
+    <Content Include="Images\indicator\column.png" />
+    <Content Include="Images\indicator\copy.svg" />
+    <Content Include="Images\indicator\download.png" />
+    <Content Include="Images\indicator\fill.png" />
+    <Content Include="Images\indicator\info-hover.png" />
+    <Content Include="Images\indicator\info.png" />
+    <Content Include="Images\indicator\invalid-name.svg" />
+    <Content Include="Images\indicator\line.png" />
+    <Content Include="Images\indicator\page-1.svg" />
+    <Content Include="Images\indicator\pop-close-hover.png" />
+    <Content Include="Images\indicator\pop-close.png" />
+    <Content Include="Images\indicator\restore.png" />
+    <Content Include="Images\indicator\scroll-left-act.png" />
+    <Content Include="Images\indicator\scroll-left.png" />
+    <Content Include="Images\indicator\scroll-right.png" />
+    <Content Include="Images\indicator\scroll-right-act.png" />
+    <Content Include="Images\indicator\table-hover.png" />
+    <Content Include="Images\indicator\table.png" />
+    <Content Include="Images\marketPrice\analyse.png" />
+    <Content Include="Images\marketPrice\clock.png" />
+    <Content Include="Images\marketPrice\close.png" />
+    <Content Include="Images\marketPrice\columnar.png" />
+    <Content Include="Images\marketPrice\g-d-top.png" />
+    <Content Include="Images\marketPrice\g-down-2.png" />
+    <Content Include="Images\marketPrice\g-down.png" />
+    <Content Include="Images\marketPrice\g-up-2.png" />
+    <Content Include="Images\marketPrice\g-up-top.png" />
+    <Content Include="Images\marketPrice\g-up.png" />
+    <Content Include="Images\marketPrice\line.png" />
+    <Content Include="Images\marketPrice\open.png" />
+    <Content Include="Images\marketPrice\r-d-top.png" />
+    <Content Include="Images\marketPrice\r-down-2.png" />
+    <Content Include="Images\marketPrice\r-down.png" />
+    <Content Include="Images\marketPrice\r-up-2.png" />
+    <Content Include="Images\marketPrice\r-up-top.png" />
+    <Content Include="Images\marketPrice\r-up.png" />
+    <Content Include="Images\marketPrice\reopen.png" />
+    <Content Include="Images\marketPrice\search-icon.png" />
+    <Content Include="Images\marketPrice\downup.png" />
+    <Content Include="Images\marketPrice\slide-down.png" />
+    <Content Include="Images\marketPrice\updown.png" />
+    <Content Include="Images\marketPrice\w-down.png" />
+    <Content Include="Images\marketPrice\w-up.png" />
+    <Content Include="Images\news\360.png" />
+    <Content Include="Images\news\android.png" />
+    <Content Include="Images\news\animate-clock.png" />
+    <Content Include="Images\news\apple.png" />
+    <Content Include="Images\news\back.jpg" />
+    <Content Include="Images\news\bailun-scan.png" />
+    <Content Include="Images\news\button.png" />
+    <Content Include="Images\news\chrome.png" />
+    <Content Include="Images\news\cloesPage.png" />
+    <Content Include="Images\news\hui.png" />
+    <Content Include="Images\news\loading.gif" />
+    <Content Include="Images\news\news-start.png" />
+    <Content Include="Images\news\phone-icon.png" />
+    <Content Include="Images\news\point.jpg" />
+    <Content Include="Images\news\QQ.png" />
+    <Content Include="Images\news\QQ1.png" />
+    <Content Include="Images\news\set-down.png" />
+    <Content Include="Images\news\set-down1.png" />
+    <Content Include="Images\news\set-hover.png" />
+    <Content Include="Images\news\set-hover1.png" />
+    <Content Include="Images\news\set-up.png" />
+    <Content Include="Images\news\set-up1.png" />
+    <Content Include="Images\news\set.png" />
+    <Content Include="Images\news\set1.png" />
+    <Content Include="Images\news\share.png" />
+    <Content Include="Images\news\share1.png" />
+    <Content Include="Images\news\star-off.png" />
+    <Content Include="Images\news\star-on.png" />
+    <Content Include="Images\news\weibo.png" />
+    <Content Include="Images\news\weibo1.png" />
+    <Content Include="Images\news\weixin.png" />
+    <Content Include="Images\news\weixin1.png" />
+    <Content Include="Images\public\chart-logo.png" />
+    <Content Include="Images\public\imgClose.png" />
+    <Content Include="Images\public\imgNext.png" />
+    <Content Include="Images\public\imgPrev.png" />
+    <Content Include="Images\public\loading-small.gif" />
+    <Content Include="Images\public\loading.gif" />
+    <Content Include="Images\public\logo.png" />
+    <Content Include="Images\public\Nocontent.png" />
+    <Content Include="Images\public\push.png" />
+    <Content Include="Images\public\scan.png" />
+    <Content Include="Images\public\share-qq.png" />
+    <Content Include="Images\public\share-wechat.png" />
+    <Content Include="Images\public\share-weibo.png" />
+    <Content Include="Images\public\top.png" />
+    <Content Include="Images\public\x.png" />
+    <Content Include="m\image\guide.png" />
+    <Content Include="m\image\Icon Shape.png" />
+    <Content Include="m\script\adaptation.js" />
+    <Content Include="m\script\APPIsInstall\AppInstall.js" />
+    <Content Include="m\script\build.js" />
+    <Content Include="m\script\const.js" />
+    <Content Include="m\script\dist\books\adaptation.js" />
+    <Content Include="m\script\dist\books\APPIsInstall\AppInstall.js" />
+    <Content Include="m\script\dist\books\build.txt" />
+    <Content Include="m\script\dist\books\const.js" />
+    <Content Include="m\script\dist\books\moblie\Android.js" />
+    <Content Include="m\script\dist\books\moblie\booksMethod.js" />
+    <Content Include="m\script\dist\books\moblie\cookies.js" />
+    <Content Include="m\script\dist\books\moblie\ImageMethod.js" />
+    <Content Include="m\script\dist\books\moblie\Ios.js" />
+    <Content Include="m\script\dist\books\moblie\IsLoadMethod.js" />
+    <Content Include="m\script\dist\books\moblie\molieInit.js" />
+    <Content Include="m\script\dist\books\moblie\touch.js" />
+    <Content Include="m\script\dist\books\mui\city.data-3.js" />
+    <Content Include="m\script\dist\books\mui\city.data.js" />
+    <Content Include="m\script\dist\books\mui\mui.js" />
+    <Content Include="m\script\dist\books\mui\mui.min.js" />
+    <Content Include="m\script\dist\books\mui\mui.picker.js" />
+    <Content Include="m\script\dist\books\mui\mui.poppicker.js" />
+    <Content Include="m\script\dist\books\mui\mui.previewimage.js" />
+    <Content Include="m\script\dist\books\mui\mui.pullToRefresh.js" />
+    <Content Include="m\script\dist\books\mui\mui.pullToRefresh.material.js" />
+    <Content Include="m\script\dist\books\mui\mui.zoom.js" />
+    <Content Include="m\script\dist\books\onLine\onLine.js" />
+    <Content Include="m\script\dist\books\require.js" />
+    <Content Include="m\script\dist\books\share.js" />
+    <Content Include="m\script\dist\books\zepto\touch.js" />
+    <Content Include="m\script\dist\books\zepto\zepto.js" />
+    <Content Include="m\script\moblie\Android.js" />
+    <Content Include="m\script\moblie\booksMethod.js" />
+    <Content Include="m\script\moblie\cookies.js" />
+    <Content Include="m\script\moblie\ImageMethod.js" />
+    <Content Include="m\script\moblie\Ios.js" />
+    <Content Include="m\script\moblie\IsLoadMethod.js" />
+    <Content Include="m\script\moblie\molieInit.js" />
+    <Content Include="m\script\moblie\touch.js" />
+    <Content Include="m\script\r.js" />
+    <Content Include="m\script\require.js" />
+    <Content Include="m\script\share.js" />
+    <Content Include="m\script\zepto\touch.js" />
+    <Content Include="m\script\zepto\zepto.js" />
+    <Content Include="m\share.html" />
+    <Content Include="m\style\dist\share.css" />
+    <Content Include="m\style\glup\mui.min.css" />
+    <Content Include="m\style\glup\mui.picker.css" />
+    <Content Include="m\style\glup\mui.poppicker.css" />
+    <Content Include="m\style\glup\previewImage.css" />
+    <Content Include="robots.txt" />
+    <Content Include="Scripts\dev\financialCalendar\calendarIndex.js" />
+    <Content Include="Scripts\dev\financialCalendar\calendarDetail.js" />
+    <Content Include="Data\Config\WebBaojiaPre.config" />
+    <Content Include="Data\Config\WebBaojiaRelease.config" />
+    <Content Include="Data\Config\WebNewsPre.config" />
+    <Content Include="Data\Config\WebNewsRelease.config" />
+    <Content Include="Data\Config\WebRiliPre.config" />
+    <Content Include="Data\Config\WebRiliRelease.config" />
+    <Content Include="Data\Config\WebShujuPre.config" />
+    <Content Include="Data\Config\WebShujuRelease.config" />
+    <Content Include="Data\Config\WebBaojiaTest.config" />
+    <Content Include="Data\Config\WebNewsTest.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\Config\WebRiliTest.config" />
+    <Content Include="Data\Config\WebShujuTest.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\Json\effect.json" />
+    <None Include="Properties\PublishProfiles\118.31.245.186_hotfix_baojia.pubxml" />
+    <None Include="Properties\PublishProfiles\118.31.245.186_hotfix_news.pubxml" />
+    <None Include="Properties\PublishProfiles\118.31.245.186_hotfix_rili.pubxml" />
+    <None Include="Properties\PublishProfiles\118.31.245.186_hotfix_shuju.pubxml" />
+    <Content Include="Scripts\dev\indicator\Chart.js" />
+    <Content Include="Scripts\dev\indicator\country.js" />
+    <Content Include="Scripts\dev\indicator\dataCenter.js" />
+    <Content Include="Scripts\dev\indicator\detail.js" />
+    <Content Include="Scripts\dev\indicator\indicator.js" />
+    <Content Include="Scripts\dev\marketPrice\commonDetail.js" />
+    <Content Include="Scripts\dev\marketPrice\stockDetail.js" />
+    <Content Include="Scripts\dev\marketPrice\priceIndex.js" />
+    <Content Include="Scripts\dev\marketPrice\marketPrice.js" />
+    <Content Include="Scripts\dev\marketPrice\priceDetail.js" />
+    <Content Include="Scripts\dev\marketPrice\stockHome.js" />
+    <Content Include="Scripts\dev\marketPrice\plateList.js" />
+    <Content Include="Scripts\dev\marketPrice\search.js" />
+    <Content Include="Scripts\dev\marketPrice\stockList.js" />
+    <Content Include="Scripts\dev\news\newsImportant.js" />
+    <Content Include="Scripts\dev\news\newsIndex.js" />
+    <Content Include="Scripts\dev\sharedView\calculatePrice.js" />
+    <Content Include="Scripts\dev\sharedView\calendar.js" />
+    <Content Include="Scripts\dev\sharedView\controlBar.js" />
+    <Content Include="Scripts\dev\sharedView\inviteCode.js" />
+    <Content Include="Scripts\dev\sharedView\linkMap.js" />
+    <Content Include="Scripts\dev\sharedView\mask.js" />
+    <Content Include="Scripts\dev\sharedView\news.js" />
+    <Content Include="Scripts\dev\sharedView\price.js" />
+    <Content Include="Scripts\dev\sharedView\priceMap.js" />
+    <Content Include="Scripts\dev\sharedView\TV.js" />
+    <Content Include="Scripts\dist\financialCalendar\calendarDetail.js" />
+    <Content Include="Scripts\dist\financialCalendar\calendarIndex.js" />
+    <Content Include="Scripts\dist\indicator\Chart.js" />
+    <Content Include="Scripts\dist\indicator\country.js" />
+    <Content Include="Scripts\dist\indicator\dataCenter.js" />
+    <Content Include="Scripts\dist\indicator\detail.js" />
+    <Content Include="Scripts\dist\indicator\indicator.js" />
+    <Content Include="Scripts\dist\marketPrice\commonDetail.js" />
+    <Content Include="Scripts\dist\marketPrice\marketPrice.js" />
+    <Content Include="Scripts\dist\marketPrice\plateList.js" />
+    <Content Include="Scripts\dist\marketPrice\priceDetail.js" />
+    <Content Include="Scripts\dist\marketPrice\priceIndex.js" />
+    <Content Include="Scripts\dist\marketPrice\search.js" />
+    <Content Include="Scripts\dist\marketPrice\stockDetail.js" />
+    <Content Include="Scripts\dist\marketPrice\stockHome.js" />
+    <Content Include="Scripts\dist\marketPrice\stockList.js" />
+    <Content Include="Scripts\dist\news\newsImportant.js" />
+    <Content Include="Scripts\dist\news\newsIndex.js" />
+    <Content Include="Scripts\dist\sharedView\calculatePrice.js" />
+    <Content Include="Scripts\dist\sharedView\calendar.js" />
+    <Content Include="Scripts\dist\sharedView\controlBar.js" />
+    <Content Include="Scripts\dist\sharedView\inviteCode.js" />
+    <Content Include="Scripts\dist\sharedView\linkMap.js" />
+    <Content Include="Scripts\dist\sharedView\mask.js" />
+    <Content Include="Scripts\dist\sharedView\news.js" />
+    <Content Include="Scripts\dist\sharedView\price.js" />
+    <Content Include="Scripts\dist\sharedView\priceMap.js" />
+    <Content Include="Scripts\dist\sharedView\TV.js" />
+    <Content Include="Scripts\glup\addEvent\addEvent.js" />
+    <Content Include="Scripts\glup\addEvent\addEvent.min.js" />
+    <Content Include="Scripts\glup\avalon_two\avalon.js" />
+    <Content Include="Scripts\glup\avalon_two\avalon.min.js" />
+    <Content Include="Scripts\glup\avalon_two\avalon.modern.js" />
+    <Content Include="Scripts\glup\avalon_two\avalon.modern.min.js" />
+    <Content Include="Scripts\glup\avalon_two\main.js" />
+    <Content Include="Scripts\glup\avalon_two\main.min.js" />
+    <Content Include="Scripts\glup\charting_library\charting_library.js" />
+    <Content Include="Scripts\glup\charting_library\charting_library.min.js" />
+    <Content Include="Scripts\glup\charting_library\datafeed\udf\datafeed.js" />
+    <Content Include="Scripts\glup\charting_library\datafeed\udf\datafeed.min.js" />
+    <Content Include="Scripts\glup\charting_library\static\bundles\2.1241f4b3f95dd7677a3c.js" />
+    <Content Include="Scripts\glup\charting_library\static\bundles\crosshair.6c091f7d5427d0c5e6d9dc3a90eb2b20.cur" />
+    <Content Include="Scripts\glup\charting_library\static\bundles\dot.ed68e83c16f77203e73dbc4c3a7c7fa1.cur" />
+    <Content Include="Scripts\glup\charting_library\static\bundles\eraser.0579d40b812fa2c3ffe72e5803a6e14c.cur" />
+    <Content Include="Scripts\glup\charting_library\static\bundles\grab.bc156522a6b55a60be9fae15c14b66c5.cur" />
+    <Content Include="Scripts\glup\charting_library\static\bundles\grabbing.1c0862a8a8c0fb02885557bc97fdafe7.cur" />
+    <Content Include="Scripts\glup\charting_library\static\bundles\ie-fallback-logos.01acaeb21cf903de7d89.js" />
+    <Content Include="Scripts\glup\charting_library\static\bundles\library.2e4e86e4539a260f4a7b69dd55f2595b.css" />
+    <Content Include="Scripts\glup\charting_library\static\bundles\library.5b9e0d4f842989964d56.js" />
+    <Content Include="Scripts\glup\charting_library\static\bundles\library.5b9e0d4f842989964d56.min.js" />
+    <Content Include="Scripts\glup\charting_library\static\bundles\objecttreedialog.e507dbe7b836760cf959.js" />
+    <Content Include="Scripts\glup\charting_library\static\bundles\vendors.037de1a224aecfed7020.js" />
+    <Content Include="Scripts\glup\charting_library\static\bundles\vendors.4d073557b52d805561e631f4420fc97f.css" />
+    <Content Include="Scripts\glup\charting_library\static\bundles\zoom.e21f24dd632c7069139bc47ae89c54b5.cur" />
+    <Content Include="Scripts\glup\charting_library\static\fonts\fontawesome-webfont.svg" />
+    <Content Include="Scripts\glup\charting_library\static\images\balloon.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\bar-loader.gif" />
+    <Content Include="Scripts\glup\charting_library\static\images\button-bg.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\charting_library\logo-widget-copyright-faded.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\charting_library\logo-widget-copyright.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\controlll.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\delayed.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\dialogs\checkbox.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\dialogs\close-flat.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\dialogs\large-slider-handle.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\dialogs\linewidth-slider.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\dialogs\opacity-slider.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\icons.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\prediction-clock-black.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\prediction-clock-white.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\prediction-failure-white.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\prediction-success-white.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\save-load-separator-inv.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\select-bg.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\sidetoolbar\instruments.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\sidetoolbar\toolgroup.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\svg\chart\bucket2.svg" />
+    <Content Include="Scripts\glup\charting_library\static\images\svg\chart\font.svg" />
+    <Content Include="Scripts\glup\charting_library\static\images\svg\chart\large-slider-handle.svg" />
+    <Content Include="Scripts\glup\charting_library\static\images\svg\chart\pencil2.svg" />
+    <Content Include="Scripts\glup\charting_library\static\images\svg\question-mark-rounded.svg" />
+    <Content Include="Scripts\glup\charting_library\static\images\ticker-icons.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\tvcolorpicker-bg-gradient.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\tvcolorpicker-bg.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\tvcolorpicker-check.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\tvcolorpicker-sprite.png" />
+    <Content Include="Scripts\glup\charting_library\static\images\warning-icon.png" />
+    <Content Include="Scripts\glup\charting_library\static\js\external\spin.min.js" />
+    <Content Include="Scripts\glup\charting_library\static\tv-chart.18168320bd5edaac1e75.html" />
+    <Content Include="Scripts\glup\echarts\echarts.common.min.js" />
+    <Content Include="Scripts\glup\echarts\echarts.js" />
+    <Content Include="Scripts\glup\highStock\exporting.js" />
+    <Content Include="Scripts\glup\highStock\exporting.min.js" />
+    <Content Include="Scripts\glup\highStock\highcharts.js" />
+    <Content Include="Scripts\glup\highStock\highstock.js" />
+    <Content Include="Scripts\glup\highStock\highstock.min.js" />
+    <Content Include="Scripts\glup\highStock\offline-exporting.js" />
+    <Content Include="Scripts\glup\highStock\offline-exporting.min.js" />
+    <Content Include="Scripts\glup\jquery\jquery-1.8.3.min.js" />
+    <Content Include="Scripts\glup\jquery\jquery.onepage-scroll.js" />
+    <Content Include="Scripts\glup\jquery\jquery.onepage-scroll.min.js" />
+    <Content Include="Scripts\glup\jquery\json2.js" />
+    <Content Include="Scripts\glup\jquery\json2.min.js" />
+    <Content Include="Scripts\glup\kkpager\kkpage1\kkpage.txt" />
+    <Content Include="Scripts\glup\kkpager\kkpage1\kkpager.css" />
+    <Content Include="Scripts\glup\kkpager\kkpage1\kkpager.js" />
+    <Content Include="Scripts\glup\kkpager\kkpage1\kkpager.min.css" />
+    <Content Include="Scripts\glup\kkpager\kkpage1\kkpager.min.js" />
+    <Content Include="Scripts\glup\kkpager\kkpager.js" />
+    <Content Include="Scripts\glup\kkpager\kkpager.min.js" />
+    <Content Include="Scripts\glup\kkpager\kkpager_blue.css" />
+    <Content Include="Scripts\glup\kkpager\kkpager_blue.min.css" />
+    <Content Include="Scripts\glup\layer\extend\layer.ext.js" />
+    <Content Include="Scripts\glup\layer\extend\layer.ext.min.js" />
+    <Content Include="Scripts\glup\layer\layer.js" />
+    <Content Include="Scripts\glup\layer\layer.min.js" />
+    <Content Include="Scripts\glup\layer\skin\default\icon-ext.png" />
+    <Content Include="Scripts\glup\layer\skin\default\icon.png" />
+    <Content Include="Scripts\glup\layer\skin\default\loading-0.gif" />
+    <Content Include="Scripts\glup\layer\skin\default\loading-1.gif" />
+    <Content Include="Scripts\glup\layer\skin\default\loading-2.gif" />
+    <Content Include="Scripts\glup\layer\skin\layer.css" />
+    <Content Include="Scripts\glup\layer\skin\layer.ext.css" />
+    <Content Include="Scripts\glup\layer\skin\moon\default.png" />
+    <Content Include="Scripts\glup\layer\skin\moon\style.css" />
+    <Content Include="Scripts\glup\My97DatePicker\calendar.js" />
+    <Content Include="Scripts\glup\My97DatePicker\calendar.min.js" />
+    <Content Include="Scripts\glup\My97DatePicker\config.js" />
+    <Content Include="Scripts\glup\My97DatePicker\config.min.js" />
+    <Content Include="Scripts\glup\My97DatePicker\lang\en.js" />
+    <Content Include="Scripts\glup\My97DatePicker\lang\en.min.js" />
+    <Content Include="Scripts\glup\My97DatePicker\lang\zh-cn.js" />
+    <Content Include="Scripts\glup\My97DatePicker\lang\zh-cn.min.js" />
+    <Content Include="Scripts\glup\My97DatePicker\lang\zh-tw.js" />
+    <Content Include="Scripts\glup\My97DatePicker\lang\zh-tw.min.js" />
+    <Content Include="Scripts\glup\My97DatePicker\My97DatePicker.htm" />
+    <Content Include="Scripts\glup\My97DatePicker\skin\datePicker.gif" />
+    <Content Include="Scripts\glup\My97DatePicker\skin\datePicker.png" />
+    <Content Include="Scripts\glup\My97DatePicker\skin\datePicker2.png" />
+    <Content Include="Scripts\glup\My97DatePicker\skin\default\datepicker-dev.css" />
+    <Content Include="Scripts\glup\My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="Scripts\glup\My97DatePicker\skin\default\img.gif" />
+    <Content Include="Scripts\glup\My97DatePicker\skin\default\img.png" />
+    <Content Include="Scripts\glup\My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="Scripts\glup\My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\glup\My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\glup\My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="Scripts\glup\My97DatePicker\WdatePicker.js" />
+    <Content Include="Scripts\glup\My97DatePicker\WdatePicker.min.js" />
+    <Content Include="Scripts\glup\My97DatePicker\开发包\lang\en.js" />
+    <Content Include="Scripts\glup\My97DatePicker\开发包\lang\en.min.js" />
+    <Content Include="Scripts\glup\My97DatePicker\开发包\lang\zh-cn.js" />
+    <Content Include="Scripts\glup\My97DatePicker\开发包\lang\zh-cn.min.js" />
+    <Content Include="Scripts\glup\My97DatePicker\开发包\lang\zh-tw.js" />
+    <Content Include="Scripts\glup\My97DatePicker\开发包\lang\zh-tw.min.js" />
+    <Content Include="Scripts\glup\My97DatePicker\开发包\readme.txt" />
+    <Content Include="Scripts\glup\My97DatePicker\开发包\skin\datePicker.gif" />
+    <Content Include="Scripts\glup\My97DatePicker\开发包\skin\default\datepicker.css" />
+    <Content Include="Scripts\glup\My97DatePicker\开发包\skin\default\img.gif" />
+    <Content Include="Scripts\glup\My97DatePicker\开发包\skin\WdatePicker.css" />
+    <Content Include="Scripts\glup\My97DatePicker\开发包\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\glup\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\glup\My97DatePicker\开发包\skin\whyGreen\img.gif" />
+    <Content Include="Scripts\glup\OCS\jquery.signalR-2.2.1.js" />
+    <Content Include="Scripts\glup\OCS\jquery.signalR-2.2.1.min.js" />
+    <Content Include="Scripts\glup\OCS\newshubs.js" />
+    <Content Include="Scripts\glup\OCS\quotehubs.js" />
+    <Content Include="Scripts\glup\require.min.js" />
+    <Content Include="Scripts\glup\response\adaptation_10.js" />
+    <Content Include="Scripts\glup\response\adaptation_10.min.js" />
+    <Content Include="Scripts\glup\vue\vue.js" />
+    <Content Include="Scripts\glup\vue\vue.min.js" />
+    <Content Include="Scripts\gulpmin\addEvent\addEvent.js" />
+    <Content Include="Scripts\gulpmin\addEvent\addEvent.min.js" />
+    <Content Include="Scripts\gulpmin\avalon_two\avalon.js" />
+    <Content Include="Scripts\gulpmin\avalon_two\avalon.min.js" />
+    <Content Include="Scripts\gulpmin\avalon_two\avalon.modern.js" />
+    <Content Include="Scripts\gulpmin\avalon_two\avalon.modern.min.js" />
+    <Content Include="Scripts\gulpmin\avalon_two\main.js" />
+    <Content Include="Scripts\gulpmin\avalon_two\main.min.js" />
+    <Content Include="Scripts\gulpmin\charting_library\charting_library.js" />
+    <Content Include="Scripts\gulpmin\charting_library\charting_library.min.js" />
+    <Content Include="Scripts\gulpmin\charting_library\datafeed\udf\datafeed.js" />
+    <Content Include="Scripts\gulpmin\charting_library\datafeed\udf\datafeed.min.js" />
+    <Content Include="Scripts\gulpmin\charting_library\static\bundles\2.1241f4b3f95dd7677a3c.js" />
+    <Content Include="Scripts\gulpmin\charting_library\static\bundles\ie-fallback-logos.01acaeb21cf903de7d89.js" />
+    <Content Include="Scripts\gulpmin\charting_library\static\bundles\library.2e4e86e4539a260f4a7b69dd55f2595b.css" />
+    <Content Include="Scripts\gulpmin\charting_library\static\bundles\library.5b9e0d4f842989964d56.js" />
+    <Content Include="Scripts\gulpmin\charting_library\static\bundles\library.5b9e0d4f842989964d56.min.js" />
+    <Content Include="Scripts\gulpmin\charting_library\static\bundles\objecttreedialog.e507dbe7b836760cf959.js" />
+    <Content Include="Scripts\gulpmin\charting_library\static\bundles\vendors.037de1a224aecfed7020.js" />
+    <Content Include="Scripts\gulpmin\charting_library\static\bundles\vendors.4d073557b52d805561e631f4420fc97f.css" />
+    <Content Include="Scripts\gulpmin\charting_library\static\js\external\spin.min.js" />
+    <Content Include="Scripts\gulpmin\echarts\echarts.common.min.js" />
+    <Content Include="Scripts\gulpmin\echarts\echarts.js" />
+    <Content Include="Scripts\gulpmin\highStock\exporting.js" />
+    <Content Include="Scripts\gulpmin\highStock\exporting.min.js" />
+    <Content Include="Scripts\gulpmin\highStock\highcharts.js" />
+    <Content Include="Scripts\gulpmin\highStock\highstock.js" />
+    <Content Include="Scripts\gulpmin\highStock\highstock.min.js" />
+    <Content Include="Scripts\gulpmin\highStock\offline-exporting.js" />
+    <Content Include="Scripts\gulpmin\highStock\offline-exporting.min.js" />
+    <Content Include="Scripts\gulpmin\jquery\jquery-1.8.3.min.js" />
+    <Content Include="Scripts\gulpmin\jquery\jquery.onepage-scroll.js" />
+    <Content Include="Scripts\gulpmin\jquery\jquery.onepage-scroll.min.js" />
+    <Content Include="Scripts\gulpmin\jquery\json2.js" />
+    <Content Include="Scripts\gulpmin\jquery\json2.min.js" />
+    <Content Include="Scripts\gulpmin\kkpager\kkpage1\kkpager.css" />
+    <Content Include="Scripts\gulpmin\kkpager\kkpage1\kkpager.js" />
+    <Content Include="Scripts\gulpmin\kkpager\kkpage1\kkpager.min.css" />
+    <Content Include="Scripts\gulpmin\kkpager\kkpage1\kkpager.min.js" />
+    <Content Include="Scripts\gulpmin\kkpager\kkpager.js" />
+    <Content Include="Scripts\gulpmin\kkpager\kkpager.min.js" />
+    <Content Include="Scripts\gulpmin\kkpager\kkpager_blue.css" />
+    <Content Include="Scripts\gulpmin\kkpager\kkpager_blue.min.css" />
+    <Content Include="Scripts\gulpmin\layer\extend\layer.ext.js" />
+    <Content Include="Scripts\gulpmin\layer\extend\layer.ext.min.js" />
+    <Content Include="Scripts\gulpmin\layer\layer.js" />
+    <Content Include="Scripts\gulpmin\layer\layer.min.js" />
+    <Content Include="Scripts\gulpmin\layer\skin\layer.css" />
+    <Content Include="Scripts\gulpmin\layer\skin\layer.ext.css" />
+    <Content Include="Scripts\gulpmin\layer\skin\moon\style.css" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\calendar.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\calendar.min.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\config.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\config.min.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\lang\en.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\lang\en.min.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\lang\zh-cn.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\lang\zh-cn.min.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\lang\zh-tw.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\lang\zh-tw.min.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\skin\default\datepicker-dev.css" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\skin\default\img.gif" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\WdatePicker.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\WdatePicker.min.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\开发包\lang\en.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\开发包\lang\en.min.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\开发包\lang\zh-cn.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\开发包\lang\zh-cn.min.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\开发包\lang\zh-tw.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\开发包\lang\zh-tw.min.js" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\开发包\skin\default\datepicker.css" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\开发包\skin\WdatePicker.css" />
+    <Content Include="Scripts\gulpmin\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\gulpmin\OCS\jquery.signalR-2.2.1.js" />
+    <Content Include="Scripts\gulpmin\OCS\jquery.signalR-2.2.1.min.js" />
+    <Content Include="Scripts\gulpmin\OCS\newshubs.js" />
+    <Content Include="Scripts\gulpmin\OCS\quotehubs.js" />
+    <Content Include="Scripts\gulpmin\require.min.js" />
+    <Content Include="Scripts\gulpmin\response\adaptation_10.js" />
+    <Content Include="Scripts\gulpmin\response\adaptation_10.min.js" />
+    <Content Include="Scripts\gulpmin\vue\vue.js" />
+    <Content Include="Scripts\gulpmin\vue\vue.min.js" />
+    <Content Include="Static\Websocket\Calendar.html" />
+    <Content Include="Static\Websocket\ChartLine.html" />
+    <Content Include="Static\Websocket\CommonDetailSignalr.html" />
+    <Content Include="Static\Websocket\IndexNewsSignalr.html" />
+    <Content Include="Static\Websocket\NewsPriceSignalr.html" />
+    <Content Include="Static\Websocket\newsPartSignalr.html" />
+    <Content Include="Static\Websocket\IndexPriceSignalr-r.html" />
+    <Content Include="Static\Websocket\IndexPriceSignalr.html" />
+    <Content Include="Static\Websocket\Forex.html" />
+    <Content Include="Styles\dev\download\app.less" />
+    <Content Include="Styles\dev\news\index.less" />
+    <Content Include="Styles\dev\sharedView\inviteCode.less" />
+    <Content Include="Styles\dist\download\app.css" />
+    <Content Include="Styles\dist\download\mobileApp.css" />
+    <Content Include="Styles\dist\financialCalendar\calendarIndex.css" />
+    <Content Include="Styles\dist\financialCalendar\detail.css" />
+    <Content Include="Styles\dist\indicator\country.css" />
+    <Content Include="Styles\dist\indicator\dataCenter.css" />
+    <Content Include="Styles\dist\indicator\detail.css" />
+    <Content Include="Styles\dist\indicator\indicator.css" />
+    <Content Include="Styles\dist\marketPrice\commonDetail.css" />
+    <Content Include="Styles\dist\marketPrice\marketPrice.css" />
+    <Content Include="Styles\dist\marketPrice\marketPriceIndex.css" />
+    <Content Include="Styles\dist\marketPrice\plateList.css" />
+    <Content Include="Styles\dist\marketPrice\Search.css" />
+    <Content Include="Styles\dist\marketPrice\stockDetail.css" />
+    <Content Include="Styles\dist\marketPrice\stockHome.css" />
+    <Content Include="Styles\dist\marketPrice\stockList.css" />
+    <Content Include="Styles\dist\news\index.css" />
+    <Content Include="Styles\dist\Public\footer.css" />
+    <Content Include="Styles\dist\Public\public.css" />
+    <Content Include="Styles\dist\Public\top.css" />
+    <Content Include="Styles\dist\Public\tradingView.css" />
+    <Content Include="Styles\dist\sharedView\calendar.css" />
+    <Content Include="Styles\dist\sharedView\inviteCode.css" />
+    <Content Include="Styles\dist\sharedView\mask.css" />
+    <Content Include="Styles\dist\sharedView\news.css" />
+    <Content Include="Styles\dist\sharedView\price.css" />
+    <Content Include="Views\News\index.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\SharedView\Top.cshtml" />
+    <Content Include="Views\SharedView\Footer.cshtml" />
+    <Content Include="Scripts\glup\charting_library\static\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Scripts\glup\charting_library\static\fonts\fontawesome-webfont.woff" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\ar.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\cs.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\da_DK.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\de.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\el.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\en.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\es.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\et_EE.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\fa.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\fr.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\he_IL.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\hu_HU.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\id_ID.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\it.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\ja.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\ko.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\market-quotes-translations.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\ms_MY.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\nl_NL.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\pl.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\pt.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\ro.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\ru.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\sk_SK.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\sv.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\th.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\tr.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\vi.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\zh.json" />
+    <Content Include="Scripts\glup\charting_library\static\localization\translations\zh_TW.json" />
+    <Content Include="Views\News\NewsView.cshtml" />
+    <Content Include="Views\News\QuoteView.cshtml" />
+    <Content Include="Views\Account\InvitationCode.cshtml" />
+    <Content Include="Views\Indicator\IndexUsDataView.cshtml" />
+    <Content Include="Views\Indicator\IndexGlobalDataView.cshtml" />
+    <Content Include="Scripts\dev\financialCalendar\effect.json" />
+    <Content Include="Views\MarketPriceView\Forex.cshtml" />
+    <Content Include="Views\MarketPriceView\PreciousMetals.cshtml" />
+    <Content Include="Views\MarketPriceView\Commodity.cshtml" />
+    <Content Include="Views\MarketPriceView\StockIndex.cshtml" />
+    <Content Include="Views\MarketPriceView\Futures.cshtml" />
+    <Content Include="Views\MarketPriceView\Bonds.cshtml" />
+    <Content Include="Views\MarketPriceView\Bitcoin.cshtml" />
+    <Content Include="Views\MarketPriceView\IndexProductView.cshtml" />
+    <Content Include="Views\MarketPrice\IndexProductView.cshtml" />
+    <Content Include="Views\Calendar\Index2.cshtml" />
+    <Content Include="Views\SharedView\SvgData.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Data\Logs\" />
+    <Folder Include="Data\Txt\baojia\" />
+    <Folder Include="Models\" />
+    <Folder Include="m\script\mui\" />
+    <Folder Include="m\script\onLine\" />
+    <Folder Include="Views\OpenBeta\" />
+    <Folder Include="Views\SmsCode\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bailun.Common\Bailun.Common.csproj">
+      <Project>{0f0c30cd-b29b-4f44-ba39-fbe60d9d260e}</Project>
+      <Name>Bailun.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bailun.Finance.Model\Bailun.Finance.Model.csproj">
+      <Project>{85b4445b-3d92-44f0-a6db-b67eb401f3fa}</Project>
+      <Name>Bailun.Finance.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\glup\Animation.less" />
+    <Content Include="Styles\glup\public.less" />
+    <Content Include="Styles\glup\PublicDefind.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\glup\HreadFooter\footer.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\glup\HreadFooter\top.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_LayoutIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SharedView\MarketWatch.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SharedView\FinancialCalendar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MarketPrice\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\dev\marketPrice\marketPrice.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SharedView\MarketBrief.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\dev\marketPrice\stockDetail.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Calendar\Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Calendar\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\dev\financialCalendar\calendarIndex.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\dev\financialCalendar\detail.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Config\Default.config" />
+    <Content Include="Data\Config\WebDevelop.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\Config\WebLocal.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="packages.config" />
+    <Content Include="IconFont\iconfont.eot" />
+    <Content Include="IconFont\iconfont.ttf" />
+    <Content Include="IconFont\iconfont.woff" />
+    <Content Include="m\style\glup\Animation.less" />
+    <Content Include="m\style\glup\loadMore.less" />
+    <Content Include="m\style\glup\public.less" />
+    <Content Include="m\style\glup\PublicDefind.less" />
+    <Content Include="m\style\dev\share.less" />
+    <Content Include="m\style\glup\adaptation.less" />
+    <None Include="Properties\PublishProfiles\118.31.245.186_WebBailunNews.pubxml" />
+    <None Include="Properties\PublishProfiles\118.31.245.186_WebBailunBaojia.pubxml" />
+    <None Include="Properties\PublishProfiles\118.31.245.186_WebBailunRili.pubxml" />
+    <None Include="Properties\PublishProfiles\118.31.245.186_WebBailunShuju.pubxml" />
+    <None Include="Properties\PublishProfiles\118.31.245.213_WebBailunBaojia.pubxml" />
+    <None Include="Properties\PublishProfiles\118.31.245.213_WebBailunNews.pubxml" />
+    <None Include="Properties\PublishProfiles\118.31.245.213_WebBailunRili.pubxml" />
+    <None Include="Properties\PublishProfiles\118.31.245.213_WebBailunShuju.pubxml" />
+    <None Include="Properties\PublishProfiles\47.90.12.249_WebBailun.pubxml" />
+    <Content Include="Views\Shared\_LayoutPrice.cshtml" />
+    <Content Include="Views\SharedView\PriceNav.cshtml" />
+    <Content Include="Views\MarketPrice\HKStock.cshtml" />
+    <Content Include="Views\SharedView\ControlBar.cshtml" />
+    <Content Include="Views\MarketPrice\StockList.cshtml" />
+    <Content Include="Styles\dev\marketPrice\marketPriceIndex.less" />
+    <Content Include="Views\SharedView\Share.cshtml" />
+    <Content Include="Styles\dev\marketPrice\stockHome.less" />
+    <Content Include="Styles\dev\marketPrice\stockList.less" />
+    <Content Include="Views\MarketPrice\UsStock.cshtml" />
+    <Content Include="Styles\dev\marketPrice\commonDetail.less" />
+    <Content Include="Views\Account\ViewPage1.cshtml" />
+    <Content Include="Views\MarketPrice\StockDetail.cshtml" />
+    <Content Include="Views\MarketPrice\Search.cshtml" />
+    <Content Include="Views\MarketPrice\PlateList.cshtml" />
+    <Content Include="Styles\dev\marketPrice\plateList.less" />
+    <Content Include="Views\SharedView\BeShare.cshtml" />
+    <Content Include="Styles\dev\marketPrice\Search.less" />
+    <Content Include="Views\MarketPrice\PriceList.cshtml" />
+    <Content Include="Views\MarketPrice\Detail.cshtml" />
+    <Content Include="Views\Indicator\Index.cshtml" />
+    <Content Include="Views\Indicator\Country.cshtml" />
+    <Content Include="Views\Indicator\Detail.cshtml" />
+    <Content Include="Styles\dev\indicator\indicator.less" />
+    <Content Include="Views\Indicator\DataCenter.cshtml" />
+    <Content Include="Views\SharedView\DataCenterNav.cshtml" />
+    <Content Include="Styles\dev\indicator\dataCenter.less" />
+    <Content Include="Views\Shared\_LayoutDataCenter.cshtml" />
+    <Content Include="Styles\dev\indicator\detail.less" />
+    <Content Include="Styles\dev\indicator\country.less" />
+    <Content Include="Views\Download\MobileApp.cshtml" />
+    <Content Include="Styles\dev\download\mobileApp.less" />
+    <Content Include="Views\Download\App.cshtml" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <Content Include="Styles\glup\HreadFooter\tradingView.less" />
+    <Content Include="Styles\dev\sharedView\mask.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\dev\sharedView\news.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\dev\sharedView\calendar.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\dev\sharedView\price.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>28576</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:28510/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此项目引用这台计算机上缺少的 NuGet 程序包。使用 NuGet 程序包还原可下载这些程序包。有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

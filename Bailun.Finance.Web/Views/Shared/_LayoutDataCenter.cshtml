@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="keywords" content="@ViewBag.Keywords">
+    <meta name="description" content="@ViewBag.Description">
+    <link href="~/Styles/dist/Public/public.css?v=13763e8aed" rel="stylesheet" charset="utf-8"/>
+    @RenderSection("style", required: false)
+    <script type="text/javascript" src="//trusted.shuidi.cn/trusted.js?id=1127&jump=0"></script>
+</head>
+<body>
+    @Html.Partial("~/Views/SharedView/Top.cshtml")
+    @Html.Partial("~/Views/SharedView/DataCenterNav.cshtml")
+    @RenderBody()
+    @Html.Partial("~/Views/SharedView/Footer.cshtml")
+
+    <script src="~/Scripts/glup/jquery/jquery-1.8.3.min.js?v=e128811631"></script>    
+    <script src="~/Scripts/glup/layer/layer.min.js?v=1aee668c9e"></script>
+    @RenderSection("script", required: false)
+
+</body>
+</html>

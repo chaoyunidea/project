@@ -1,0 +1,53 @@
+﻿{
+  "genre": [ "A类:","B类:"],
+  "A类": [
+    {
+      "type": "金银",
+      "name": "gold"
+
+    },
+    {
+      "type": "原油",
+      "name": "crude"
+
+    },
+    {
+      "type": "欧元",
+      "name": "euro"
+    },
+    {
+      "type": "铂钯",
+      "name": "platinum"
+    },
+    {
+      "type": "铜",
+      "name": "copper"
+    },
+    {
+      "type": "英镑",
+      "name": "pound"
+    },
+    {
+      "type": "日元",
+      "name": "yen"
+    },
+    {
+       "type": "瑞郎",
+      "name": "chf"
+    },
+    {
+      "type": "澳元",
+      "name": "australia"
+    }
+  ],
+  "B类": [
+    {
+      "type": "美元",
+      "name": "dollar"
+    },
+    {
+      "type": "加元",
+      "name": "cad"
+    }
+  ]
+}

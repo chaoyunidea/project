@@ -1,0 +1,41 @@
+﻿@using Bailun.Finance.Model.Indicator;
+@{
+    Layout = null;
+}
+
+<div class="banner">
+    <div class="content">
+        <dl class="tab clearfix">
+            <dd data-id="3" class="active">美国非农就业人数</dd>
+            <dd data-id="1">美国央行利率 </dd>
+            <dd data-id="2">美国ADP</dd>
+            <dd data-id="4">美国GDP</dd>
+        </dl>
+        <div class="data-group">
+            @if (Model != null)
+            {
+                foreach (KeyValuePair<int, IList<DataCenterModel>> kv in Model)
+                {
+                    <ul data-index="@(kv.Key)" class="clearfix @(kv.Key == 3 ? "active" : "")">
+                        @foreach (DataCenterModel em in kv.Value)
+                        {
+                            int index = kv.Value.IndexOf(em);
+                            <li class="@((index < 6 ? "big " : "") + (float.Parse(em.Currentvalue) > float.Parse(em.Frontvalue) ? "up" : "down"))">
+                                <a href="/indicator/datacenter/@(kv.Key)" target="_blank">
+                                    <h5>@(em.Valuetime.Substring(0, 4))年@(em.Valuetime.Substring(4,2))月</h5>
+                                    <h3> @(em.Currentvalue + (kv.Key == 1 || kv.Key == 4 ? "%" : "万"))</h3>
+                                    @if (index < 6)
+                                    {
+                                      <div class="chart" id="chart@(em.Id)" style="width:155px;height:40px;"></div>
+                                    }
+                               
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                }
+          }
+        </div>
+    </div>
+</div>

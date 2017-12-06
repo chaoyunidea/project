@@ -1,0 +1,210 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>拜仑财经-APP下载</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0 user-scalable=no" />
+    <link href="/Styles/dist/Public/public.css?v=13763e8aed" rel="stylesheet" />
+    <link href="~/Styles/dist/download/mobileApp.css?v=a0e95cdacc" rel="stylesheet" />
+    @*<link href="~/Styles/glup/animate.css" rel="stylesheet" />*@
+    <style>
+        .mask{    
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            background: rgba(0,0,0,.8);
+            text-align: center;
+        }
+        .mask img{width:90%;}
+    </style>
+</head>
+<body>
+
+    <ul class="onepage-pagination">
+        <li><a data-index="1" href="#1" class=""></a></li>
+        <li><a data-index="2" href="#2" class=""></a></li>
+        <li><a data-index="3" href="#3" class=""></a></li>
+        <li><a data-index="4" href="#4" class=""></a></li>
+    </ul>
+    <div class="main onepage-wrapper">
+        <div class="page section news" data-index="1">
+            <div class="content">
+                <div class="wrap">
+                    <h1>即时新闻</h1>
+                    <p class="description">聚合华尔街见闻、金十数据、FX678、 FX168、Daliyfx <br />博采众长，一览无余</p>
+                    <div class="download-area">
+                        <ul class="button-group">
+                            <li style="background: #ccc; border: 1px solid #ccc;">
+                                <img src="~/Images/download/apple.png" />
+                                <span>即将上线</span>
+                            </li>
+                            <li>
+                                <a href="https://gafxchatimage.fx110.com/api/bailun/bailunfinance_v1.0.apk">
+                                    <img src="~/Images/download/android.png" />
+                                    <span style="color:white;">Android下载</span>
+                                </a>
+                            </li>
+                        </ul>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="next-page">
+                <img src="~/Images/download/next.png" />
+            </div>
+        </div>
+        <div class="page section calendar" data-index="2">
+            <div class="content">
+                <div class="wrap">
+                    <h1>财经日历</h1>
+                    <p class="description">对比历史数据看懂趋势<br /> 读数据分析详解疑惑</p>
+                    <div class="download-area">
+                        <ul class="button-group">
+                            <li  style="background: #ccc; border: 1px solid #ccc;">
+                                <img src="~/Images/download/apple.png" />
+                                <span>即将上线</span>
+                            </li>
+                            <li>
+                                <a href="https://gafxchatimage.fx110.com/api/bailun/bailunfinance_beta.apk">
+                                    <img src="~/Images/download/android.png" />
+                                    <span style="color:white;">Android下载</span>
+                                </a>
+                            </li>
+                        </ul>
+                        
+                    </div>
+
+                </div>
+                
+            </div>
+            <div class="next-page">
+                <img src="~/Images/download/next.png" />
+            </div>
+        </div>
+        <div class="page section price" data-index="3">
+            <div class="content">
+                <div class="wrap">
+                    <h1>市场报价</h1>
+                    <p class="description">囊括外汇、贵金属、大宗商品、股指、股指期货、债券、比特币等报价信息 实现最快、最全、最便捷的 多品种即时市场报价</p>
+                    <div class="download-area">
+                        <ul class="button-group">
+                            <li  style="background: #ccc; border: 1px solid #ccc;">
+                                <img src="~/Images/download/apple.png" />
+                                <span>即将上线</span>
+                            </li>
+                            <li>
+                                <a href="https://gafxchatimage.fx110.com/api/bailun/bailunfinance_beta.apk">
+                                    <img src="~/Images/download/android.png" />
+                                    <span style="color:white;">Android下载</span>
+                                </a>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                </div>
+                
+            </div>
+            <div class="next-page">
+                <img src="~/Images/download/next.png" />
+            </div>
+        </div>
+        <div class="page section indicator" data-index="4">
+            <div class="content">
+                <div class="wrap">
+                    <h1>宏观数据</h1>
+                    <p class="description">正在完善，敬请期待！</p>
+                    <div class="download-area">
+                        <ul class="button-group">
+                            <li  style="background: #ccc; border: 1px solid #ccc;">
+                                <img src="~/Images/download/apple.png" />
+                                <span>即将上线</span>
+                            </li>
+                            <li>
+                                <a href="https://gafxchatimage.fx110.com/api/bailun/bailunfinance_beta.apk">
+                                    <img src="~/Images/download/android.png" />
+                                    <span style="color:white;">Android下载</span>
+                                </a>
+                            </li>
+                        </ul>
+                       
+                    </div>
+                </div>
+                
+            </div>            
+        </div>
+    </div>
+    <script src="~/Scripts/glup/jquery/jquery-1.8.3.min.js?v=e128811631"></script>
+    <script src="~/Scripts/glup/response/adaptation_10.js?v=324b87f498"></script>
+    <script src="~/Scripts/glup/jquery/jquery.onepage-scroll.js?v=116635985c"></script>
+    <script>
+                
+        $(function () {
+
+            if (is_weixn()) {
+                $('body').append('<div class="mask"><img src="/Images/download/guide.png" /></div>')
+                $('.mask').on('click', function () {
+                    $(this).remove();
+                })
+            }
+            $('.main').onepage_scroll({
+                sectionContainer: '.page',
+                loop: false,
+                afterMove: function (index) {
+                    //switch (index) {
+                    //    case 1:
+                    //        testAnim('bounceIn', '.news');
+                    //        break;
+                    //    case 2:
+                    //        testAnim('bounceIn', '.calendar');
+                    //        break;
+                    //    case 3:
+                    //        testAnim('bounceIn', '.price');
+                    //        break;
+                    //    case 4:
+                    //        testAnim('bounceIn', '.indicator');
+                    //        break;
+                    //}
+                    
+                }
+            });
+
+            $('.next-page').on('click', function () {
+                $('.main').moveDown();
+            })
+
+            $('body').on('touchmove', function (event) {
+                event.preventDefault();
+            })
+        });
+
+        function testAnim(x,el) {
+            $( el + ' .content .wrap').removeClass().addClass(x + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $(this).removeClass();
+            });
+        };
+
+        function is_weixn() {
+            var ua = navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    </script>
+    @if (!string.IsNullOrEmpty(CustomConfig.Cnzz))
+    {
+        <span style="filter:alpha(opacity=0);-moz-opacity:0;opacity:0;display:none"><script src="@CustomConfig.Cnzz" language="JavaScript"></script></span>
+    }
+</body>
+</html>
+
+
+

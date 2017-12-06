@@ -1,0 +1,14 @@
+/Account/InvitationCode
+/News/GenerateStaticPageNewsIndex
+/Calendar/GenerateStaticPageCalendarIndex
+/MarketPrice/GenerateStaticPageMarketPriceIndex
+/Indicator/GenerateStaticPageIndicatorIndex
+/OpenBeta/CheckInvitationCode
+/OpenBeta/CheckSmsCode
+/OpenBeta/SetInvitationCodeCookie
+/Account/InvitationCodeVer
+/Download/App
+/Download/MobileApp
+/Images
+/Scripts
+/Style

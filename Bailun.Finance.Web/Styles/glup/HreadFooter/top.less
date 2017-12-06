@@ -1,0 +1,114 @@
+﻿@import (reference) "../../glup/PublicDefind.less";//引入方法
+
+.header{
+    height:60px;background:#29323c;color:#fff;position:relative;min-width:@DefindWidth;
+    .header-main{
+        width:@DefindWidth;margin:0 auto;
+        .logo{
+            float:left;margin-right:70px;cursor:pointer;padding-top:12px;*display:inline;*zoom:1;
+            img{height:39px;}
+        }
+        ul{
+            float:left;vertical-align:bottom;margin-top:16px;
+            li{
+                float:left;padding-bottom:5px;margin-right:70px;
+                &.active{
+                    border-bottom:3px solid #f3f3f3;
+                    a{color:#fff;}
+                }
+                a{color:#cecece;font-size:18px;}
+            }
+        }
+        .app-download{
+            float:right;margin-top:16px;cursor:pointer;
+            img{width:14px;vertical-align:middle;margin-right:5px;}
+            em{font-size:14px;color:#fff;vertical-align:middle;}
+        }
+
+    }
+}
+
+.price-nav{
+    background:#2e3945;.box-shadow(0, 0px, 10px, 0, rgba(0, 0, 0, 0.35));  min-width:@DefindWidth;      
+        ul{
+          width:@DefindWidth;margin:0 auto;
+          li{
+              float:left;margin-right:20px;
+              &.active a{border-bottom:3px solid #329fd9;}
+              a{
+                  display:block;line-height:42px;padding:0 5px;font-size:16px;color:#fff;
+              }
+          }  
+        }    
+}
+.reverse .control-bar .control-left .change-color i.up{background-image:url(/Images/marketPrice/g-up-top.png);}
+.reverse .control-bar .control-left .change-color i.down{background-image:url(/Images/marketPrice/r-d-top.png);}
+.control-bar{
+    margin: 15px 0 20px;
+    .control-left{
+        float:left;
+        span{
+            display:inline-block;line-height:24px;padding:0 10px;background:#fff;.border-radius(12px);.box-shadow( 0, 0 ,5px, 0, rgba(0, 0, 0, 0.1));margin-right: 10px;cursor:pointer;
+        }
+        .change-color{           
+            i{display:inline-block;width:9px;height:15px;vertical-align:middle;}
+            .up{background-image:url(/Images/marketPrice/r-up-top.png);}
+            .down{margin-right:5px;background-image:url(/Images/marketPrice/g-d-top.png);}
+
+        }
+        .time-count{
+            position:relative;
+            &.active{
+                .set-box{display:block;z-index: 10;}
+            }
+            i{display:inline-block;width:12px;background-image:url(/Images/marketPrice/clock.png);background-repeat: no-repeat; vertical-align:middle;margin-right:5px;height:12px;}
+            .set-box{
+                position:absolute;right:-10px;.box-shadow(0, 0 ,6.5px ,0, rgba(195, 195, 195, 0.4));margin-top: 10px;display:none; z-index: 10;cursor:default;
+                ul{
+                    padding: 10px 10px;background: #fff;width: 180px;border: 1px solid #ddd;
+                    li{
+                        line-height:20px;padding:5px 10px;background:#fff;border-top: 1px solid #ddd;
+                        &:first-child{border:none;}
+                        h3{font-size:14px;font-weight:bold;}
+                        p{
+                            display:inline-block;vertical-align: middle;
+                            img{ width: 13px;vertical-align: middle;}
+                            em{vertical-align: middle;margin-left: 5px;color:@FontColor_2;}
+                        }
+                            
+                    }
+                }
+                .shape{.triangle(up,7px,7px,#fff);position:absolute;top: -12px;right: 20px;}
+            }
+        }
+    }
+    
+}
+ 
+    .search-bar{
+        float:right;line-height:24px;padding:0 10px;background:#fff;.border-radius(13px);.box-shadow( 0, 0 ,5px, 0, rgba(0, 0, 0, 0.1));position:relative;border: 1px solid rgb(50, 159, 217);
+        &:hover{.box-shadow( 0, 0 ,6px, 0, rgba(50, 159, 217, 0.5));}
+        input{line-height:25px;background: transparent;width: 120px;color:@FontColor_1;height:25px}
+        .search-btn{display:inline-block;width:12px;margin-left:5px;cursor:pointer;}
+        &.active{.set-box{display:block;z-index: 10;}}
+        .set-box{
+            position:absolute;right:-10px;.box-shadow(0, 0 ,6.5px ,0, rgba(195, 195, 195, 0.4));margin-top: 8px;display:none;width:230px;background: #fff;padding: 10px 5px;z-index: 10;
+            table{
+                border-collapse:collapse;width:100%;
+                tr{
+                    font-size:14px;text-align:center;height: 30px;cursor:pointer;
+                    th{width:33%;color:@FontColor_1;}
+                    td{
+                        border-top:1px solid #eaeaea;color:@FontColor_2;font-size:12px;
+                        .more{color:#329fd9;}
+                    }
+                    &:hover{
+                        td{
+                            background:#efefef;
+                        }
+                    }
+                }
+            }
+            .shape{.triangle(up,7px,7px,#fff);position:absolute;top: -12px;right: 20px;}
+        }
+    }

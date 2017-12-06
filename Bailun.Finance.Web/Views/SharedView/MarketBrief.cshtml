@@ -1,0 +1,196 @@
+﻿@using Bailun.Finance.Model.News;
+@using Bailun.Common.Extensions;
+@{ 
+    Layout = null;
+}
+
+<link href="~/Styles/dist/sharedView/news.css?v=846a3c4759" rel="stylesheet" />
+<div class="area express">
+    <div class="heading clearfix">
+        <h3>市场快讯</h3>
+        <a href="@CustomConfig.WebBailunNews"><span>更多 ></span></a>
+    </div>
+    <div class="content" data-tab="0">
+        <dl class="tab">
+            <dd data-index="1" class="active">金十</dd>
+            <dd data-index="2">华尔街见闻</dd>
+            <dd data-index="4">FX678</dd>
+            <dd data-index="3">FX168</dd>
+            <dd data-index="5">DailyFx</dd>
+        </dl>
+        <div class="news-content" id="scroll">
+            
+            <div class="news-item active" data-index="1">
+                <div class="news-data">
+                    @if (Model != null)
+                    {
+                        int i = 0;
+                        var currTime = Convert.ToInt64(0);                        
+                        <div class="news-area">
+                            <ul class="news-list">
+                                @foreach (FinanceBriefModel em in Model.JSNews)
+                                {
+                                    if (i == 0 || DateExtensions.ConvertDateTimeInt(em.ReleasedDate, 1) < DateExtensions.ConvertDateTimeInt(currTime, 1))
+                                    {
+                                        <li data-date="@em.ReleasedDate" class="news-cell">
+                                            <h3>@(DateExtensions.ConvertStringToDateTime(em.ReleasedDate).ToString("MM月dd日"))</h3>
+                                        </li>
+                                    }
+
+                                    <li data-id="@em.SourceId" data-date="@em.ReleasedDate">
+                                        <em class="send-time">@(DateExtensions.ConvertStringToDateTime(em.ReleasedDate).ToString("HH:mm"))</em>
+                                        <div class="main-content">@Html.Raw(em.Content != null ? em.Content : em.Title)</div>
+                                    </li>
+
+                                    currTime = em.ReleasedDate;
+                                    i++;
+                                }
+                                    
+                            </ul>
+                        </div>
+                        <a class="more" href="@CustomConfig.WebBailunNews#1">查看更多</a>                                                        
+                    }
+                </div>                               
+            </div>
+
+            <div class="news-item" data-index="2">
+                <div class="news-data">
+
+                    @if (Model != null)
+                    {
+                        int i = 0;
+                        var currTime = Convert.ToInt64(0);
+                        <div class="news-area">
+                            <ul class="news-list">
+                                @foreach (FinanceBriefModel em in Model.WallStreetcnNews)
+                                {
+                                    if (i == 0 || DateExtensions.ConvertDateTimeInt(em.ReleasedDate, 1) < DateExtensions.ConvertDateTimeInt(currTime, 1))
+                                    {
+                                        <li data-date="@em.ReleasedDate" class="news-cell">
+                                            <h3>@(DateExtensions.ConvertStringToDateTime(em.ReleasedDate).ToString("MM月dd日"))</h3>
+                                        </li>
+                                    }
+
+                                    <li data-id="@em.SourceId" data-date="@em.ReleasedDate">
+                                        <em class="send-time">@(DateExtensions.ConvertStringToDateTime(em.ReleasedDate).ToString("HH:mm"))</em>
+                                        <div class="main-content">@Html.Raw(em.Content != null ? em.Content : em.Title)</div>
+                                    </li>
+
+                                    currTime = em.ReleasedDate;
+                                    i++;
+                                }
+
+                            </ul>
+                        </div>
+                        <a class="more" href="@CustomConfig.WebBailunNews#2">查看更多</a>
+                    }
+                </div>
+                
+            </div>
+
+            <div class="news-item" data-index="4">
+                <div class="news-data">
+
+                    @if (Model != null)
+                    {
+                        int i = 0;
+                        var currTime = Convert.ToInt64(0);
+                        <div class="news-area">
+                            <ul class="news-list">
+                                @foreach (FinanceBriefModel em in Model.Fx678News)
+                                {
+                                    if (i == 0 || DateExtensions.ConvertDateTimeInt(em.ReleasedDate, 1) < DateExtensions.ConvertDateTimeInt(currTime, 1))
+                                    {
+                                        <li data-date="@em.ReleasedDate" class="news-cell">
+                                            <h3>@(DateExtensions.ConvertStringToDateTime(em.ReleasedDate).ToString("MM月dd日"))</h3>
+                                        </li>
+                                    }
+
+                                    <li data-id="@em.SourceId" data-date="@em.ReleasedDate">
+                                        <em class="send-time">@(DateExtensions.ConvertStringToDateTime(em.ReleasedDate).ToString("HH:mm"))</em>
+                                        <div class="main-content">@Html.Raw(em.Content != null ? em.Content : em.Title)</div>
+                                    </li>
+
+                                    currTime = em.ReleasedDate;
+                                    i++;
+                                }
+
+                            </ul>
+                        </div>
+                        <a class="more" href="@CustomConfig.WebBailunNews#4">查看更多</a>
+                    }
+                </div>
+                
+            </div>
+
+            <div class="news-item" data-index="3">
+                <div class="news-data">
+                    @if (Model != null)
+                    {
+                        int i = 0;
+                        var currTime = Convert.ToInt64(0);
+                        <div class="news-area">
+                            <ul class="news-list">
+                                @foreach (FinanceBriefModel em in Model.Fx168News)
+                                {
+                                    if (i == 0 || DateExtensions.ConvertDateTimeInt(em.ReleasedDate, 1) < DateExtensions.ConvertDateTimeInt(currTime, 1))
+                                    {
+                                        <li data-date="@em.ReleasedDate" class="news-cell">
+                                            <h3>@(DateExtensions.ConvertStringToDateTime(em.ReleasedDate).ToString("MM月dd日"))</h3>
+                                        </li>
+                                    }
+
+                                    <li data-id="@em.SourceId" data-date="@em.ReleasedDate">
+                                        <em class="send-time">@(DateExtensions.ConvertStringToDateTime(em.ReleasedDate).ToString("HH:mm"))</em>
+                                        <div class="main-content">@Html.Raw(em.Content != null ? em.Content : em.Title)</div>
+                                    </li>
+
+                                    currTime = em.ReleasedDate;
+                                    i++;
+                                }
+
+                            </ul>
+                        </div>
+                        <a class="more" href="@CustomConfig.WebBailunNews#3">查看更多</a>
+                    }
+                </div>                
+            </div>
+
+            <div class="news-item" data-index="5">
+                <div class="news-data">
+                    @if (Model != null)
+                    {
+                        int i = 0;
+                        var currTime = Convert.ToInt64(0);
+                        <div class="news-area">
+                            <ul class="news-list">
+                                @foreach (FinanceBriefModel em in Model.DailyFxnEews)
+                                {
+                                    if (i == 0 || DateExtensions.ConvertDateTimeInt(em.ReleasedDate, 1) < DateExtensions.ConvertDateTimeInt(currTime, 1))
+                                    {
+                                        <li data-date="@em.ReleasedDate">
+                                            <h3>@(DateExtensions.ConvertStringToDateTime(em.ReleasedDate).ToString("MM月dd日"))</h3>
+                                        </li>
+                                    }
+
+                                    <li data-id="@em.SourceId" data-date="@em.ReleasedDate" class="news-cell">
+                                        <em class="send-time">@(DateExtensions.ConvertStringToDateTime(em.ReleasedDate).ToString("HH:mm"))</em>
+                                        <div class="main-content">@Html.Raw(em.Content != null ? em.Content : em.Title)</div>
+                                    </li>
+
+                                    currTime = em.ReleasedDate;
+                                    i++;
+                                }
+
+                            </ul>
+                        </div>
+                        <a class="more" href="@CustomConfig.WebBailunNews#5">查看更多</a>
+                    }
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>    
+<iframe style="display:none;opacity:0;width:0;height:0;" id="news-websocket"></iframe>
+

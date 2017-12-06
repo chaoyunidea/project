@@ -1,0 +1,84 @@
+﻿@using Bailun.Finance.Model.Quote;
+@using Bailun.Common.Extensions;
+
+@{
+    Layout = null;
+}
+
+<div class="nav clearfix">
+    <div class="tab" data-tab="0">
+        <div class="tab-title clearfix">
+            <div data-index="0" class="pre active"><a href="@CustomConfig.WebBailunBaojia/marketprice/index">主要</a></div>
+            <div data-index="1" class="pre"><a href="@CustomConfig.WebBailunBaojia/marketprice/list/forex">外汇</a></div>
+            @*<div data-index="5" class="pre"><a href="/marketprice/list/cfdindices">外汇期货</a></div>*@
+            <div data-index="11" class="pre"><a href="@CustomConfig.WebBailunBaojia/marketprice/list/metals">贵金属</a></div>
+            <div data-index="2" class="pre"><a href="@CustomConfig.WebBailunBaojia/marketprice/list/goods">大宗商品</a></div>
+            <div data-index="3" class="pre"><a href="@CustomConfig.WebBailunBaojia/marketprice/list/indices">股指</a></div>
+            <div data-index="10" class="pre"><a href="@CustomConfig.WebBailunBaojia/marketprice/list/stockIndex">股指期货</a></div>
+            @*<div data-index="6" class="pre"><a href="/marketprice/ashares">沪深</a></div>
+                <div data-index="7" class="pre"><a href="/marketprice/hkstock">港股</a></div>
+                <div data-index="8" class="pre"><a href="/marketprice/usstock">美股</a></div>*@
+            <div data-index="4" class="pre"><a href="@CustomConfig.WebBailunBaojia/marketprice/list/bonds">债券</a></div>
+            <div data-index="9" class="pre"><a href="@CustomConfig.WebBailunBaojia/marketprice/list/bitcoin">比特币</a></div>
+        </div>
+        <div class="tab-content">
+            @*<div class="loading" style="top:30px"></div>*@
+           
+
+            @if (Model != null)
+            {
+                foreach (KeyValuePair<int, IList<ChatIndexModel>> kv in Model)
+                {
+                    <div class="tab-item clearfix @(kv.Key ==0 ? "active" : "")" data-index="@kv.Key">
+                        @if (kv.Value != null && kv.Value.Count > 0)
+                        {
+                            foreach (ChatIndexModel m in kv.Value)
+                            {
+                                <div class="nav-link">
+                                    <div class="nav-data clearfix @(kv.Key == 9 ? "press" : "") @(m.PriceExchange.CaculatePriceExchange(m.CurrentPrice,m.OpenPrice).Substring(0,1) == "+" ? "up" : m.PriceExchange.CaculatePriceExchange(m.CurrentPrice,m.OpenPrice).Substring(0,1) == "-" ? "down" : "none")" data-code="@(m.Code)" data-timezone="@(m.Price_TimeZone)">
+
+                                        <div class="data-contain clearfix">
+                                            <p class="title">@m.Cn_Name</p>
+                                            <p class="current-price">@m.CurrentPrice</p>
+                                        </div>
+                                        @if (kv.Key == 9)
+                                        {
+                                            <div class="exchange">@m.Exchange</div>
+                                        }
+                                        <div class="data-left">
+                                            <span class="open-price">@m.PriceExchange.CaculatePriceExchange(m.CurrentPrice, m.OpenPrice)</span>
+                                            <span class="close-price">(@m.PriceLimit.CaculatePriceLimit(m.CurrentPrice, m.OpenPrice))</span>
+                                            <p class="data-time">@m.PriceDate.ConvertDatetimeHourBeijing(m.Price_TimeZone)</p>
+                                        </div>
+                                        <div class="chart" id="chartLine@(kv.Key == 0 ? "Main" + Convert.ToString(m.MarketId) : Convert.ToString(m.MarketId))" style="width:50px;height:50px;" data-id="@(m.MarketId)">
+
+                                        </div>
+
+                                    </div>
+                                    <a href="@CustomConfig.WebBailunBaojia/marketprice/detail/@(m.MarketId)" target="_blank"></a>
+                                </div>
+
+                            }
+
+                            if (kv.Value.Count < 6)
+                            {
+                                for(var i = 0;i < 6 - kv.Value.Count; i++)
+                                {
+                                    <div class="nav-link nodata">
+                                        <div class="nav-data">
+                                            <div class="svg-box">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" t="1512359708237" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="9184" width="50" height="50"><defs><style type="text/css" /></defs><path d="M874.396775 366.139535h-134.786977l-33.212527-170.956403a23.337674 23.337674 0 0 0-27.326511-18.443907l-185.93538 36.121798-38.265054-31.287566a23.369426 23.369426 0 0 0-14.744807-5.262883 23.234481 23.234481 0 0 0-18.054945 8.557147L273.856496 366.139535H164.423442c-9.398574 0-17.01507 7.108465-17.01507 15.875969v138.914729c0 8.767504 7.616496 15.875969 17.01507 15.875969h26.751008v312.228713a15.875969 15.875969 0 0 0 15.875969 15.875969h609.903131a15.875969 15.875969 0 0 0 15.875969-15.875969V536.806202h41.567256c9.398574 0 17.01507-7.108465 17.01507-15.875969v-138.914729c0-8.767504-7.620465-15.875969-17.01507-15.875969z m-191.535628-169.916527a3.468899 3.468899 0 0 1 4.060279 2.738604l32.474295 167.177923h-38.796899l-167.479566-136.94214 169.741891-32.974387zM649.247752 366.139535h-186.56645l74.851225-91.342388L649.247752 366.139535z m-211.80924-168.709954a3.476837 3.476837 0 0 1 4.873922-0.492155l79.856124 65.293892-85.142822 103.908217H299.492217l137.946295-168.709954z m375.542077 647.636341H211.019411V536.806202h601.965147v308.25972z m58.586295-328.104682H167.253333v-130.976744h704.313551v130.976744z" fill="#dbdbdb" p-id="9185" /><path d="M402.177984 695.014202h234.464249a15.875969 15.875969 0 0 0 15.875969-15.875969v-88.056062a15.875969 15.875969 0 0 0-15.875969-15.875969H402.177984a15.875969 15.875969 0 0 0-15.875968 15.875969v88.056062a15.875969 15.875969 0 0 0 15.875968 15.875969z m3.968993-99.963039h226.526263v80.118077H406.146977v-80.118077z" fill="#dbdbdb" p-id="9186" /><path d="M440.843907 271.090109m-9.922481 0a9.922481 9.922481 0 1 0 19.844962 0 9.922481 9.922481 0 1 0-19.844962 0Z" fill="#dbdbdb" p-id="9187" /><path d="M418.216682 298.841302m-9.92248 0a9.922481 9.922481 0 1 0 19.844961 0 9.922481 9.922481 0 1 0-19.844961 0Z" fill="#dbdbdb" p-id="9188" /><path d="M395.593426 326.588527m-9.92248 0a9.922481 9.922481 0 1 0 19.844961 0 9.922481 9.922481 0 1 0-19.844961 0Z" fill="#dbdbdb" p-id="9189" /><path d="M372.966202 354.335752m-9.922481 0a9.922481 9.922481 0 1 0 19.844961 0 9.922481 9.922481 0 1 0-19.844961 0Z" fill="#dbdbdb" p-id="9190" /><path d="M463.471132 243.342884m-9.922481 0a9.922481 9.922481 0 1 0 19.844961 0 9.922481 9.922481 0 1 0-19.844961 0Z" fill="#dbdbdb" p-id="9191" /></svg>
+                                            </div>
+                                            <p>暂无相关推荐</p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</div>

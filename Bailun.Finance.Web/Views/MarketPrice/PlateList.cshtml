@@ -1,0 +1,51 @@
+﻿@using Bailun.Finance.Model.Enums;
+@{
+    ViewBag.Title = "拜仑财经";
+    ViewBag.Keywords = "";
+    ViewBag.Description = "";
+    Layout = "/Views/Shared/_LayoutPrice.cshtml";
+}
+
+@section style{    
+    <link href="~/Scripts/glup/kkpager/kkpage1/kkpager.min.css?v=ed39d937ab" rel="stylesheet" />
+    <link href="~/Styles/dist/marketPrice/plateList.css?v=dacd7a61c4" rel="stylesheet" />
+}
+<div class="main clearfix">    
+    <div class="left">  
+        @Html.Partial("~/Views/SharedView/ControlBar.cshtml")      
+        <div class="bread clearfix">
+            @*<span><a href="/marketprice/index">市场报价</a> > </span> <span><a href="/marketprice/hkstock"></a>  > </span>
+            *@
+        </div>
+        <div class="area plate">
+            <div class="content">
+                <ul id="plateList" class="plateList clearfix">
+                    
+                </ul>                
+            </div>
+            <div id="kkpager"></div>
+        </div>
+     </div>
+     
+</div>
+
+
+
+@section script{
+    <script>
+        var productId = '@ViewBag.productId';
+    </script>
+    <script src="/Scripts/glup/jquery/json2.js?v=39b6ed277e"></script>
+    <script src="https://gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="https://gajsapi.fx110.com/script/public/signalr/signalr.js"></script>
+    <script src="https://gajsapi.fx110.com/script/public/masklayer/masklayer.min.js"></script>
+    <script src="~/Scripts/glup/highStock/highstock.js?v=c3d47eb237"></script>
+    <script src="https://gajsapi.fx110.com/script/public/jsScroll/jsScroll.min.js"></script>      
+    <script src="~/Scripts/glup/avalon_two/avalon.js?v=975735a0e4"></script>    
+    <script src="~/gulp/gulp/requireBuilder/jsFileRoute.js?v=654db78f43"></script>    
+    <script src="~/Scripts/glup/kkpager/kkpage1/kkpager.js?v=2bc296e351"></script>
+    <script src="/Scripts/glup/require.min.js?v=7658ede0c2" data-main="/Scripts/dist/marketPrice/plateList.js?v=c8a70ab057"></script>
+    @*<script src="~/Scripts/dist/sharedView/news.js?v=92f3ea12cc"></script>*@
+    
+
+}

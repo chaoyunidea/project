@@ -1,0 +1,51 @@
+﻿@using Bailun.Finance.Model.Quote;
+@using Bailun.Common.Extensions;
+@{
+    Layout = null;
+    Dictionary<int, string[]> arrProduct = new Dictionary<int, string[]>();
+    arrProduct.Add(1, new string[] { "外汇", "forex" });
+    arrProduct.Add(2, new string[] { "大宗商品", "goods" });
+    arrProduct.Add(3, new string[] { "股指", "indices" });
+    arrProduct.Add(4, new string[] { "债券", "bonds" });
+    arrProduct.Add(9, new string[] { "比特币", "bitcoin" });
+    arrProduct.Add(10, new string[] { "股指期货", "stockIndex" });
+    arrProduct.Add(11, new string[] { "贵金属", "metals" });
+
+}
+@if (Model != null)
+{
+    foreach (KeyValuePair<int, IList<ChatIndexModel>> em in Model)
+    {
+        <div class="box price-item">
+            <div class="heading clearfix">
+                <h3>@(arrProduct[em.Key][0])</h3>
+                <span><a href="/marketprice/list/@(arrProduct[em.Key][1])">更多></a></span>
+            </div>
+            <div class="content">
+                <ul class="clearfix">
+                   
+                    @foreach (ChatIndexModel cell in em.Value)
+                    {
+                        <li data-code="@cell.Code" class="@(cell.PriceExchange.CaculatePriceExchange(cell.CurrentPrice,cell.OpenPrice).Substring(0,1) == "+" ? "up" : cell.PriceExchange.CaculatePriceExchange(cell.CurrentPrice,cell.OpenPrice).Substring(0,1) == "-" ? "down" : "none")">
+                            <div class="params">
+                                <div class="name clearfix">
+                                    <h5>@cell.Cn_Name</h5>
+                                </div>
+                                <div class="data-area">
+                                    <h3 class="current">@cell.CurrentPrice<i></i></h3>
+                                    <p class="updowns"><em class="percent">@cell.PriceExchange.CaculatePriceExchange(cell.CurrentPrice, cell.OpenPrice)</em><em>@cell.PriceLimit.CaculatePriceLimit(cell.CurrentPrice, cell.OpenPrice)</em></p>
+                                </div>
+                            </div>
+                            <div class="chart" id="chartLine@(cell.MarketId)" data-id="@(cell.MarketId)">
+
+                            </div>
+                            <a href="/marketprice/detail/@cell.MarketId" target="_blank"></a>
+                        </li>
+                    }
+                    
+                </ul>
+            </div>
+        </div>
+    }
+
+}

@@ -1,0 +1,6 @@
+D:\work\GIT\bailun\Bailun.Finance.Model\bin\Debug\Bailun.Finance.Model.dll
+D:\work\GIT\bailun\Bailun.Finance.Model\bin\Debug\Bailun.Finance.Model.pdb
+D:\work\GIT\bailun\Bailun.Finance.Model\bin\Debug\FX110.Cache.dll
+D:\work\GIT\bailun\Bailun.Finance.Model\obj\Debug\Bailun.Finance.Model.dll
+D:\work\GIT\bailun\Bailun.Finance.Model\obj\Debug\Bailun.Finance.Model.pdb
+D:\work\GIT\bailun\Bailun.Finance.Model\obj\Debug\Bailun.Finance.Model.csprojResolveAssemblyReference.cache

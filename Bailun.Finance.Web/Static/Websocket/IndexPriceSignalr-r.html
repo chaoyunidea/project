@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="/Scripts/glup/jquery/jquery-1.8.3.min.js?v=e128811631"></script>
+    <script src="https://gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="https://gajsapi.fx110.com/script/public/signalr/signalr.1.0.1.min.js?1"></script>
+    <script>
+
+       // var indexArr =  ["Brent Oil", "EURUSD.", "Crude Oil WTI", "GBPUSD.", "USDJPY.", "AUDUSD.", "USDCHF.", "USDCNH"]
+        var indexArr = window.parent.rightPriceCodeArr, signalrServer;
+
+        function singalr() { 
+            signalrServer = new signalr(
+        {
+            hubjs:'/Scripts/glup/OCS/quotehubs.js?v=1ef29dcf33',
+            hubConnection: 'https://q' + (Math.floor(Math.random() * 30) + 1) + '.bailun.com/signalr',
+            createHubProxy: 'QuoteHub',
+            connHunProxyOn: 'Subscribe'
+        },
+        function (that) {
+           
+            that.connHunProxy.invoke("WebSiteSubscribeSymbol", indexArr.join('|'));
+           // that.connHunProxy.invoke('SubscribeSymbole_Spread', "1242,1338,707,132,1042,1035,1531,917,1085,1349,24,1156,157,1530,26,1065,1311,1359,1491,711,67,967,38,1333,1367,1450,1372,6,1528")
+        },
+        function (json) {
+            var ar = json.split(',');
+            Vary = new createForexData(ar[0], ar[1], ar[2], ar[3], ar[4], ar[5], ar[6], ar[7], ar[8], ar[9], ar[10], ar[11], ar[12]);
+            window.parent.rightPriceListRefresh(Vary);
+        },
+           function (state) {//: 0正在连接 1已连接 2重新连接 4断开连接
+               if (state.newState == 4) {
+                   singalr();
+               }
+           })
+        }
+        singalr();
+
+        //setInterval(function () {
+        //    signalrServer.stop();
+        //    signalrServer.start();
+        //}, 60 * 60 * 1000);
+    </script>
+
+    <script>
+        //var Vary;
+        //$.ajaxSettings.async = false;
+        //var indexArr = window.parent.rightPriceCodeArr;
+        //$(function () {
+
+        //    //var connection = $.hubConnection('http://10.0.0.147:10001//signalr');
+        //    var connection = $.hubConnection('https://q' + (Math.floor(Math.random() * 30) + 1) + '.bailun.com/signalr');
+
+        //    var connHunProxy = connection.createHubProxy('QuoteHub');
+            
+        //    connHunProxy.on('Subscribe', function (json) {              
+        //        var ar = json.split(',');
+        //        Vary = new createForexData(ar[0], ar[1], ar[2], ar[3], ar[4], ar[5], ar[6], ar[7], ar[8], ar[9], ar[10], ar[11], ar[12]);
+        //        window.parent.rightPriceListRefresh(Vary);
+
+        //    });
+
+        //    connection.start({ jsonp: true, transport: ['webSockets', 'longPolling'] }).done(function () {
+        //        connHunProxy.invoke("WebSiteSubscribeSymbol", indexArr.join('|'));                
+        //    });
+            
+        //    setInterval(function () {
+        //        connection.stop();
+        //        connection.start({ jsonp: true, transport: ['webSockets', 'longPolling'] }).done(function () {
+        //            connHunProxy.invoke("WebSiteSubscribeSymbol", indexArr.join('|'));
+        //        });
+        //    }, 60 * 60 * 1000);
+        //})
+        
+        //一般
+        function createForexData(stockCode, stockName, bid, ask, open, close, high, low, spread, time, priceLimit, priceExchange,source) {
+            this.Code = stockCode;
+            this.Cn_Name = stockName;
+            this.CurrentPrice = source == 0 ? close : bid;
+            this.Ask = ask;
+            this.OpenPrice = open;
+            this.ClosePrice = close;
+            this.HighPrice = high;
+            this.LowPrice = low;
+            this.PriceDate = time;
+            this.PriceLimit = priceLimit;
+            this.PriceExchange = priceExchange;
+            //this.点差 = BP1;
+        }
+       
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿@using Bailun.Finance.Model.Quote;
+@using Bailun.Common.Extensions;
+
+@{
+    Layout = null;
+    var list = Model as List<ChatIndexModel>;
+}
+<link href="~/Styles/dist/sharedView/price.css?v=90fa91409f" rel="stylesheet" />
+<script type="text/javascript">
+    var modelList = '@ViewBag.ModelList';
+</script>
+<div class="area quote">
+    <div class="heading clearfix">
+        <h3>市场报价</h3>
+        <a href="@CustomConfig.WebBailunBaojia"><span>更多 ></span></a>
+    </div>
+    <div class="content">
+        <div id="chartLine" class="chart"></div>
+        <table>
+            <tbody>
+                @if (list != null && list.Any())
+                {
+                    var index = 0;
+                    foreach (ChatIndexModel em in list)
+                    {
+                        
+                        <tr class="@(em.PriceLimit.CaculatePriceExchange(em.CurrentPrice,em.OpenPrice).Substring(0,1) == "+" ? "up" : em.PriceLimit.CaculatePriceExchange(em.CurrentPrice,em.OpenPrice).Substring(0,1) == "-" ? "down" : "none")@(index == 0 ? " active" : "")" data-id ="@em.MarketId" data-code="@em.Code">
+                            <td class="title">@em.Cn_Name</td>
+                            <td class="td2">@(Math.Round(Convert.ToDecimal(em.CurrentPrice), 4))</td>
+                            <td class="td3">@(em.PriceLimit.CaculatePriceLimit(em.CurrentPrice, em.OpenPrice)) </td>
+                            <td class="td4">@(em.PriceExchange.CaculatePriceExchange(em.CurrentPrice, em.OpenPrice))</td>
+                        </tr>
+                        index++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

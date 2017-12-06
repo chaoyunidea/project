@@ -1,0 +1,58 @@
+﻿@import (reference) "../../glup/PublicDefind.less";//引入方法
+@import (reference) "../../glup/Animation.less";//引入方法
+@priceImg:'@{ImgUrl}/marketPrice/';
+body{background:@Default_bg;color:@FontColor_1;}
+
+.area{   
+    margin-bottom:25px; 
+    .heading{
+        border-top:1px solid @border_color;
+        h3{font-size:16px;font-weight:bold;padding:8px 17px;border-top:3px solid @MainColor_5;display: inline-block;position: relative;top: -1px;float:left;}
+        span{float:right;line-height:40px;color:@FontColor_3;}
+    }       
+}
+.main{
+    margin:10px auto 20px;width:@DefindWidth;
+    .left{
+        width:100%;float:left;
+        .control-bar{width:auto;}
+        .head-bar{margin:15px 0 30px;}
+        .bread{
+            float:left;
+            span{
+                line-height:25px;float:left;margin-right:5px;
+            }            
+        }
+        .search-group{
+            min-height:500px;
+            .no-data{
+                text-align: center; padding-top: 150px;
+                img{width: 60px;}
+                p{font-size: 18px;margin-top: 20px;color: @FontColor_3;}
+            }
+        }
+        .price{
+            .heading{}
+            .content{
+                padding-bottom:50px;
+                ul{    
+                    width:@DefindWidth + 30px;                
+                    li{
+                       .border-radius(2px);background:#fff;.box-shadow(0, 0 ,8px ,0 ,rgba(195, 195, 195, 0.18));line-height:36px;float:left;margin-right:30px;width:270px;margin-bottom:15px;
+                       a{
+                           display:block;padding:0 20px;
+                           h4{float:left;font-size:16px;width: 120px;.ellipsis();}
+                           .code{
+                               float:left;color:@FontColor_3;width:105px;margin-left:5px;.ellipsis();
+                               em{color:@FontColor_1;}
+                           }
+                       }
+
+                    }
+                }
+            }
+        }
+    }    
+}
+
+

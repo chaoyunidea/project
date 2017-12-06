@@ -1,0 +1,90 @@
+﻿@using Bailun.Finance.Model.Calendar;
+@using Bailun.Common.Extensions;
+
+@{
+    ViewBag.Title = "拜仑财经" + "-" + ViewBag.Title;
+    ViewBag.Keywords = "拜仑财经日历,拜仑财经日历解读";
+    ViewBag.Description = "拜仑财经日历解读";
+    Layout = "/Views/Shared/_Layout.cshtml";
+
+    var model = Model as FinanceUnscrambleModel;
+    if (model == null)
+    {
+        model = new FinanceUnscrambleModel();
+    }
+}
+@section style{
+    <link href="~/Styles/dist/financialCalendar/detail.css?v=a7f01eb146" rel="stylesheet" />
+    <link rel="stylesheet" src="//gajsapi.fx110.com/script/public/layer/skin/layer.css?v=2393c3e70f" />    
+}
+<div class="main clearfix">
+    <div class="left">
+        <div class="chart-show">
+            <div class="chart-theme">@(model.Title)</div>
+            <div class="show-line"></div>
+            <div class="details-show">
+                <div class="time-pb">
+                    <span class="choice-theme">选择日期：</span>
+                    <input class="choice-date" type="text" placeholder="起始日期" id="start-time"/>
+                    <span class="need-to">至</span>
+                    <input class="choice-last" type="text" placeholder="结束日期" id="end-time"/>
+                    <a href="javascript:;" class="sure" id="select-data">确定</a>
+                    <span class="column chart-type"></span>
+                    <span class="line chart-type active"></span>
+                    @*<span class="pub-line"><b></b>预测</span>
+                    <span class="preview-line active"><b></b>公布</span>*@
+                </div>
+                <div id="container"></div>
+            </div> 
+            <div class="public-time">
+                <div class="next-time">下次公布时间：<span>@(DateExtensions.ConvertStringToDateTime(model.PublicTime).ToString("MM-dd HH:mm"))</span></div>
+                <div class="next-time">数据公布机构：<span>@(model.Institutions)</span></div> 
+                <div class="next-time">发布频率：<span>@(model.Frequency)</span></div> 
+                <div class="next-time">统计方法：<span>@(model.Method)</span></div> 
+            </div> 
+            <div class="effect">
+                <div class="need-show">
+                   数据影响
+                </div>
+                <div class="effect-introduce">
+                    @Html.Raw(model.DataImpact)
+                </div>
+            </div>
+            <div class="effect">
+                <div class="need-show">
+                    数据释义
+                </div>
+                <div class="effect-introduce">
+                    @Html.Raw(model.Paraphrase)
+                </div>
+            </div>
+            <div class="effect">
+                <div class="need-show">
+                    趣味解读
+                </div>
+                <div class="effect-introduce">
+                    @Html.Raw(model.Focus)
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="right">
+        @Html.Partial("~/Views/SharedView/MarketBrief.cshtml") 
+        @Html.Partial("~/Views/SharedView/MarketWatch.cshtml")
+        
+    </div>*@
+</div>
+
+@section script{
+    <script>
+        var calendarId = @ViewBag.UnId;
+    </script>
+    <script src="/Scripts/glup/jquery/json2.js?v=39b6ed277e"></script>
+    <script src="//gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="//gajsapi.fx110.com/script/public/masklayer/masklayer.min.js"></script>    
+    <script src="~/Scripts/glup/highStock/highstock.js?v=c3d47eb237"></script>
+    <script src="//gajsapi.fx110.com/script/public/jsScroll/jsScroll.min.js"></script>
+    <script src="~/Scripts/glup/My97DatePicker/WdatePicker.min.js?v=3163356532"></script>
+    <script src="//gajsapi.fx110.com/script/public/layer/layer.js?v=391c55f2ca"></script>
+    <script src="~/Scripts/dist/financialCalendar/calendarDetail.js?v=b016186a77"></script>        
+}

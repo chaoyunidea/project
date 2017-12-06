@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "市场报价_拜仑财经";
+    ViewBag.Keywords = "";
+    ViewBag.Description = "";
+    Layout = "/Views/Shared/_LayoutPrice.cshtml";
+}
+
+@section style{    
+    <link href="~/Styles/dist/marketPrice/marketPriceIndex.css?v=9cbde7682b" rel="stylesheet" />
+    <link href="~/Scripts/glup/kkpager/kkpage1/kkpager.min.css?v=ed39d937ab" rel="stylesheet" />
+}
+<div class="main clearfix">
+    <div class="left">
+        @*顶部控制栏*@
+        @Html.Partial("~/Views/SharedView/ControlBar.cshtml")
+        @*品种视图*@
+        @Html.Action("IndexProductView", "MarketPrice")
+       @* <div class="box price-item">
+        <div class="heading clearfix">
+            <h3>外汇期货</h3>
+            <span><a href="/marketprice/list/cfdindices">更多></a></span>
+        </div>
+        <div class="content">
+            <ul class="clearfix" id="cfdindicesData"></ul>
+
+        </div>
+    </div>
+    <div class="box price-item">
+        <div class="heading clearfix">
+            <h3>沪深</h3>
+            <span><a href="/marketprice/ashares">更多></a></span>
+        </div>
+        <div class="content">
+            <ul class="clearfix" id="asharesData"></ul>
+
+        </div>
+    </div>
+
+    <div class="box price-item">
+        <div class="heading clearfix">
+            <h3>港股</h3>
+            <span><a href="/marketprice/hkstock">更多></a></span>
+        </div>
+        <div class="content">
+            <ul class="clearfix" id="hkstockData"></ul>
+
+        </div>
+    </div>
+
+    <div class="box price-item">
+        <div class="heading clearfix">
+            <h3>美股</h3>
+            <span><a href="/marketprice/usstock">更多></a></span>
+        </div>
+        <div class="content">
+            <ul class="clearfix" id="usstockData"></ul>
+
+        </div>
+    </div>*@
+
+        @*<div class="box price-item">
+            <div class="heading clearfix">
+                <h3>比特币</h3>
+                <span><a href="/marketprice/list/bitcoin">更多></a></span>
+            </div>
+            <div class="content">
+                <ul class="clearfix" id="bitcoinData"></ul>
+
+            </div>
+        </div>*@
+
+     </div>
+    <div class="right">
+        @*市场快讯*@
+       @Html.Action("MarketBrief","SharedView",new { topSize = 50})       
+        @*财经日历*@ 
+       @Html.Action("FinancialCalendar", "SharedView", new { topSize = 4 })   
+    </div>
+    @*SvaData*@
+    @Html.Action("SvgData", "SharedView", new { type = 2 })   
+</div>
+@*<iframe style="display:none;opacity:0;width:0;height:0;" id="h-websocket"></iframe>*@
+@section script{
+<script>
+    var newsDomain = '@CustomConfig.WebBailunNews';
+</script>
+<script src="~/gulp/gulp/requireBuilder/jsFileRoute.js?v=654db78f43"></script>
+<script src="/Scripts/glup/jquery/json2.js?v=39b6ed277e"></script>
+<script src="//gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+<script src="//gajsapi.fx110.com/script/public/masklayer/masklayer.min.js"></script>
+<script src="~/Scripts/glup/highStock/highcharts.js?v=04ecfbef6b"></script>
+<script src="/Scripts/glup/require.min.js?v=7658ede0c2" data-main="/Scripts/dist/marketPrice/priceIndex.js?v=494f5a4edb"></script>
+}

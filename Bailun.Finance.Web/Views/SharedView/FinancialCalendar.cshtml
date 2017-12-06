@@ -1,0 +1,76 @@
+﻿@using Bailun.Finance.Model.Calendar;
+@using Bailun.Common.Extensions;
+
+
+@{ 
+    Layout = null;
+    var model = Model as List<FX_FinanceEconomicsModel>;
+    //List<FX_FinanceEconomicsModel> lists = new List<FX_FinanceEconomicsModel>();
+    //var nowIndex = 0;
+
+    //foreach (FX_FinanceEconomicsModel i in model)
+    //{
+    //    if (i.ReleasedDate >= DateExtensions.ConvertDateTimeInt(DateTime.Now))
+    //    {
+    //        lists.Add(i);
+    //        nowIndex++;
+    //    }
+    //    if (nowIndex > 3)
+    //    {
+    //        break;
+    //    }
+    //}
+}
+<link href="~/Styles/dist/sharedView/calendar.css?v=8d4c903381" rel="stylesheet" />
+<div class="area calendar">
+    <div class="heading clearfix">
+        <h3>财经日历</h3>
+        <a href="@CustomConfig.WebBailunRili"><span>更多 ></span></a>
+    </div>
+    <div class="content">
+         
+            @if(model != null && model.Any()){
+                <ul class="calendar-list">
+                @foreach (FX_FinanceEconomicsModel em in model)
+                {
+                    <li>
+                        <a href="@CustomConfig.WebBailunRili/calendar/unscramble/@(em.SourceId + "_" + (string.IsNullOrEmpty(em.UnscrambleId) ? "0" :em.UnscrambleId)  + "_" + em.ReleasedDate)" target="_blank">
+                            <div class="time clearfix">
+                                <em>@(DateExtensions.ConvertStringToDateTime(em.ReleasedDate).ToString("HH:mm"))</em>
+                                <div class="star-union">
+                                    @{ 
+                                        var str = "";
+                                        for (var i = 0; i < em.Star; i++) {
+                                            str += "<img src=\"/Images/news/star-on.png\" />";
+                                        }
+                                        for (var i = 0; i < 5 - em.Star; i++) {
+                                            str += "<img src=\"/Images/news/star-off.png\" />";
+                                        }
+                                    }
+                                    @Html.Raw(str.Trim())
+                                </div>
+                            </div>
+                            <div class="title clearfix">                                
+                                <img src="/images/banner/rectangle/@(em.CountryImg)" class="flag" />
+                                <em class="nation">@(em.Country)</em>                                
+                                <em class="title-con">@(em.Title)</em>
+                            </div>
+                            <div class="param clearfix">
+                                <p>今值: <em>@(em.Actual)</em></p>
+                                <p>预测: <em>@(em.Consensus)</em></p>
+                                <p>前值: <em>@(em.Revised == "---" || em.Revised == "0" ? em.Previous : em.Revised)</em></p>
+                            </div>
+                        </a>
+                    </li>   
+                }
+              </ul>
+            }else{
+                <div class="nodata">
+                    <img src="/Images/calendar/no-info.png">
+                    <p>今日无财经数据</p>
+                </div>                
+            }
+        
+    </div>
+</div>
+

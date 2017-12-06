@@ -1,0 +1,190 @@
+
+
+/*
+    变形动作执行
+    transform  变形的动作
+
+    例子：
+    .transform:translateX(100px);
+
+*/
+.transform(@transform){
+transform:@transform;
+-ms-transform:@transform; /* Internet Explorer */
+-moz-transform:@transform; /* Firefox */
+-webkit-transform:@transform; /* Safari 和 Chrome */
+-o-transform:@transform; /* Opera */
+}
+
+ /*
+     动画过程执行方式
+     name    动作名称
+     frames  动作效果
+
+     例子：
+    .keyframes (line, {
+        0%{background-size:0% 2px;}
+        100%{background-size:100% 2px;}
+    });
+ */
+.keyframes (@name, @frames) {
+    @-webkit-keyframes @name{ @frames(); }
+    @-moz-keyframes @name{ @frames(); }
+    @-ms-keyframes @name{ @frames();}
+    @-o-keyframes @name{ @frames(); }
+    @keyframes @name{ @frames(); }
+}
+
+
+.transition(...){
+    transition:@arguments;
+    -ms-transition:@arguments;
+    -o-transition:@arguments;
+    -moz-transition:@arguments;
+    -webkit-transition:@arguments;
+}
+
+//css3  旋转
+// @deg  度数  单位是deg
+.transformR(@deg:90deg){
+transform:rotate(@deg);
+-ms-transform:rotate(@deg); /* Internet Explorer */
+-moz-transform:rotate(@deg); /* Firefox */
+-webkit-transform:rotate(@deg); /* Safari 和 Chrome */
+-o-transform:rotate(@deg); /* Opera */
+}
+
+.transformX(@deg){
+transform:translateX(@deg);
+-ms-transform:translateX(@deg); /* Internet Explorer */
+-moz-transform:translateX(@deg); /* Firefox */
+-webkit-transform:translateX(@deg); /* Safari 和 Chrome */
+-o-transform:translateX(@deg); /* Opera */
+}
+
+.transformS(@deg){
+transform:scale(@deg);
+-ms-transform:scale(@deg); /* Internet Explorer */
+-moz-transform:scale(@deg); /* Firefox */
+-webkit-transform:scale(@deg); /* Safari 和 Chrome */
+-o-transform:scale(@deg); /* Opera */
+}
+
+.transformZ(@deg){
+transform:translateZ(@deg);
+-ms-transform:translateZ(@deg); /* Internet Explorer */
+-moz-transform:translateZ(@deg); /* Firefox */
+-webkit-transform:translateZ(@deg); /* Safari 和 Chrome */
+-o-transform:translateZ(@deg); /* Opera */
+}
+
+.transformY(@deg){
+transform:translateY(@deg);
+-ms-transform:translateY(@deg); /* Internet Explorer */
+-moz-transform:translateY(@deg); /* Firefox */
+-webkit-transform:translateY(@deg); /* Safari 和 Chrome */
+-o-transform:translateY(@deg); /* Opera */
+}
+
+.transformD(@x,@y,@z){
+transform:translate3d(@x @y @z);
+-ms-transform:translate3d(@x @y @z); /* Internet Explorer */
+-moz-transform:translate3d(@x @y @z); /* Firefox */
+-webkit-transform:translate3d(@x @y @z); /* Safari 和 Chrome */
+-o-transform:translate3d(@x @y @z); /* Opera */
+}
+//css3的动画效果
+ // -webkit-animation-name:'wobble';/*动画属性名，也就是我们前面keyframes定义的动画名*/
+ //   -webkit-animation-duration: 10s;/*动画持续时间*/
+ //    -webkit-animation-timing-function: ease-in-out; /*动画频率，和transition-timing-function是一样的*/
+ //    -webkit-animation-delay: 2s;/*动画延迟时间*/
+ //    -webkit-animation-iteration-count: 10;/*定义循环资料，infinite为无限次*/
+ //    -webkit-animation-direction: alternate;/*定义动画方式*/
+ //    -webkit-animation-play-state:paused; /*属性规定动画正在运行还是暂停*/
+ //    -webkit-animation-fill-mode:forwards;/* 属性规定动画在播放之前或之后，其动画效果是否可见*/
+ 
+ //@name 动画的名称                如 name
+ //@time 动画时长                    如 3s
+ //@pattern 定义循环资料      如 10      infinite为无限次
+ //@fillmode 属性规定动画在播放之前或之后，其动画效果是否可见
+.animation(@name,@time:3s,@pattern:infinite,@fillmode:none){
+animation:@name @time @pattern @fillmode;
+-moz-animation:@name @time @pattern @fillmode; /* Firefox */
+-webkit-animation:@name @time @pattern @fillmode; /* Safari and Chrome */
+-o-animation:@name @time @pattern @fillmode; /* Opera */
+}
+
+// 动画延迟的时间
+.delay(@pattern:0s){ //@pattern  动画延迟多少s执行
+animation-delay:@pattern;
+-webkit-animation-delay:@pattern;
+-moz-animation-delay: @pattern;
+-o-animation-delay:@pattern;
+}
+
+//动画的播放法方式
+//@pattern 播放的方式  是否应该轮流反向播放动画  normal|alternate
+.direction(@pattern:normal){ 
+animation-direction:@pattern;
+-webkit-animation-direction:@pattern;
+-moz-animation-direction: @pattern;
+-o-animation-direction:@pattern;
+}
+
+//属性规定动画在播放之前或之后，其动画效果是否可见
+//@pattern 播放的方式  是否应该轮流反向播放动画  normal|alternate
+//none    不改变默认行为。
+//forwards    当动画完成后，保持最后一个属性值（在最后一个关键帧中定义）。
+//backwards   在 animation-delay 所指定的一段时间内，在动画显示之前，应用开始属性值（在第一个关键帧中定义）。
+//both    向前和向后填充模式都被应用。
+.fillmode(@pattern:none){ 
+animation-fill-mode:@pattern;
+-webkit-animation-fill-mode:@pattern;
+-moz-animation-fill-mode: @pattern;
+-o-animation-fill-mode:@pattern;
+}
+
+//属性规定动画正在运行还是暂停。
+//paused    规定动画已暂停。    
+//running 规定动画正在播放。
+//注释：您可以在 JavaScript 中使用该属性，这样就能在播放过程中暂停动画。
+.fillstate(@pattern){ 
+animation-play-state:@pattern;
+-webkit-animation-play-state:@pattern;
+-moz-animation-play-state: @pattern;
+-o-animation-play-state:@pattern;
+}
+
+
+// 动画频率，和transition-timing-function是一样的
+//linear  动画从头到尾的速度是相同的。  测试
+//ease    默认。动画以低速开始，然后加快，在结束前变慢。 测试
+//ease-in 动画以低速开始。    测试
+//ease-out    动画以低速结束。    测试
+//ease-in-out 动画以低速开始和结束。 测试
+//cubic-bezier(n,n,n,n)   在 cubic-bezier 函数中自己的值。可能的值是从 0 到 1 的数值。  {animation-timing-function: cubic-bezier(0.25,0.1,0.25,1);}
+.timing(@pattern:ease-in-out){ //@pattern  动画延迟多少s执行
+    animation-timing-function:@pattern;
+    -webkit-animation-timing-function:@pattern;
+    -moz-animation-timing-function: @pattern;
+    -o-animation-timing-function:@pattern;
+}
+
+//动画的行动方式
+/*.keyframes(@name,@fn)
+{
+    @keyframes @name{@fn}
+    @-moz-keyframes @name{@fn}
+    @-webkit-keyframes @name{@fn}
+    @-o-keyframes @name{@fn}   
+}*/
+/*.transition(@name,@time:.5s,@pattern)
+{
+    -webkit-transition: @name @time @pattern;
+    -moz-transition:  @name @time @pattern;
+    transition: @name @time @pattern;
+
+}*/
+    
+
+

@@ -1,0 +1,229 @@
+﻿@{
+    ViewBag.Title = "财经日历-拜仑财经";
+    ViewBag.Keywords = "财经日历";
+    ViewBag.Description = "拜仑财经日历";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+@section style{    
+    <link href="~/Styles/dist/financialCalendar/calendarIndex.css?v=09331f2fb6" rel="stylesheet" />   
+}
+<div class="main clearfix">
+    <div class="left">
+        <div class="economic">
+            <div class="week-pick clearfix" id="monitor">
+                <span class="prev" id="prev-week"><i class="icon-font"> < </i> 上周</span>
+                <ul class="week-date"> 
+                    <li></li> 
+                    <li></li> 
+                    <li></li> 
+                    <li></li> 
+                    <li></li> 
+                    <li></li> 
+                    <li></li>                                  
+                </ul>
+                <span class="next" id="next-week">下周 > </span>
+            </div>
+            <div class="main-board">
+                <div class="step-pick country clearfix">
+                    <span class="title">国家</span>
+                    <dl class="item">
+                        <dd class="active">全部</dd>                        
+                        <dd>美国</dd>
+                        <dd>加拿大</dd>
+                        <dd>中国</dd>
+                        <dd>日本</dd>
+                        <dd>韩国</dd> 
+                        <dd>澳大利亚</dd>
+                        <dd>欧元区</dd>
+                        <dd>英国</dd>
+                        <dd>瑞士</dd>
+                        <dd>法国</dd>
+                        <dd>德国</dd>                                                                                                                      
+                    </dl>
+                    @*<div class="date-picker" onclick="WdatePicker({ doubleCalendar: true, dateFmt: 'yyyy-MM-dd' })">
+                        <img src="~/Images/calendar/calendar.png" />
+                        
+                        <i></i>
+                    </div>*@
+                    <div class="date-picker">
+                        <img src="~/Images/calendar/calendar.png" class="icon"/>
+                        <input type="text" id="date-place" readonly />
+                        <i></i>
+                    </div>
+                    
+                </div>
+                <div class="step-pick clearfix level">
+                    <span class="title">状态</span>
+                    <dl class="item">
+                        <dd data-select="today" class="active">今日</dd>
+                        <dd data-select="impact">未公布</dd>
+                        <dd data-select="important">重要</dd>
+                    </dl>
+                </div>              
+                <table class="info-main">
+                    <thead>
+                        <tr>
+                            <th class="item" width="7%">时间</th>
+                            <th class="item" width="5%">区域</th>
+                            <th class="item" width="34%" align="left">指标名称</th>
+                            <th class="item" width="9%">重要性</th>
+                            <th class="item" width="5%">前值</th>
+                            <th class="item" width="8%">预测值</th>
+                            <th class="item highlight" width="9%">公布值</th>
+                            <th class="item affect" width="18%" id="effect">影响<img class="icon" src="~/Images/calendar/xia.png" /></th>
+                            <th class="item" width="5%">解读</th>
+                        </tr>
+                    </thead>                    
+                    <tbody id="economic">
+
+                        @*<tr ms-for="el in economicData">
+                            <td class="time" ms-if="el.showSpan" ms-attr="{rowspan:el.RowSpan}">{{el.AddDate | date("HH:mm")}}</td>
+                            <td class="ensign" ms-if="el.showSpan" ms-attr="{rowspan:el.RowSpan}"><img ms-attr="{src:'/images/banner/square/' + el.CountryImg}" /></td>
+                            <td align="left">{{el.Title}}</td>
+                            <td>   
+                                <div ms-class="['star-level',el.Star > 2 ? '' : 'low']">
+                                    <i ms-css="{width:(el.Star * 20) + '%'}"></i>
+                                </div>
+                            </td>
+                            <td ms-if="el.Revised == '---' || el.Revised == 0">
+                                {{el.Previous}}                                                                 
+                            </td>
+                            <td ms-if="el.Revised != '---' && el.Revised != 0">
+                                <div class="front-val">
+                                    {{el.Revised}}
+                                    <span>
+                                        修正前 <br />
+                                         {{el.Previous}}
+                                    </span>
+                                </div>
+                            </td>
+                            <td>{{el.Consensus}}</td>
+                            <td class="highlight">{{el.Actual}}</td>
+                            
+                            <td class="trend">
+                                <span ms-class="[el.Impact] | impactColor">
+                                    <em>{{el.Impact | impactFn}}</em>
+                                    
+                                </span>
+                            </td>
+                            <td class="detail">
+                                <a ms-attr="{href:'/calendar/unscramble/'+ el.Id + '_' + el.UnscrambleId + '_' + el.ReleasedDate,target:'_blank'}">
+                                    <img src="~/Images/calendar/detail-link.png" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr ms-if="noData">
+                            <td colspan="9" class="no-data">
+                                <img src="~/Images/calendar/no-info.png" />
+                                <em>今日无经济数据</em>
+                            </td>
+                        </tr>*@                     
+                    </tbody>
+                </table>
+                <div class="loading"></div>
+            </div>
+        </div>
+
+        <div class="area economic">
+            <div class="heading clearfix">
+                <h3>财经大事一览</h3>
+            </div>
+            <div class="content">
+                <div class="main-board">                                        
+                    <table class="info-main">
+                        <thead>
+                            <tr>
+                                <th class="item" width="8%">时间</th>
+                                <th class="item" width="8%">区域</th>
+                                <th class="item" width="15%">城市</th>
+                                <th class="item" width="12%">重要性</th>
+                                <th class="item" width="49%" align="left">事件</th>                                
+                            </tr>
+                        </thead>
+                        <tbody id="overall">                           
+                            @*<tr ms-for="el in overallData">
+                                <td class="time" ms-if="el.IsDetermine">待定</td>
+                                <td class="time" ms-if="!el.IsDetermine">{{el.ReleasedDate | date('HH:mm')}}</td>
+                                <td class="ensign"> {{el.Country}}</td>
+                                <td>{{el.City}}</td>
+                                <td>
+                                    <div ms-class="['star-level',el.Star > 2 ? '' : 'low']">
+                                        <i ms-css="{width:(el.Star * 20) + '%'}"></i>
+                                    </div>
+                                </td>
+                                <td align="left" class="content">
+                                    <img ms-if="el.PeopleImg.length" ms-attr="{src:'//' + el.PeopleImg}"/>
+                                    <p ms-html="el.EventContent"></p>                                
+                                </td>                                    
+                            </tr> 
+                            <tr ms-if="noData">
+                                <td colspan="5" class="no-data">
+                                    <img src="~/Images/calendar/no-event.png" />
+                                    <em>今日无财经大事</em>                                
+                                </td>
+                            </tr>*@                                                          
+                        </tbody>
+                    </table>
+                    <div class="loading"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="area economic">
+            <div class="heading clearfix">
+                <h3>假期休市一览</h3>
+            </div>
+            <div class="content">
+                <div class="main-board">
+                    <table class="info-main">
+                        <thead>
+                            <tr>
+                                <th class="item" width="15%">时间</th>
+                                <th class="item" width="15%">区域</th>
+                                <th class="item" width="20%">市场</th>
+                                <th class="item" width="15%">节日名称</th>
+                                <th class="item" width="35%">详细安排</th>
+                            </tr>
+                        </thead>
+                        <tbody id="holiday">
+                            @*<tr ms-for="el in holidayData">
+                                <td class="time">{{el.ReleasedDate | date("HH:mm")}}</td>
+                                <td class="ensign">{{el.Country}}</td>
+                                <td>{{el.Exchange}}</td>
+                                <td>{{el.HolidayName}}</td>
+                                <td ms-html="el.Note"></td>
+                            </tr>    
+                            <tr ms-if="noData">
+                                <td colspan="5" class="no-data">
+                                    <img src="~/Images/calendar/no-holiday.png" />
+                                    <em>今日无假期休市安排</em>                                
+                                </td>
+                            </tr>*@                         
+                        </tbody>
+                    </table>
+                    <div class="loading"></div>
+                </div>
+            </div>
+        </div>
+     </div>
+    @*<div class="right">
+       @Html.Partial("~/Views/SharedView/MarketBrief.cshtml")        
+       @Html.Partial("~/Views/SharedView/MarketWatch.cshtml")      
+    </div>*@
+    <div class="effect">
+
+    </div>
+</div>
+
+
+<iframe style="display:none;opacity:0;width:0;height:0;" id="calendar-socket"></iframe>
+
+@section script{
+    <script src="/Scripts/glup/jquery/json2.js?v=39b6ed277e"></script>
+    <script src="//jsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="//jsapi.fx110.com/script/public/masklayer/masklayer.min.js"></script>     
+    <script src="~/Scripts/glup/highStock/highstock.js?v=c3d47eb237"></script>
+    <script src="~/Scripts/glup/My97DatePicker/WdatePicker.min.js?v=3163356532"></script>
+    <script src="~/Scripts/dist/financialCalendar/calendarIndex.js?v=39b251386e"></script>   
+}

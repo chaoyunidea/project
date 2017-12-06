@@ -1,0 +1,5 @@
+https://news.bailun.com/News/GenerateStaticPageNewsIndex
+https://rl.bailun.com/Calendar/GenerateStaticPageCalendarIndex
+https://bj.bailun.com/MarketPrice/GenerateStaticPageMarketPriceIndex
+https://shuju.bailun.com/Indicator/GenerateStaticPageIndicatorIndex
+

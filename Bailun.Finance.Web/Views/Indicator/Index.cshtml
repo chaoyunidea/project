@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "宏观数据-拜仑财经";
+    ViewBag.Keywords = "宏观数据";
+    ViewBag.Description = "拜仑财经宏观数据";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+@section style{    
+    <link href="~/Styles/dist/indicator/indicator.css?v=2af50fc2e8" rel="stylesheet" />
+    <link href="~/Scripts/glup/My97DatePicker/skin/WdatePicker.css?v=90c5b9df25" rel="stylesheet" />
+}
+
+@* banner模块 *@
+@Html.Action("IndexUsDataView", "Indicator")
+
+@* banner模块 *@
+@Html.Action("IndexGlobalDataView", "Indicator")
+
+@section script{
+    <script src="/Scripts/glup/jquery/json2.min.js?v=d3e2b21c21"></script>
+    <script src="//gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="//gajsapi.fx110.com/script/public/masklayer/masklayer.min.js"></script>     
+    <script src="~/Scripts/glup/highStock/highstock.min.js?v=cc630a9ddf"></script>
+    <script src="~/Scripts/glup/My97DatePicker/WdatePicker.min.js?v=3163356532"></script>    
+    <script src="~/Scripts/dist/indicator/indicator.js?v=5bf0eb4da8"></script>
+}

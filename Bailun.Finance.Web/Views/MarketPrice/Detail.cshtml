@@ -1,0 +1,208 @@
+﻿@using Bailun.Finance.Model.Quote;
+@using Bailun.Common.Extensions;
+
+@{
+    ViewBag.Title = "拜仑财经" + '-' + ViewBag.Title;
+    ViewBag.Keywords = "拜仑财经市场报价,拜仑财经实时报价";
+    ViewBag.Description = "拜仑财经实时报价";
+    Layout = "/Views/Shared/_LayoutPrice.cshtml";
+
+    var model = Model as QueryDetailModel;
+    if (model == null)
+    {
+        model = new QueryDetailModel();
+    }
+    string PriceLimit;
+    string PriceExchange;
+    if (model.PriceLimit == "")
+    {
+        PriceLimit = string.Format(model.CurrentPrice - model.OpenPrice > 0 ? "+{0}" : "{0}", Math.Round(model.CurrentPrice - model.OpenPrice, 5));
+        PriceExchange = string.Format(model.CurrentPrice - model.OpenPrice > 0 ? "+{0}%" : "{0}%", model.OpenPrice <= 0 ? 0 : Math.Round((model.CurrentPrice - model.OpenPrice) / model.OpenPrice * 100, 2));
+    }
+    else
+    {
+        PriceLimit = !string.IsNullOrEmpty(model.PriceLimit) ? model.PriceLimit : "0.00";
+        PriceExchange = !string.IsNullOrEmpty(model.PriceExchange) ? model.PriceExchange : "0.00%";
+    }
+
+
+    var productArray = new string[,] { { "外汇", "forex" }, { "大宗商品", "goods" }, { "股指", "indices" }, { "债券", "bonds" }, { "外汇期货", "cfdindices" }, { "沪深", "ashares" }, { "港股", "hkstock" }, { "美股", "usstock" }, { "比特币", "bitcoin" }, { "股指期货", "stockIndex" }, { "贵金属", "metals" } };
+}
+
+@section style{
+    <link href="~/Styles/dist/marketPrice/commonDetail.css?v=422fe86f08" rel="stylesheet" />
+    <script type="text/javascript">
+        var marketId= @ViewBag.Id;
+        var codeName = HTMLEncode('@(model.Code)');
+        var productId = '@(model.ProductId)';
+        function HTMLEncode ( input ) 
+        { 
+            var converter = document.createElement("DIV"); 
+            converter.innerHTML = input; 
+            var output = converter.innerText; 
+            converter = null; 
+            return output; 
+        }
+    </script>
+}
+
+
+
+<div class="main clearfix" id="main">
+    <div class="left">
+        <div class="control-bar clearfix">
+            <div class="bread clearfix">
+                <span><a href="/marketprice/index">市场报价</a> > </span> <span><a href="/marketprice/list/@(model.ProductId > 0 ? productArray[model.ProductId - 1, 1] : "")">@(model.ProductId > 0 ? productArray[model.ProductId - 1, 0] : "")</a>  > </span> <span id="stockName">@(model.Cn_name)</span>
+            </div>                        
+            <div class="search-bar">
+                <input type="text" class="keywords" />
+                <img src="~/Images/marketPrice/search-icon.png" class="search-btn" />
+                <div class="set-box">
+                    <table>
+                        <thead>
+                            <tr><th>名称</th><th>代码</th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <b class="shape"></b>
+                </div>
+            </div>
+            <div class="control-left">
+                @*<span class="change-color">
+                    <i class="up"></i><i class="down"></i><em>红涨绿跌</em>
+                </span>*@
+                    <span class="time-count">
+                        <i></i><em>全球股市</em>
+                        <label></label>
+                        <div class="set-box">
+                            <ul>
+                                <li>
+                                    <h3>香港</h3>
+                                    <p class="hkstock-status"></p>
+                                </li>
+                                <li>
+                                    <h3>纽约</h3>
+                                    <p class="nystock-status"></p>
+                                </li>
+                                <li>
+                                    <h3>伦敦</h3>
+                                    <p class="ukstock-status"></p>
+                                </li>
+                                <li>
+                                    <h3>新加坡</h3>
+                                    <p class="sgstock-status"></p>
+                                </li>
+                                <li>
+                                    <h3>东京</h3>
+                                    <p class="jpstock-status"></p>
+                                </li>
+                            </ul>
+                            <b class="shape"></b>
+                        </div>
+                    </span>
+                </div>
+        </div>
+      
+        <div class="market">
+            @{
+                    switch (model.ProductId)
+                    {
+                    case 3: case 4: case 10: case 9: case 2:
+                    <div class="data clearfix">
+                        <div class="title">
+                            <div class="name">
+                                <h2>@(model.Cn_name)</h2>
+                                <p> · @(model.En_Name)</p>
+                            </div>
+                            <div class="digital @(ConvertExtensions.PerctangleToDecimal(PriceExchange) > 0 ? "up" : ConvertExtensions.PerctangleToDecimal(PriceExchange) < 0 ? "down" : "none")">
+                                <h2>@(Math.Round(model.CurrentPrice, 5))</h2>
+                                <p>@(PriceExchange) (@(PriceLimit))</p>
+                            </div>
+                        </div>
+                        <dl class="compare">
+                            <dd><p>今日最高</p><em>@(Math.Round(model.HighPrice, 5))</em></dd>
+                            <dd><p>今日最低</p><em>@(Math.Round(model.LowPrice, 5))</em></dd>
+                        </dl>
+                    </div>
+                    break;
+                default:
+                    <div class="data clearfix">
+                        <div class="title">
+                            <div class="name">
+                                <h2>@(model.Cn_name)</h2>
+                                <p> · @(model.En_Name)</p>
+                            </div>
+                            <div class="digital @(ConvertExtensions.PerctangleToDecimal(PriceExchange) > 0 ? "up" : ConvertExtensions.PerctangleToDecimal(PriceExchange) < 0 ? "down" : "none")">
+                                <h2>@(Math.Round(model.CurrentPrice, 5))</h2>
+                                <p>@(PriceExchange) (@(PriceLimit))</p>
+                                @*<p class="status">
+                                    <img src="~/Images/marketPrice/clock.png" />
+                                    <em>交易中</em>
+                                    <em class="time">@(model.LastPriceTime)</em>
+                                </p>*@
+                            </div>
+                        </div>
+                        <dl class="compare">
+                            <dd><p>今开</p><em>@(Math.Round(model.OpenPrice, 5))</em></dd>
+                            <dd><p>今日最高</p><em>@(Math.Round(model.HighPrice, 5))</em></dd>
+                            <dd><p>昨收</p><em>@(Math.Round(model.ClosePrice, 5))</em></dd>
+                            <dd><p>今日最低</p><em>@(Math.Round(model.LowPrice, 5))</em></dd>
+                        </dl>
+                    </div>
+                        break;
+                }
+            }
+
+          
+                @{
+                    if (model.IsDelayData)
+                    {
+                        <div class="description"> K线图与实时报价价格波动有延迟</div>
+                    }
+                    else
+                    {
+                        <div class="description"></div>
+                    }
+
+                }
+
+                       
+            <div id="tv_chart_container" class="highcharts">
+                
+            </div>
+        </div>
+        @*<div class="area about">
+                <div class="heading clearfix">
+                    <h3>相关新闻</h3>
+                </div>
+                <div class="content">
+                    <ul>
+                        @for(int i = 0;i < 10; i++) {
+                        <li>
+                            <h3>澳大利亚ASX200指数4月21日（周五）收盘上涨32.71点，涨幅0.56%，报5854.10点。</h3>
+                            <div class="send-time">
+                                <img src="~/Images/marketPrice/clock.png" />
+                                <p>2017-04-18 08:57</p>
+                            </div>
+                        </li>
+                        }
+                    </ul>
+                </div>
+            </div>*@
+    </div>
+
+</div>
+
+<iframe style="display:none;opacity:0;width:0;height:0;" id="websocket"></iframe>
+
+@section script{
+    <script src="~/gulp/gulp/requireBuilder/jsFileRoute.js?v=654db78f43"></script>
+    <script src="/Scripts/glup/jquery/json2.js?v=39b6ed277e"></script>
+    <script src="//gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="//gajsapi.fx110.com/script/public/masklayer/masklayer.min.js"></script>
+    <script src="~/Scripts/glup/charting_library/charting_library.min.js?v=2c386db710"></script>
+    <script src="~/Scripts/glup/charting_library/datafeed/udf/datafeed.js?v=a38a334136"></script>
+    <script src="~/Scripts/dist/sharedView/TV.js?v=fc914cb5d9"></script>
+    <script src="/Scripts/glup/require.min.js?v=7658ede0c2" data-main="/Scripts/dist/marketPrice/commonDetail.js?v=6156e359b7"></script>
+}
+

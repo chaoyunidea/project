@@ -1,0 +1,93 @@
+﻿@using Bailun.Finance.Model.Indicator;
+@{
+    ViewBag.Title = "拜仑财经-宏观数据";
+    ViewBag.Keywords = "拜仑财经";
+    ViewBag.Description = "拜仑财经";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+@section style{    
+    <link href="~/Styles/dist/indicator/country.css?v=07cfb74eeb" rel="stylesheet" />
+    <link href="~/Scripts/glup/My97DatePicker/skin/WdatePicker.css?v=90c5b9df25" rel="stylesheet" />
+}
+
+
+<div class="banner">
+    <div class="content">       
+        <div class="data-group">
+            <ul class="clearfix active">
+                
+            </ul>            
+        </div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="clearfix head-bar">
+        <div class="bread clearfix">
+            <span><a href="/indicator/index">宏观数据</a> </span> >
+            @foreach (CountryDetailModel cm in ViewBag.CountryModel)
+            {
+                if (ViewBag.Id == cm.Id)
+                {
+                    <span>@(cm.Country)</span>
+                }
+            }
+                        
+        </div>
+        <ul class="color-info">
+            <li class="green">
+                <span></span>
+                <p>负值</p>
+            </li>
+            <li class="red">
+                <span></span>
+                <p>非负且大于等于前值</p>
+            </li>
+        </ul>
+    </div>
+
+    <div class="item-tab">
+      
+        <dl class="clearfix">
+            @*<dd class="active" data-id="1">国民经济核算</dd>
+            <dd data-id="2">国民经济核算</dd>
+            <dd data-id="3">国民经济核算</dd>
+            <dd data-id="4">国民经济核算</dd>
+            <dd data-id="5">国民经济核算</dd>
+            <dd data-id="6">国民经济核算</dd>*@
+        </dl>
+    </div>
+
+    <div class="table-group item">
+
+        @*<table class="table-item" data-id="1">            
+            <thead>
+                <tr>
+                    <th class="type-column">全部指标 </th>
+                    <th>16/07 </th>
+                    <th>16/07 </th>
+                    <th class="chart-column"></th>
+                </tr>
+            </thead>
+                
+            <tbody>
+                <tr><td><a>12</a></td><td><a>12</a></td><td><a>12</a></td><td></td></tr>
+                <tr><td><a>12</a></td><td><a>12</a></td><td><a>12</a></td><td></td></tr>
+                <tr><td><a>12</a></td><td><a>12</a></td><td><a>12</a></td><td></td></tr>
+            </tbody>
+        </table>*@ 
+    </div>
+
+</div>
+
+@section script{
+    <script>
+        var countryId = '@ViewBag.Id'; 
+    </script>
+    <script src="/Scripts/glup/jquery/json2.js?v=39b6ed277e"></script>
+    <script src="//gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="//gajsapi.fx110.com/script/public/masklayer/masklayer.min.js"></script>     
+    <script src="~/Scripts/glup/highStock/highstock.js?v=c3d47eb237"></script>
+    <script src="~/Scripts/dist/indicator/country.js?v=3fbb7a307b"></script>
+}

@@ -1,0 +1,59 @@
+﻿@import (reference) "../../glup/PublicDefind.less";//引入方法
+
+@bgk:#1b2429;       //第一层背景
+@bgg:#161d21;     //第二层背景
+@colk:#c8c8ca;   
+@coll:#787980;
+@font-size:16px;
+#footer{min-width:@DefindWidth;}
+.Bottom_nav{
+    overflow:hidden;width:100%;background:#29323c;color:#fff;
+    .Bottom{
+        width:@DefindWidth;height:216px;margin:0 auto;padding-top:50px;
+       
+        .QR_code{
+            float:right;text-align:center;
+            &>img{width:96px;}
+            p{padding-top:6px;color:@FontColor_3;}
+            .share{
+                margin-top:35px;text-align:center;
+                dd{
+                    display:inline-block;margin-left:20px;cursor:pointer;
+                    img{height:20px;}
+                    &:first-child{margin:0;}
+                }
+            }
+        }
+        .left-part{
+            float:left;
+            .foot-logo{
+                margin-bottom:40px;
+                img{height:23px;margin-right:42px;}
+                em{font-size:16px;}
+            }
+            .Bottom_Link{
+                 a{font-size:14px;color:@colk;display:inline-block;padding-right:20px;font-family:@font-f;}
+            }
+            .font_div{
+                margin-top:20px;margin-bottom:36px;
+                .max_top{padding-top:8px;}
+                .min_top{padding-top:20px;}
+                 p{
+                     color:@colk;font-size:14px;font-family:@font-f;
+                     em{color:@FontColor_3;}
+                 }
+            }
+        }
+        
+    }
+   
+    
+    
+}   
+.bot{
+    overflow:hidden;width:100%;background: #232c35;
+     .max_bot{
+         width:@DefindWidth;margin:0 auto;line-height:70px;
+        p{font-family:@font-f;font-size:14px;color:@coll;em{color:#fff;}}
+     }
+}

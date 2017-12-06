@@ -1,0 +1,167 @@
+﻿@using Bailun.Finance.Model.Indicator;
+@using Bailun.Common.Extensions;
+@{
+    ViewBag.Title = "拜仑财经-" + Model.CountryName + "-" + Model.Itemname;
+    ViewBag.Keywords = "拜仑财经";
+    ViewBag.Description = "拜仑财经";
+    Layout = "/Views/Shared/_Layout.cshtml";
+
+    var model = Model as IndicatorDetailModel;
+    if (model == null)
+    {
+        model = new IndicatorDetailModel();
+    }
+}
+
+@section style{    
+    <link href="~/Styles/dist/indicator/detail.css?v=fff6519924" rel="stylesheet" />
+    <link href="~/Scripts/glup/My97DatePicker/skin/WdatePicker.css?v=90c5b9df25" rel="stylesheet" />
+}
+<div class="main clearfix">
+    <div class="clearfix head-bar">
+        <div class="bread clearfix">
+            <span><a href="/indicator/index">宏观数据</a> </span> >
+            <span><a href="/indicator/country/@(model.Country)">@(model.CountryName)</a>   </span> >
+            <span id="stockName">@(model.Itemname)</span>
+        </div>
+        <div class="country-select select-box">
+            <span class="title">更换国家指标</span>
+            <div class="country select">
+                <span class="pick clearfix"><em>@(model.CountryName)</em><i class="triangle"></i></span>
+                <dl>
+                    @foreach (CountryDetailModel cm in ViewBag.CountryModel)
+                    {
+                        <dd data-id="@(cm.Id)" class="@(cm.Id == model.Country ? "selected" : "")">@cm.Country</dd>
+                    }
+                </dl>
+            </div>
+            <div class="indicator select">
+                <span class="pick clearfix"><em>@(model.Itemname)</em><i class="triangle"></i></span>
+                <dl>
+                    @foreach (ItemSubModel cm in ViewBag.IndicatorModel)
+                    {
+                        <dd data-id="@(cm.Codes)" class="@(cm.Codes == model.MainItems ? "selected" : "")">@cm.Names</dd>
+                    }
+                </dl>
+            </div>
+            <span class="button" id="switch-indicator">确定</span>
+        </div>
+    </div>
+
+    <div class="container clearfix">
+        <div class="left-side">
+            <div class="detail">
+                <div class="title clearfix">
+                    <h1>@(model.Itemname)</h1>
+                    <div class="chart-control">
+                        <span class="line active" data-type="line"></span>
+                        <span class="column" data-type="column"></span>
+                        <label class="shortcut"></label>
+                    </div>
+                </div>
+                <dl>
+                    <dd><em class="name">公布机构：</em><em class="value">@(model.Organization)</em></dd>
+                    <dd class="@(model.Real > model.FrontValue ? "up" : "down")"><em class="name">最新值：</em><em class="value">@(model.Real)@(model.Unit)</em><i></i></dd>
+                    <dd><em class="name">预测值：</em><em class="value">@(model.PreValue)@(model.Unit)</em></dd>
+                    <dd><em class="name">前值：</em><em class="value">@(model.FrontValue)@(model.Unit)</em></dd>
+                    <dd><em class="name">数据日期：</em><em class="value">@(DateExtensions.ConvertStringToDateTime(long.Parse(model.Publishat),1).ToString("yyyy-MM-dd"))</em></dd>
+                </dl>
+            </div>
+            <div class="chart-area">
+                <div class="time-select clearfix">
+                    <div class="date">
+                        <span class="choice-theme">选择日期：</span>
+                        <input class="choice-date" type="text" placeholder="起始日期" id="start-time" value="@(DateTime.Now.AddYears(-5).ToString("yyyy/MM/dd"))" readonly>
+                        <span class="need-to">至</span>
+                        <input class="choice-last" type="text" placeholder="结束日期" id="end-time" value="@(DateTime.Now.ToString("yyyy/MM/dd"))" readonly>
+                        <a href="javascript:;" class="sure" id="select-data">确定</a>
+                    </div>
+                    <ul class="year">
+                        <li data-year="1">1年</li>
+                        <li data-year="5" class="active">5年</li>
+                        <li data-year="10">10年</li>
+                        <li data-year="0">全部</li>
+                    </ul>
+                </div>
+                <div class="chart" id="chart"></div>
+                <div class="compare">
+                    <div class="item clearfix">
+                        <h3>添加数据对比</h3>
+                        @*<ul class="item-name">
+                            <li class="first"><span></span><p>@(model.CountryName)-@(model.Itemname)（@(model.Unit)）</p></li>
+                            <li class="second"><span></span><p>美国-净出口对GDP同比的拉动</p></li>
+                        </ul>*@
+                    </div>
+                    <div class="compare-select select-box">
+                        <div class="country select">
+                            <span class="pick clearfix"><em>选择国家</em><i class="triangle"></i></span>
+                            <dl>
+                                @foreach (CountryDetailModel cm in ViewBag.CountryModel)
+                                {
+                                    <dd data-id="@(cm.Id)">@cm.Country</dd>
+                                }
+                                
+                            </dl>
+                        </div>
+                        <div class="indicator select">
+                            <span class="pick clearfix"><em>选择指标</em><i class="triangle"></i></span>
+                            <dl>
+                               
+                            </dl>
+                        </div>
+                        <span class="button">确定</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-side">
+            <div class="country-name">
+                @foreach (CountryDetailModel cm in ViewBag.CountryModel)
+                {
+                    if (cm.Id == model.Country)
+                    {
+                        <img src="@(cm.cflag)" />
+                        <h3>@cm.Country</h3>
+                    }
+
+                }
+                
+            </div>
+            @foreach (IndicatorMenuModel mm in ViewBag.MenuModel)
+            {
+                <div class="field @(mm.main_indicator.id == model.Indicator ? "active" : "")">
+                    <div class="item-header clearfix">
+                        <span>@mm.main_indicator.name</span>
+                        <img src="~/Images/marketPrice/slide-down.png" />
+                    </div>
+                    <ul>
+                        @foreach (ItemSubModel item in mm.itemsub)
+                        {
+                            <li>
+                                <a href="/indicator/detail/@(item.Codes)" class="@(item.Codes == ViewBag.Id ? "active" : "")">@item.Names</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            }
+            
+        </div>
+    </div>
+</div>
+
+
+
+@section script{
+    <script>
+        var itemId = '@ViewBag.Id';
+        var itemTitle = '@(model.CountryName)-@(model.Itemname)(@(model.Unit))';
+    </script>
+    <script src="/Scripts/glup/jquery/json2.js?v=39b6ed277e"></script>
+    <script src="//gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="~/Scripts/glup/highStock/highstock.js?v=c3d47eb237"></script>
+    <script src="~/Scripts/glup/highStock/exporting.js?v=20f2ee504c"></script>
+    <script src="~/Scripts/glup/highStock/offline-exporting.js?v=b6731963b2"></script>
+    <script src="~/Scripts/glup/My97DatePicker/WdatePicker.min.js?v=3163356532"></script>
+    <script src="~/Scripts/dist/indicator/detail.js?v=823a2902fc"></script>
+}

@@ -1,0 +1,1 @@
+function addEvent(e,n,t){e.attachEvent?(e["e"+n+t]=t,e[n+t]=function(){e["e"+n+t](window.event)},e.attachEvent("on"+n,e[n+t])):e.addEventListener(n,t,!1)}function removeEvent(e,n,t){e.detachEvent?(e.detachEvent("on"+n,e[n+t]),e[n+t]=null):e.removeEventListener(n,t,!1)}

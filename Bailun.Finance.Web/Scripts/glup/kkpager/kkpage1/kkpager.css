@@ -1,0 +1,124 @@
+#kkpager,.kkpager{
+	clear:both;
+	color:#999;
+	padding:5px 0px 5px 0px;
+	font-size:13px;
+    margin:25px auto;
+}
+#kkpager a,.kkpager a{
+	float: left;
+	display: inline;
+	padding: 0px 5px;
+	margin:0 5px;
+	cursor: pointer;
+	background: #fff;
+	text-decoration:none;
+	color:#999;
+    line-height:30px;
+    font-size:14px;
+    font-family: 'ºÚÌå';
+}
+
+#kkpager span.disabled,.kkpager span.disabled{
+    display:none;
+	float: left;
+	padding: 3px 10px 3px 10px;
+	margin-right: 5px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border:1px solid #DFDFDF;
+	background-color:#FFF;
+	color:#DFDFDF;
+}
+#kkpager span.curr,.kkpager span.curr{
+	float: left;
+	display: inline;
+	padding: 11px;
+	margin:0 5px;
+	background: #F0FDFF;
+	color: #fff;
+    background:#095db1;
+    margin-top:-4px;
+	border-top-left-radius: 3px;
+    -moz-border-radius-topleft:3px;
+	-webkit-border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+    -moz-border-radius-topright:3px;
+	-webkit-border-top-right-radius: 3px;
+}
+#kkpager a:hover,.kkpager a:hover{
+	background-color:none; 
+	color:#095db1;
+}
+#kkpager span.normalsize,.kkpager span.normalsize{
+}
+#kkpager_gopage_wrap,.kkpager_gopage_wrap{
+	position:relative;
+	left:0px;
+	top:0px;
+}
+#kkpager_btn_go,.kkpager_btn_go {
+	width:44px;
+	height:18px;
+	border:0px;
+	overflow:hidden;
+	line-height:140%;
+	padding:0px;
+	margin:0px;
+	text-align:center;
+	cursor:pointer;
+	background-color:#31ACE2;
+	color:#FFF;
+	position:absolute;
+	left:0px;
+	top:-5px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	display:none;
+}
+#kkpager_btn_go_input,.kkpager_btn_go_input{
+	width:36px;
+	height:14px;
+	color:#999;
+	text-align:center;
+	margin-left:1px;
+	margin-right:1px;
+	border:1px solid #DFDFDF;
+	position:relative;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	left:0px;
+	top:-2px;
+    *top:0;
+	outline:none;
+}
+
+#kkpager_btn_go_input.focus,.kkpager_btn_go_input.focus{
+	border-color:#31ACE2;
+}
+
+#kkpager .pageBtnWrap,.kkpager .pageBtnWrap{
+	float:left;
+    border:1px #ddd solid;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+    height:30px;
+    padding:0 10px;
+}
+#kkpager .infoTextAndGoPageBtnWrap,.kkpager .infoTextAndGoPageBtnWrap{
+	float:right;
+}
+#kkpager .spanDot,.kkpager .spanDot{
+	float:left;
+	margin-right:5px;
+}
+
+#kkpager .currPageNum,.kkpager .currPageNum{
+	color:#FD7F4D;
+}
+
+#kkpager .infoTextAndGoPageBtnWrap,.kkpager .infoTextAndGoPageBtnWrap{
+	padding-top:0px;
+}

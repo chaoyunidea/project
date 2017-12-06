@@ -1,0 +1,315 @@
+﻿@using Bailun.Finance.Model.News;
+@using Bailun.Common.Extensions;
+@using Bailun.Finance.Model.Enums;
+@using Bailun.Common.Helper;
+@using Bailun.Finance.Model.Image;
+@using System.Text.RegularExpressions;
+@{
+    Layout = null;
+    var list = Model as FinanceBriefListModel;
+}
+<div class="news" data-tab="0">
+    <div class="tab-bar clearfix">
+        <div class="l clearfix">
+            <div data-index="1" class="ct active">金  十 <i></i></div>
+            <div data-index="2" class="ct">华尔街见闻 <i></i></div>
+            <div data-index="4" class="ct">FX678<i></i></div>
+            <div data-index="3" class="ct">FX168<i></i></div>
+            <div data-index="5" class="ct">DailyFx<i></i> </div>
+        </div>
+        <div class="set-btn">
+            <div class="set-btn-wrap">
+                <span class="set-icon"></span>
+                <em>设置</em>
+                <span class="up"></span>
+            </div>            
+            <div class="set-box">                
+                <ul class="clearfix">
+                    <li class="sound" data-type="sound">
+                        <p>声音提醒</p>
+                        <dl class="check-list">
+                            <dd data-id="1"><span><img src="/Images/calendar/goo.png"></span><em>金  十</em></dd>
+                            <dd data-id="2"><span><img src="/Images/calendar/goo.png"></span><em>华尔街见闻</em></dd>
+                            <dd data-id="4"><span><img src="/Images/calendar/goo.png"></span><em>FX678</em></dd>
+                            <dd data-id="3"><span><img src="/Images/calendar/goo.png"></span><em>FX168</em></dd>
+                            <dd data-id="5"><span><img src="/Images/calendar/goo.png"></span><em>DailyFx</em></dd>
+                        </dl>
+                    </li>
+                    <li class="notice" data-type="notice">
+                        <p>桌面消息</p>
+                        <dl class="check-list">
+                            <dd data-id="1"><span><img src="/Images/calendar/goo.png"></span><em>金  十</em></dd>
+                            <dd data-id="2"><span><img src="/Images/calendar/goo.png"></span><em>华尔街见闻</em></dd>
+                            <dd data-id="4"><span><img src="/Images/calendar/goo.png"></span><em>FX678</em></dd>
+                            <dd data-id="3"><span><img src="/Images/calendar/goo.png"></span><em>FX168</em></dd>
+                            <dd data-id="5"><span><img src="/Images/calendar/goo.png"></span><em>DailyFx</em></dd>
+                        </dl>
+                    </li>
+                    @*<li class="desk"><p>桌面消息</p><div class="switch clo"><span></span></div></li>*@
+                </ul>
+                <i class="shape"></i>
+            </div>
+        </div>
+    </div>
+    <div class="news-content">
+        <div class="news-item active" data-index="1">
+            <div class="news-data">
+                @if (list != null && list.JSNews.Any())
+                {
+                    <div class="news-area">
+
+                        <ul class="news-list">
+                            @{
+                                var currTime = Convert.ToInt64(0);
+                                int i = 0;
+                                foreach (FinanceBriefModel jm in list.JSNews)
+                                {
+                                    if (i == 0 || DateExtensions.ConvertDateTimeInt(jm.ReleasedDate, 1) < DateExtensions.ConvertDateTimeInt(currTime, 1))
+                                    {
+                                        <div class="time">
+                                            @if (i == 0)
+                                            {
+                                                <div class="clock-border">
+                                                    <div class="clock">
+                                                        <div class="hour div-hour" id="">
+                                                        </div>
+                                                        <div class="minute div-minute" id="">
+                                                        </div>
+                                                        <div class="second div-second" id="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            @*<img src="/Images/news/news-start.png">*@
+                                            <p>@(DateExtensions.ConvertStringToDateTime(jm.ReleasedDate).ToString("MM月dd日"))</p>
+                                        </div>
+                                    }
+                                    if (jm.Type == 0)
+                                    {
+                                        <li data-date="@(jm.ReleasedDate)" class="level@(jm.Level) clearfix" data-id="@(jm.SourceId)">
+                                            <div class="post-time">
+                                                <i></i><em>@(DateExtensions.ConvertStringToDateTime(jm.ReleasedDate).ToString("HH:mm:ss"))</em>
+                                            </div>
+                                            <div class="content">
+                                                <div class="info">@Html.Raw(jm.Content)</div>
+                                                @if (!string.IsNullOrEmpty(jm.SmallImg))
+                                                {
+                                                    var imsList = ModelHelper<List<ImageTwoModel>>.DeserializeObject(jm.SmallImg);
+                                                    if (imsList != null && imsList.Any())
+                                                    {
+
+                                                        <div class="img-place">
+                                                            <img src="@(imsList.FirstOrDefault().Small)" data-viewer="@(imsList.FirstOrDefault().Big)" />
+                                                        </div>
+                                                    }
+                                                }
+                                                <div class="share">
+                                                    <span class="share-icon iconfont">&#xe60f;</span>
+                                                    <div class="share-box">
+                                                        <i class="shape"></i>
+                                                        <ul class="bdsharebuttonbox">
+                                                            <li><a href="javascript:;" data-bshare='{type:"weixin",url:"",title:"",desc:"@(Regex.Replace(jm.Title.Replace("<br />","。"),@"\s",""))",summary:"",images:"@CustomConfig.WebBailunNews/images/public/push.png" }' class="weixin"><i class="iconfont">&#xe50a;</i>微信</a></li>
+                                                            <li><a href="javascript:;" data-bshare='{type:"weibo",url:"",title:"",desc:"@(Regex.Replace(jm.Title.Replace("<br />","。"),@"\s",""))",summary:"",images:"@CustomConfig.WebBailunNews/images/public/push.png" }' class="weibo"><i class="iconfont">&#xe504;</i>微博</a></li>
+                                                            <li><a href="javascript:;" data-bshare='{type:"qzone",url:"",title:"",desc:"@(Regex.Replace(jm.Title.Replace("<br />","。"),@"\s",""))",summary:"",images:"@CustomConfig.WebBailunNews/images/public/push.png"}' class="qq"><i class="iconfont">&#xe64e;</i>QQ</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                    else {
+                                        <li class="calendar level@(jm.Level)" data-date="@(jm.ReleasedDate)" data-id="@(jm.SourceId)">
+                                            <div class="post-time">
+                                                <i></i><em>@(DateExtensions.ConvertStringToDateTime(jm.ReleasedDate).ToString("HH:mm:ss"))</em>
+                                            </div>
+                                            <div class="content">
+                                                <dl>
+                                                    <dd class="flag">
+                                                        <img src="~/Images/banner/rectangle/@(jm.CountryImg)" onerror="javascript:this.src='/images/banner/rectangle/default_country.png'"/>
+                                                    </dd>
+                                                    <dd class="act-time">
+                                                        @(DateExtensions.ConvertStringToDateTime(jm.AddDate).ToString("HH:mm"))
+                                                    </dd>
+                                                    <dd class="title">
+                                                        <p class="name">@Html.Raw(jm.Title)</p>
+                                                        <p class="value">前值：@(jm.Previous) 预期：@(jm.Consensus)</p>
+                                                        @if (jm.Revised != null && jm.Revised != "---")
+                                                        {
+                                                            <p class="revised">修正：@jm.Revised（前值）</p>
+                                                        }
+                                                        
+                                                    </dd>
+                                                    <dd class="star">
+                                                        <div class="star-level @(jm.Star < 3 ? "low" : "")">
+                                                            <i style="width:@(jm.Star * 20)%"></i>
+                                                        </div>
+                                                    </dd>
+                                                    <dd class="act-val">
+                                                        公布：@(jm.Actual)
+                                                    </dd>
+                                                    <dd class="impact">
+                                                        <span class="impact@(jm.Impact)">
+                                                            @((((ImpactDefine)jm.Impact) == ImpactDefine.无影响 ? ImpactDefine.影响较小 : (ImpactDefine)jm.Impact).ToString()
+                                                                    + ((jm.Impact == Convert.ToInt16(ImpactDefine.利多) || jm.Impact == Convert.ToInt16(ImpactDefine.利空)) ? " 美元" : ""))
+                                                        </span>
+                                                    </dd>
+                                                </dl>
+                                                <div class="share">
+                                                    <span class="share-icon iconfont">&#xe60f;</span>
+                                                    <div class="share-box">
+                                                        <i class="shape"></i>
+                                                        <ul class="bdsharebuttonbox">
+                                                            <li><a href="javascript:;" data-bshare='{type:"weixin",url:"",title:"",desc:"@(Regex.Replace(jm.Title.Replace("<br />","。"),@"\s",""))",summary:"",images:"@CustomConfig.WebBailunNews/images/public/push.png" }' class="weixin"><i class="iconfont">&#xe50a;</i>微信</a></li>
+                                                            <li><a href="javascript:;" data-bshare='{type:"weibo",url:"",title:"",desc:"@(Regex.Replace(jm.Title.Replace("<br />","。"),@"\s",""))",summary:"",images:"@CustomConfig.WebBailunNews/images/public/push.png" }' class="weibo"><i class="iconfont">&#xe504;</i>微博</a></li>
+                                                            <li><a href="javascript:;" data-bshare='{type:"qzone",url:"",title:"",desc:"@(Regex.Replace(jm.Title.Replace("<br />","。"),@"\s",""))",summary:"",images:"@CustomConfig.WebBailunNews/images/public/push.png" }' class="qq"><i class="iconfont">&#xe64e;</i>QQ</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+
+                                    currTime = jm.ReleasedDate;
+                                    i++;
+                                }
+                            }
+                        </ul>
+                    </div>
+                                }
+            </div>
+            <div class="loading-more">
+                <img src="~/Images/marketPrice/slide-down.png" />
+                <em>点击加载更多</em>
+            </div>
+            <div id="kk-jinshi" class="kkpager"></div>
+        </div>
+
+        <div class="news-item" data-index="2">
+            <div class="news-data">
+                @if (list != null && list.WallStreetcnNews.Any())
+                {
+                    <div class="news-area">
+
+                        <ul class="news-list">
+                            <div class="time">
+                                <div class="clock-border">
+                                    <div class="clock">
+                                        <div class="hour div-hour" id="">
+                                        </div>
+                                        <div class="minute div-minute" id="">
+                                        </div>
+                                        <div class="second div-second" id="">
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<img src="/Images/news/news-start.png">*@
+                                <p>@(DateExtensions.ConvertStringToDateTime(list.WallStreetcnNews[0].ReleasedDate).ToString("MM月dd日"))</p>
+                            </div>
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div class="loading-more">
+                <img src="~/Images/marketPrice/slide-down.png" />
+                <em>点击加载更多</em>
+            </div>
+            <div id="kk-ws" class="kkpager"></div>
+        </div>
+
+        <div class="news-item" data-index="4">
+            <div class="news-data">
+                @if (list != null && list.Fx678News.Any())
+                {
+                    <div class="news-area">
+
+                        <ul class="news-list">
+                            <div class="time">
+                                <div class="clock-border">
+                                    <div class="clock">
+                                        <div class="hour div-hour" id="">
+                                        </div>
+                                        <div class="minute div-minute" id="">
+                                        </div>
+                                        <div class="second div-second" id="">
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<img src="/Images/news/news-start.png">*@
+                                <p>@(DateExtensions.ConvertStringToDateTime(list.Fx678News[0].ReleasedDate).ToString("MM月dd日"))</p>
+                            </div>
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div class="loading-more">
+                <img src="~/Images/marketPrice/slide-down.png" />
+                <em>点击加载更多</em>
+            </div>
+            <div id="kk-fx678" class="kkpager"></div>
+        </div>
+
+        <div class="news-item" data-index="3">
+            <div class="news-data">
+                @if (list != null && list.Fx168News.Any())
+                {
+                    <div class="news-area">
+
+                        <ul class="news-list">
+                            <div class="time">
+                                <div class="clock-border">
+                                    <div class="clock">
+                                        <div class="hour div-hour" id="">
+                                        </div>
+                                        <div class="minute div-minute" id="">
+                                        </div>
+                                        <div class="second div-second" id="">
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<img src="/Images/news/news-start.png">*@
+                                <p>@(DateExtensions.ConvertStringToDateTime(list.Fx168News[0].ReleasedDate).ToString("MM月dd日"))</p>
+                            </div>
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div class="loading-more">
+                <img src="~/Images/marketPrice/slide-down.png" />
+                <em>点击加载更多</em>
+            </div>
+            <div id="kk-fx168" class="kkpager"></div>
+        </div>
+        <div class="news-item" data-index="5">
+            <div class="news-data">
+                @if (list != null && list.DailyFxnEews.Any())
+                {
+                    <div class="news-area">
+
+                        <ul class="news-list">
+                            <div class="time">
+                                <div class="clock-border">
+                                    <div class="clock">
+                                        <div class="hour div-hour" id="">
+                                        </div>
+                                        <div class="minute div-minute" id="">
+                                        </div>
+                                        <div class="second div-second" id="">
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<img src="/Images/news/news-start.png">*@
+                                <p>@(DateExtensions.ConvertStringToDateTime(list.DailyFxnEews[0].ReleasedDate).ToString("MM月dd日"))</p>
+                            </div>
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div class="loading-more">
+                <img src="~/Images/marketPrice/slide-down.png" />
+                <em>点击加载更多</em>
+            </div>
+            <div id="kk-dailyfx" class="kkpager"></div>
+        </div>
+    </div>
+</div>
+

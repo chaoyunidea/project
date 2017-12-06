@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "拜仑财经";
+    ViewBag.Keywords = "";
+    ViewBag.Description = "";
+    Layout = "/Views/Shared/_LayoutPrice.cshtml";
+}
+
+@section style{    
+    <link href="~/Styles/dist/marketPrice/stockHome.css?v=9fb561e0de" rel="stylesheet" />
+    <link href="~/Scripts/glup/kkpager/kkpage1/kkpager.min.css?v=ed39d937ab" rel="stylesheet" />
+}
+<div class="main clearfix">
+    <div class="left">
+        @Html.Partial("~/Views/SharedView/ControlBar.cshtml")
+        <div class="box price-item">
+            <div class="heading clearfix">
+                <h3>行业板块</h3>
+                <span><a href="/marketprice/stocklist/7-1-50">更多></a></span>
+            </div>
+            <div class="content">
+                <ul class="clearfix" id="industryData">
+                    @*<li>
+                        <a href="/marketprice/detail/100097">
+                            <div class="params up">
+                                <h5 class="name">有色金属</h5>
+                                <h3 class="current">6.78<i></i></h3>
+                                <p class="stock-name">天齐锂业</p>
+                                <p class="updowns"><em class="percent">0.03%</em><em>0.00</em></p>
+                            </div>
+                            <div class="chart" id="chartLine100097"></div>
+                        </a>
+                    </li>*@
+                </ul>
+
+            </div>
+        </div>
+        <div class="special-group clearfix">            
+            @*<div class="special-box">
+                <div class="heading clearfix">
+                    <h3>港股通</h3>
+                    <span><a href="/marketprice/forex">更多></a></span>
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>代码</th><th>名称</th><th>最新价</th><th>涨跌幅</th><th>涨跌额</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="up"><td>00001</td><td>长和</td><td class="color">98.650</td><td class="color">+0.150</td><td class="color">+0.152%</td></tr>
+                    </tbody>
+                </table>
+            </div>*@
+        </div>
+     </div>
+    <div class="right">
+       @Html.Partial("~/Views/SharedView/MarketBrief.cshtml")        
+       @Html.Action("FinancialCalendar", "SharedView", new { topSize = 4 })   
+    </div>
+</div>
+
+
+
+@section script{
+    <script>
+        var productId = 7;
+    </script>
+    <script src="~/gulp/gulp/requireBuilder/jsFileRoute.js?v=654db78f43"></script>
+    <script src="/Scripts/glup/jquery/json2.js?v=39b6ed277e"></script>
+    <script src="https://gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="https://gajsapi.fx110.com/script/public/signalr/signalr.js"></script>
+    <script src="https://gajsapi.fx110.com/script/public/masklayer/masklayer.min.js"></script>
+    <script src="~/Scripts/glup/highStock/highstock.js?v=c3d47eb237"></script>
+    <script src="https://gajsapi.fx110.com/script/public/jsScroll/jsScroll.min.js"></script>  
+    <script src="/Scripts/glup/require.min.js?v=7658ede0c2" data-main="/Scripts/dist/marketPrice/stockHome.js?v=5eaa4d8b79"></script>
+
+}

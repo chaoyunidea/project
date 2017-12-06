@@ -1,0 +1,38 @@
+﻿@import (reference) "../../glup/PublicDefind.less";//引入方法
+@import (reference) "../../glup/Animation.less";//引入方法
+
+.express{
+    .content{
+        background:#fff;position:relative;
+        .tab{
+            line-height:34px;background: #f3fcff;
+            dd{
+                display:inline-block;padding:0 10px;cursor:pointer;*display:inline;*zoom:1;*padding:0 7px;
+                &.active{color:@MainColor_5;font-weight: bold;}
+            }
+        }
+        .news-content{
+            padding:12px;height: 370px;overflow: hidden;
+            .news-item{
+                color:@FontColor_1;display:none;
+                &.active{display:block;}
+                h3{font-size:16px;margin-bottom:13px;font-weight:bold;color:@FontColor_2;}
+                ul{
+                    li{
+                        line-height:1.6;margin-bottom: 12px;
+                        .send-time{color:@FontColor_2;margin-right:8px;vertical-align:top;}
+                        .main-content{display:inline-block;width:250px;vertical-align:top;*display:inline;*zoom:1;}
+                    }
+                }
+                .more{
+                    display:block;padding:0 10px;color:@MainColor_5;border:1px solid @MainColor_5;.border-radius(3px);margin:15px auto;line-height: 1.5;width: 78px;box-sizing: border-box;
+                }
+            }
+        }
+    }
+}
+
+.divScrollBar{
+    top:34px !important;
+    &>div{.opacity(0.3);background-color:#000;.border-radius(2px)}
+}

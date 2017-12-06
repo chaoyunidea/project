@@ -1,0 +1,50 @@
+﻿@import (less) "../glup/public.less"; 
+@import (reference) "../glup/Animation.less";
+
+body{
+    .adaptationSize(font-size);
+    .content{
+        padding:0.5rem 0 .5rem .5rem;
+         
+
+        .title{
+             .flex();  padding-bottom:.2rem; border-bottom: 1px solid #ccc;
+            .ct-share-headimg{
+               display:inline-block; vertical-align:top;
+                img{.adaptationSize(width,55px);.adaptationSize(height,55px);}
+            }
+
+            .ct-share-title{
+                  .flexSize(1); -webkit-box-orient: vertical;.adaptationPM(padding,0,0,0,10px);
+                  h1{.adaptationSize(font-size,20px);.adaptationSize(line-height,35px);}
+                  p{.adaptationSize(font-size,16px);.adaptationSize(line-height,20px);color:#545A64;}
+            }
+        }
+         
+        .ct-share-content{
+            .ct-name-time{
+                padding: .3rem 0; color: #acb2c1; .adaptationSize(font-size,14px);
+            }
+            .ct-c{
+                .adaptationSize(font-size,16px); .adaptationSize(line-height,25px);  color: #545a64; text-indent: 2em; padding: .1rem .5rem .1rem 0;
+                &>p,&>div{
+                   .adaptationPM(padding,0,0,.1rem,0);.adaptationSize(line-height,30px);
+                }
+            }
+        }
+    }
+
+    .ct-fixed {
+        @background:#29323C;
+          position: fixed;  left: 0; bottom: 0; width: 100%; z-index: 999; .box-sizing();padding:0 .5rem;
+            .ct-share-show { padding:.3rem .2rem; overflow: hidden; width: 100%; margin: 0 auto .5rem auto;.border-radius(.6rem); .box-sizing();background: @background; 
+                         .ct-share-headimg { text-align: center; color: #FFF; .adaptationSize(font-size,18px);}
+          }
+    }
+}
+
+.mask { 
+        width: 100%; background-color: rgba(0,0,0,0.5); clear: both; position: fixed; z-index: 999999; height: 100%; display: none;top: 0;
+         img {width: 100%;}
+       
+       }

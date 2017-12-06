@@ -1,0 +1,195 @@
+﻿@using Bailun.Finance.Model.Indicator;
+@{
+    ViewBag.Title = "拜仑财经-宏观数据";
+    ViewBag.Keywords = "拜仑财经";
+    ViewBag.Description = "拜仑财经";
+    Layout = "/Views/Shared/_LayoutDataCenter.cshtml";
+    var List = Model as List<DataCenterModel>;
+    string Unit = ViewBag.Id == 2 || ViewBag.Id == 3 ? "(万人)" : "(%)";
+    var bankArray = new string[,] { { "2", "中国央行" }, { "1", "美联储" }, { "5", "欧洲央行" }, { "4", "英国央行" }, { "11", "新西兰央行" }, { "10", "澳洲联储" }, { "3", "日本央行" }, { "15", "俄罗斯央行" }, { "13", "印度央行" }, { "14", "巴西央行" }, { "18", "瑞士央行" } };
+
+}
+
+@section style{
+    <link href="~/Styles/dist/indicator/dataCenter.css?v=2727575cb7" rel="stylesheet" />
+    <link href="~/Scripts/glup/kkpager/kkpage1/kkpager.min.css?v=ed39d937ab" rel="stylesheet" />
+}
+
+<div class="top-wrap">
+    <div class="bar-bg">
+        <div class="title-bar clearfix">
+            @if (ViewBag.Id == 1)
+            {
+                <dl class="interest-tab clearfix">
+                    @for (var i = 0; i < bankArray.GetLength(0); i++)
+                {
+                        <dd class="@(int.Parse(bankArray[i,0]) == ViewBag.Country ? "active" : "")">
+                            <a href="/indicator/datacenter/1-@(bankArray[i,0])">@(bankArray[i, 1])</a>
+                        </dd>
+                    }
+
+                </dl>
+            }
+            else
+            {
+                <h3>@(List[0].Itemname)</h3>
+            }
+
+            <dl class="bar-group">
+                <dd class="info" title="报告说明"></dd>
+                <dd class="column" data-tab="chart-box" title="图表模式"></dd>
+                <dd class="table active" data-tab="table-box" title="列表模式"></dd>
+                <dd class="time-select">
+                    <img src="~/Images/calendar/calendar.png" class="icon" />
+                    <input type="text" id="date-place" readonly value="@(String.Format("{0}/{1}/{2}",List[0].Valuetime.Substring(0,4),List[0].Valuetime.Substring(4,2),List[0].Valuetime.Substring(6,2)))" />
+                    <i></i>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <table class="fix-thead"></table>
+</div>
+
+<div class="main">
+    <div class="table-box active">
+        <table class="main-data">
+            <thead>
+                <tr><th>商品</th><th>日期</th><th>前值@(Unit)</th><th>今值@(Unit)</th><th>预测值@(Unit)</th></tr>
+            </thead>
+            <tbody>
+                @{ 
+                   var index = 0; 
+                    foreach (DataCenterModel el in List)
+                    {
+                        <tr>
+                            <td><span data-type="0" data-date="@el.Valuetime">@el.Itemname</span></td>
+                            <td class="time">@el.Valuetime</td>
+                            <td><span data-type="1" data-date="@el.Valuetime">@(float.Parse(el.Frontvalue) == 0 && index == 0? "待公布" : el.Frontvalue)</span></td>
+                            <td><span data-type="2" data-date="@el.Valuetime"> @(float.Parse(el.Currentvalue) == 0 && index == 0 ? "待公布" : el.Currentvalue) </span></td>
+                            <td><span data-type="3" data-date="@el.Valuetime"> @(float.Parse(el.Predvalue) == 0 && index == 0 ? "待公布" : el.Predvalue)</span></td>
+                        </tr>
+                        index++;
+                    }
+                }
+            </tbody>
+        </table>
+        <div id="kkpager"></div>
+    </div>
+    <div class="chart-box" style="margin:0 auto; ">
+        <div class="top-bar clearfix">
+            <div class="time-select-chart clearfix">
+                <div class="date">
+                    <span class="choice-theme">选择日期：</span>
+                    <input class="choice-date" type="text" placeholder="起始日期" id="union-start" value="@(String.Format("{0}/{1}/{2}",List[29].Valuetime.Substring(0,4),List[29].Valuetime.Substring(4,2),List[29].Valuetime.Substring(6,2)))" >
+                    <span class="need-to">至</span>
+                    <input class="choice-last" type="text" placeholder="结束日期" id="union-end" value="@(String.Format("{0}/{1}/{2}",List[0].Valuetime.Substring(0,4),List[0].Valuetime.Substring(4,2),List[0].Valuetime.Substring(6,2)))" >
+                    <a href="javascript:;" class="sure" id="change-union">确定</a>
+                </div>
+            </div>
+            <div class="restore">
+                <img src="~/Images/indicator/restore.png" />
+            </div>
+            <div class="report">
+                <p class="report-type">报告类型<span></span></p>
+                <ul class="three-values">
+                        <li data-index="0">
+                        <img src="~/Images/indicator/fill.png" />
+                        前值@(Unit)
+                    </li>
+                        <li data-index="1">
+                        <img src="~/Images/indicator/fill.png" />
+                        今值@(Unit)
+                    </li>
+                        <li data-index="2">
+                        <img src="~/Images/indicator/fill.png" />
+                        预测@(Unit)
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="main-box">
+            <div id="chart-union" style="height:1300px;width:1170px;" class="chart-union"></div> 
+            <div class="time-line">                
+                <div id="chart-union-one" style="height:60px;width:1170px;" class="chart-union-one"></div>       
+            </div> 
+             
+        </div>
+    </div>
+    
+</div>
+    
+   @*前值，今值，预测分开显示界面(对于显示报告类型，建议点击事件设置相应的dom容器的display属性)*@
+
+ 
+    
+
+
+<div class="mask">
+    <div class="chart-pop" data-id="">
+        <div class="title clearfix">
+            <h1>@(List[0].Itemname)@Unit</h1>            
+        </div>   
+        <div class="chart-area">
+            <div class="time-select-chart clearfix">
+                <div class="date">
+                    <span class="choice-theme">选择日期：</span>
+                    <input class="choice-date" type="text" placeholder="起始日期" id="start-time" value="2012/10/08">
+                    <span class="need-to">至</span>
+                    <input class="choice-last" type="text" placeholder="结束日期" id="end-time" value="2017/10/08">
+                    <a href="javascript:;" class="sure" id="change-zone">确定</a>
+                </div>                
+            </div>
+            <div id="chart-pop" class="chart" style="width:1280px;"></div> 
+        </div>     
+          
+        <div class="close"></div>     
+    </div>
+</div>
+        @*<div id="main2" style="width:80%;height:600px;border:1px solid #ccc;margin:0 auto;"></div>*@
+
+
+@*<div class="explain-page">
+     <div class="explain">
+         <h3 class="explain-title"></h3>
+         <p class="Source"></p>
+         <p class="rate"></p>
+         <div class="data-title">
+             <span>数据解释:</span>
+             <p></p>
+         </div>
+         <div class="meaning">
+             <span>名词含义:</span>
+             <p></p>
+         </div>
+         <div class="know">
+             <span>解读公式:</span>
+             <p></p>
+         </div>
+         <div class="effect">
+             <span>潜在影响:</span>
+             <p></p>
+         </div>
+     </div>
+</div>*@
+
+
+@section script{
+    <script>
+        var dataId = '@ViewBag.Id';
+        var countryId = '@ViewBag.Country';
+        var mainTitle = '@(List[0].Itemname)';
+        var indicatorUnit = '@Unit';
+    </script>
+    <script src="/Scripts/glup/My97DatePicker/WdatePicker.min.js?v=3163356532"></script>
+    <script src="/Scripts/glup/jquery/json2.js?v=39b6ed277e"></script>
+    <script src="//gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="~/Scripts/glup/kkpager/kkpage1/kkpager.min.js?v=b6a7624632" type="text/javascript"></script>
+    <script src="~/Scripts/glup/echarts/echarts.js?v=ac30e24c4e"></script>
+    <script src="~/Scripts/dist/indicator/dataCenter.js?v=b64e9025f7"></script>
+    @*<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script src="~/Scripts/dev/indicator/Chart.js?v=0ccc23f4db"></script>*@
+  
+    
+
+}

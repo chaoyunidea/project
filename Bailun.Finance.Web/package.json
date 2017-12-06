@@ -1,0 +1,31 @@
+{
+  "name": "bailun",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "browser-sync": "^2.18.11",
+    "del": "^2.2.2",
+    "gulp-babel": "^7.0.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.2.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-uglify": "^3.0.0",
+    "karma": "^1.7.0",
+    "path": "^0.12.7",
+    "uglify": "^0.1.5",
+    "uglify-js": "^2.8.26",
+    "vinyl-sourcemaps-apply": "^0.2.1"
+  },
+  "devDependencies": {
+    "gulp-bom": "^1.0.0",
+    "gulp-rev": "^8.0.0",
+    "gulp-rev-collector": "^1.2.2",
+    "run-sequence": "^2.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

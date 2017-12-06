@@ -1,0 +1,91 @@
+﻿@using Bailun.Finance.Model.Enums;
+@{
+    ViewBag.Title = "拜仑财经";
+    ViewBag.Keywords = "";
+    ViewBag.Description = "";
+    Layout = "/Views/Shared/_LayoutPrice.cshtml";
+}
+
+@section style{    
+    <link href="~/Scripts/glup/kkpager/kkpage1/kkpager.min.css?v=ed39d937ab" rel="stylesheet" />
+    <link href="~/Styles/dist/marketPrice/stockList.css?v=aaa83eccf1" rel="stylesheet" />
+}
+<div class="main clearfix">    
+    <div class="left">  
+        @Html.Partial("~/Views/SharedView/ControlBar.cshtml")      
+        <div class="bread clearfix">
+            @*<span><a href="/marketprice/index">市场报价</a> > </span> <span><a href="/marketprice/hkstock">@(((StockMarket)ViewBag.productId).ToString())</a>  > </span> <span><a>创业板</a></span>
+            <span class="plate-select"><img src="~/Images/marketPrice/slide-down.png" />
+                <em>上证指数</em>
+                <div class="set-box">
+                    <ul>
+                        <li><a>科技</a></li>
+                        <li><a>工业</a></li>
+                        <li><a>非周期性消费品</a></li>
+                    </ul>
+                    <b class="shape"></b>
+                </div>
+            </span>*@
+        </div>
+        <div class="area price">
+            
+            <div class="content">
+                <ul id="stockList">
+                    @*<li ms-for="el in priceList">
+                        <a ms-attr="{href:'/marketprice/chart/' + el.SubscriberId,target:'_blank'}">
+                            <div class="inside clearfix">
+                                <div class="f-l">
+                                    <h2 class="name">{{el.Cn_Name}}</h2>
+                                    <div class="code">
+                                        <em>HK0000001</em>
+                                    </div>
+                                    <div ms-class="['total',el.Bid > el.Pre_Close ? 'up' : 'down']">                                        
+                                        <i></i>
+                                        <em>{{el.Bid | number(2)}}</em>                                                                               
+                                    </div>                                    
+                                    <span></span>
+                                    <dl class="param">
+                                        <dd><h5>涨跌额</h5><p>{{ (el.Bid - el.Pre_Close) | number(2) }}</p></dd>
+                                        <dd><h5>涨跌幅</h5><p>{{(el.Bid - el.Pre_Close) / el.Pre_Close * 100 | number(2)}}%</p></dd>
+                                        <dd><h5>买价</h5><p>{{el.Ask | number(2)}}</p></dd>
+                                        <dd><h5>卖价</h5><p>{{el.Bid | number(2)}}</p></dd>
+                                        <dd><h5>最高</h5><p>{{el.High | number(2)}}</p></dd>
+                                        <dd><h5>最低</h5><p>{{el.Low | number(2)}}</p></dd>
+                                        <dd><h5>成交量/手</h5><p>62,393</p></dd>
+                                        <dd><h5>成交额/万</h5><p>10,357.29</p></dd>
+                                    </dl>                                    
+                                </div>
+                                <div class="chart" ms-attr="{id:'chartLine' + el.SubscriberId}"></div>
+                            </div>
+                        </a>
+                    </li>*@                                      
+                </ul>                
+            </div>
+            <div id="kkpager"></div>
+        </div>
+     </div>
+     
+</div>
+
+
+
+@section script{
+    <script>
+        var productId = '@ViewBag.productId';
+        var plateType = '@ViewBag.plateType';
+        var plateId = '@ViewBag.plateId';
+    </script>
+    <script src="/Scripts/glup/jquery/json2.js?v=39b6ed277e"></script>
+    <script src="//gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="//gajsapi.fx110.com/script/public/signalr/signalr.js"></script>
+    <script src="//gajsapi.fx110.com/script/public/masklayer/masklayer.min.js"></script>
+    <script src="~/Scripts/glup/highStock/highstock.js?v=c3d47eb237"></script>
+    <script src="//gajsapi.fx110.com/script/public/jsScroll/jsScroll.min.js"></script>      
+    <script src="~/Scripts/glup/avalon_two/avalon.js?v=975735a0e4"></script>    
+    <script src="~/gulp/gulp/requireBuilder/jsFileRoute.js?v=654db78f43"></script>    
+    <script src="~/Scripts/glup/kkpager/kkpage1/kkpager.js?v=2bc296e351"></script>
+    <script src="/Scripts/glup/require.min.js?v=7658ede0c2" data-main="/Scripts/dist/marketPrice/stockList.js?v=b2962e2e4e"></script>
+    @*<script src="~/Scripts/dist/sharedView/news.js?v=92f3ea12cc"></script>*@
+    
+
+}

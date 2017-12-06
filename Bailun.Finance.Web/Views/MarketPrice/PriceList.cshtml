@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "拜仑财经";
+    ViewBag.Keywords = "";
+    ViewBag.Description = "";
+    Layout = "/Views/Shared/_LayoutPrice.cshtml";
+}
+
+@section style{    
+    <link href="~/Styles/dist/marketPrice/marketPrice.css?v=5d2f6797f6" rel="stylesheet" />
+    <link href="~/Scripts/glup/kkpager/kkpage1/kkpager.min.css?v=ed39d937ab" rel="stylesheet" />
+}
+<div class="main clearfix">
+    <div class="left">
+        @Html.Partial("~/Views/SharedView/ControlBar.cshtml")
+        <div class="area price">          
+            <div class="content">
+                <ul id="@(ViewBag.type)" class="clearfix">
+                    @*<li ms-for="el in priceList">
+                        <a ms-attr="{href:'/marketprice/chart/' + el.MarketId,target:'_blank'}">
+                            <div class="inside clearfix">
+                                <div class="f-l">
+                                    <h2 class="name">{{el.Cn_Name}}</h2>
+                                    <div ms-class="['total',el.CurrentPrice > el.OpenPrice ? 'up' : 'down']">
+                                        <div class="big">
+                                            <i></i>
+                                            <em>{{el.CurrentPrice | number(4)}}</em>
+                                        </div>
+                                        <div class="small">
+                                            <i></i>
+                                            <em>{{(el.CurrentPrice - el.OpenPrice) / el.OpenPrice * 100 | number(2)}}%</em>
+                                            <em>({{ (el.CurrentPrice - el.OpenPrice) | number(4) }})</em>
+                                        </div>
+                                    </div>
+                                    <dl class="param">
+                                        <dd><h5>买价</h5><p>{{el.CurrentPrice | number(4)}}</p></dd>
+                                        <dd><h5>卖价</h5><p>{{el.OpenPrice | number(4)}}</p></dd>
+                                        <dd><h5>最高</h5><p>{{el.HighPrice | number(4)}}</p></dd>
+                                        <dd><h5>最低</h5><p>{{el.LowPrice | number(4)}}</p></dd>
+                                    </dl>                                    
+                                </div>
+                                <div class="chart" ms-attr="{id:'chartLine' + el.MarketId}"></div>
+                            </div>
+                        </a>
+                    </li>*@                                      
+                </ul>
+            </div>
+        </div>
+        <div id="kkpager"></div>
+
+     </div>
+    <div class="right">
+       @Html.Action("MarketBrief", "SharedView", new { topSize = 50 })        
+       @Html.Action("FinancialCalendar", "SharedView", new { topSize = 4 })   
+    </div>
+</div>
+<input type="hidden" value="@(ViewBag.type)" class="category"/>
+<iframe style="display:none;opacity:0;width:0;height:0;" id="websocket"></iframe>
+ 
+
+
+@section script{  
+    <script>
+        var newsDomain = '@CustomConfig.WebBailunNews';
+    </script>  
+    <script src="/Scripts/glup/jquery/json2.js?v=39b6ed277e"></script>
+    <script src="//gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="//gajsapi.fx110.com/script/public/masklayer/masklayer.min.js"></script>
+    <script src="~/Scripts/glup/highStock/highstock.js?v=c3d47eb237"></script>
+    <script src="~/gulp/gulp/requireBuilder/jsFileRoute.js?v=654db78f43"></script>
+    <script src="~/Scripts/glup/kkpager/kkpage1/kkpager.min.js?v=b6a7624632" type="text/javascript"></script>
+    <script src="/Scripts/glup/require.min.js?v=7658ede0c2" data-main="/Scripts/dist/marketPrice/marketPrice.js?v=75975131b0"></script>
+
+}

@@ -1,0 +1,90 @@
+﻿@using Bailun.Finance.Model.News;
+
+@{
+    ViewBag.Title = "拜仑财经_最全面快速的财经新闻和市场报价！";
+    ViewBag.Keywords = "外汇新闻,外汇资讯,财经日历,汇率,外汇牌价,外汇报价,黄金报价,美股报价,港股报价,期货报价,美指报价,金十数据,华尔街见闻,FX678,汇通财经,FX168,dailyfx,investing,汇讯通,快讯通";
+    ViewBag.Description = "拜仑财经囊括金十数据、华尔街见闻、FX678、FX168、dailyfx五大财经新闻，同步更新，绿色无广告，拥有全球最全的金融产品实时报价，一站解决您的投资需求！";
+    Layout = "/Views/Shared/_Layout.cshtml";
+
+    var list = Model as FinanceBriefListModel;
+}
+
+@section style{
+   
+    <link href="~/Styles/dist/news/index.css?v=f2821bba2b" rel="stylesheet" />   
+    <link href="~/IconFont/iconfont.css" rel="stylesheet" />    
+   
+    <script>
+        var priceDomain = '@CustomConfig.WebBailunBaojia';
+    </script>
+}
+
+@* 头部报价 *@
+@Html.Action("QuoteView", "News")
+
+<div class="main clearfix">
+    <div class="left">
+        @*金十、华尔街、fx168、fx678新闻*@
+        @Html.Action("NewsView", "News")
+    </div>
+
+    <div class="right">
+        <div class="app-scan">
+            <span class="scan-code">
+                <img src="~/Images/news/bailun-scan.png" />
+                <em>最全的财经新闻源和产品报价源</em>
+            </span>
+            <ul class="os-type">
+                <li class="apple">
+                    <img src="~/Images/download/apple.png" />
+                    <em>即将上线</em>
+                </li>
+                <li class="android">
+
+                        <a href="https://gafxchatimage.fx110.com/api/bailun/bailunfinance_v1.0.apk" target="_blank">
+                            <img src="~/Images/news/android.png" />
+                            <em>Android下载</em>
+                        </a>
+
+</li>
+            </ul>
+        </div>
+
+        @Html.Action("FinancialCalendar", "SharedView", new { topSize = 4})
+        @Html.Action("MarketWatch", "SharedView")
+    </div>
+</div>
+
+<div class="to-top">
+    <img src="~/Images/public/top.png" />
+</div>
+
+<!--声音提示-->
+<audio src="" id="qtmusic" autoplay="autoplay"> </audio>
+<bgsound src="" id="IEmusic">
+
+@*<div class="mask">
+    <div class="natrual">
+        <img src="//image.jin10.com/1496978208.png" class="max"/>
+        <img src="~/images/public/x.png" class="close" />
+    </div>
+</div>*@
+
+<iframe style="display:none;opacity:0;width:0;height:0;" id="h-websocket"></iframe>
+<iframe style="display:none;opacity:0;width:0;height:0;" id="r-websocket"></iframe>
+<iframe style="display:none;opacity:0;width:0;height:0;" id="news-socket"></iframe>
+ @*SvaData*@
+@Html.Action("SvgData", "SharedView", new { type = 1 })   
+
+@section script{    
+    <script src="~/gulp/gulp/requireBuilder/jsFileRoute.js?v=654db78f43"></script>
+    <script src="//gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="//gajsapi.fx110.com/script/public/imgViewer/imgViewer.min.js"></script>
+    <script src="~/Scripts/glup/highStock/highstock.js?v=c3d47eb237"></script>  
+    <script src="//gajsapi.fx110.com/script/public/masklayer/masklayer.min.js"></script>
+    <script src="//gajsapi.fx110.com/script/public/dragsort/dragsort.min.js"></script>
+    <script src="/Scripts/glup/require.min.js?v=7658ede0c2" data-main="/Scripts/dist/news/newsIndex.js?v=a425f8f7b3"></script>
+   
+    <script src="//gajsapi.fx110.com/script/public/Bshare/bshare.min.js?v=2"></script>
+    <script src="//gajsapi.fx110.com/script/public/QRCode/generate.min.js"></script>
+}

@@ -1,0 +1,35 @@
+﻿@using Bailun.Finance.Model.Quote;
+@using Bailun.Common.Extensions;
+@{ 
+    Layout = null;
+}
+<div class="box price-item">
+    <div class="heading clearfix">
+        <h3>外汇</h3>
+        <span><a href="/marketprice/list/forex">更多></a></span>
+    </div>
+    <div class="content">
+        <ul class="clearfix" id="forexData">
+            @if (Model != null)
+            {
+                foreach (ChatIndexModel m in Model)
+                {
+                    <li data-code="@m.Code" class="down">
+                        <div class="params">
+                            <div class="name clearfix">
+                                <h5>@m.Cn_Name</h5>
+                            </div>
+                            <div class="data-area">
+                                <h3 class="current">@m.CurrentPrice<i></i></h3>
+                                <p class="updowns"><em class="percent">@m.PriceExchange.CaculatePriceExchange(m.CurrentPrice, m.OpenPrice)</em><em>@m.PriceLimit.CaculatePriceLimit(m.CurrentPrice, m.OpenPrice)</em></p>
+                            </div>
+                        </div>
+                        <div class="chart" id="chartLine@(m.MarketId)" data-highcharts-chart="5">
+                        </div>
+                        <a href="/marketprice/detail/@m.MarketId" target="_blank"></a>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+﻿@import (reference) "../../glup/PublicDefind.less";//引入方法
+@import (reference) "../../glup/Animation.less";//引入方法
+
+.calendar.area{
+    .content{
+        width:326px;
+        ul{            
+            li{
+                padding:12px 18px;background:#fff;margin-bottom:10px;font-size:13px;.box-shadow(0,0, 16px ,0, rgba(195, 195, 195, 0.18));cursor:pointer;
+                &:hover{background:#e4f0f7;}
+                .time{
+                    margin-bottom: 10px;
+                    em{color:@FontColor_3;margin-right:10px;float:left;}
+                    .star-union{
+                        margin-left: 180px;float:right;
+                        img{width:12px;vertical-align:middle;margin-right: 1px;}
+                    }
+                }
+                .title{
+                    height:40px;
+                    
+                    .flag{float:left;width:30px;height:20px;.border-radius(2px);.box-shadow(0, 0 ,4.5px ,0, rgba(0, 0, 0, 0.22));margin-right:5px;vertical-align:top;}
+                    .nation{float:left;width:65px;display:inline-block;vertical-align:top;}
+                                      
+                    .title-con{width:188px;float:right;}
+                }
+                .param{
+                    color:@FontColor_3;
+                    p{
+                        float:left;width:32%;
+                        &:first-child{width:36%;}
+                        &:last-child{ box-sizing: border-box;}
+                    }
+                }
+            }
+        }
+        .nodata{
+            background:#fff;text-align:center;padding:20px 0;
+            img{width: 30px;height: 33px;margin-bottom:5px;}
+        }
+    }
+}

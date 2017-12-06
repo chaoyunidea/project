@@ -1,0 +1,78 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../../Scripts/glup/jquery/jquery-1.8.3.min.js?v=e128811631"></script>
+    <script src="../../Scripts/glup/OCS/jquery.signalR-2.2.1.js?v=f12635d330"></script>
+    <!--<script src="http://10.0.0.147:10001/signalr/hubs"></script>-->
+    <script src="http://114.55.253.250:10001/signalr/hubs"></script>
+    <script src="http://gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+ 
+</head>
+<body>
+
+    <table id="test">
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+    </table>
+    <script>
+        var Vary;
+        $.ajaxSettings.async = false;
+        var productType = 'indices';
+        var productId = 3;
+        var productJson = { 'forex': ['外汇', 'Forex'], 'goods': ['商品期货', 'CommodityFutures'], 'indices': ['股指', 'Major_Indices'], 'bonds': ['债券', 'Bonds'], 'cfdindices': ['外汇期货', 'cfdindices'], 'ashares': ['沪深', 'ashares'], 'hkstock': ['港股', 'hkstock'], 'usstock': ['美股', 'usstock'], 'bitcoin': ['比特币', 'BitCon'], 'stockindex': ['股指期货', 'IndexFutures'], 'metals': ['贵金属', 'MetalsFutures'] };
+        $(function () {
+
+            //var connection = $.hubConnection('http://10.0.0.147:10001//signalr');
+            var connection = $.hubConnection('http://114.55.253.250:10001/signalr');
+
+            var connHunProxy = connection.createHubProxy(productJson[productType][1] + 'Hub');
+            var baseHubProxy = connection.createHubProxy('QuoteHub');
+            connHunProxy.on('Subscribe', function (json) {
+
+                var ar = json.split(',');
+                Vary = new createForexData(ar[0], ar[1], ar[2], ar[3], ar[4], ar[5], ar[6], ar[7], ar[8], ar[9], ar[10], ar[11], ar[12]);
+                $('#test tr').replaceWith('<tr><td>' + Vary.CurrentPrice + '</td><td>' + Vary.PriceLimit + '</td><td>' + Vary.PriceExchange + '</td></tr>');
+            });
+
+            connection.start({ jsonp: true, transport: ['webSockets', 'longPolling'] }).done(function () {
+                
+                    baseHubProxy.invoke("SubscribeSymbol", '恒生指数', productId);
+                
+            });
+
+
+        })
+
+        //一般
+        function createForexData(stockCode, stockName, bid, ask, open, close, high, low, spread, time, priceLimit, priceExchange,source) {
+            this.Code = stockCode;
+            this.Cn_Name = stockName;
+            this.CurrentPrice = source == 0 ? close : bid;
+            this.Ask = ask;
+            this.OpenPrice = open;
+            this.ClosePrice = close;
+            this.HighPrice = high;
+            this.LowPrice = low;
+            this.PriceLimit = priceLimit;
+            this.PriceExchange = priceExchange;
+            //this.点差 = BP1;
+        }
+
+       
+
+      
+
+
+    </script>
+</body>
+</html>

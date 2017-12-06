@@ -1,0 +1,97 @@
+﻿@using Bailun.Finance.Model.Enums;
+@{
+    ViewBag.Title = "拜仑财经";
+    ViewBag.Keywords = "";
+    ViewBag.Description = "";
+    Layout = "/Views/Shared/_LayoutPrice.cshtml";
+}
+
+@section style{    
+    <link href="~/Scripts/glup/kkpager/kkpage1/kkpager.min.css?v=ed39d937ab" rel="stylesheet" />
+    <link href="~/Styles/dist/marketPrice/Search.css?v=619720409c" rel="stylesheet" />
+
+}
+<div class="main clearfix">    
+    <div class="left">          
+        <div class="head-bar clearfix">
+            <div class="bread">
+                <span><a href="/marketprice/index">市场报价</a> > </span>  <span><a>搜索结果</a></span>
+            </div>
+            <div class="search-bar">
+                <input type="text" class="keywords" />
+                <img src="~/Images/marketPrice/search-icon.png" class="search-btn" />
+                <div class="set-box">
+                    <table>
+                        <thead>
+                            <tr><th>名称</th><th>代码</th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <b class="shape"></b>
+                </div>
+            </div>
+        </div>   
+        <div class="search-group">
+            
+            @*<div class="area price">
+                <div class="heading clearfix">
+                    <h3>沪深</h3>
+                    <span>搜索结果：28条</span>
+                </div>
+                <div class="content">
+                    <ul class="clearfix">
+                        <li>
+                            <a href="" class="clearfix">
+                                <h4 class="name">黄金</h4>
+                                <p class="code">代码 <em>600489.SS</em></p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="clearfix">
+                                <h4 class="name">黄金</h4>
+                                <p class="code">代码 <em>600489.SS</em></p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="clearfix">
+                                <h4 class="name">黄金</h4>
+                                <p class="code">代码 <em>600489.SS</em></p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="clearfix">
+                                <h4 class="name">黄金</h4>
+                                <p class="code">代码 <em>600489.SS</em></p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="kkpager"></div>
+            </div>*@
+        </div>
+        
+     </div>
+     
+</div>
+
+
+
+@section script{
+    <script>
+        var productId = '@ViewBag.productId';
+        var plateType = '@ViewBag.plateType';
+        var plateId = '@ViewBag.plateId';
+    </script>
+    <script src="/Scripts/glup/jquery/json2.js?v=39b6ed277e"></script>
+    <script src="//gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="//gajsapi.fx110.com/script/public/masklayer/masklayer.min.js"></script>
+    <script src="~/Scripts/glup/highStock/highstock.js?v=c3d47eb237"></script>
+    <script src="//gajsapi.fx110.com/script/public/jsScroll/jsScroll.min.js"></script>      
+    <script src="~/gulp/gulp/requireBuilder/jsFileRoute.js?v=654db78f43"></script>    
+    <script src="~/Scripts/glup/kkpager/kkpage1/kkpager.js?v=2bc296e351"></script>
+    <script src="//gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="/Scripts/glup/require.min.js?v=7658ede0c2" data-main="/Scripts/dist/marketPrice/search.js?v=ca5e1195a5"></script>
+    
+    
+
+}

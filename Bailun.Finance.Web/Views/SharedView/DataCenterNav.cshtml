@@ -1,0 +1,11 @@
+﻿<div class="price-nav">         
+    <ul class="clearfix">
+        @{
+            var DataTypeArr = new string[] { "央行利率", "美国ADP", "美国非农", "美国GDP" };
+            for (int i = 1; i < 5; i++)
+            {
+                <li class="@(ViewBag.Id == i ? "active" : "")"><a href="/indicator/datacenter/@(i)">@(DataTypeArr[i - 1])</a></li>
+            }
+        }      
+    </ul>    
+</div>

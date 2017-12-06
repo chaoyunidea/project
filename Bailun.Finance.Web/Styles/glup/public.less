@@ -1,0 +1,126 @@
+@import (reference) "PublicDefind.less"; 
+@import (reference) "Animation.less"; 
+@charset "utf-8";
+html * {outline: 0;-webkit-text-size-adjust: none;-webkit-tap-highlight-color: rgba(0,0,0,0);}
+body { margin:0; width:100%;font-family:'微软雅黑',sans-serif,'宋体',Arial;font-size:14px;  -webkit-font-smoothing: antialiased;    -moz-osx-font-smoothing: grayscale;}
+*{word-wrap: break-word;font-style: normal;}
+h1, h2, h3, h4, h5, h6 ,img ,dl,dt,dd,ul,li,p,table,td,th{margin: 0;padding: 0;border:0;font-weight: normal;}
+h1{font-size:20px;} 
+h2{font-size:18px;}
+h3{font-size:16px;}
+h4{font-size:13px;}
+input,textarea{margin: 0;padding: 0;resize: none;outline: none;    border: none;}
+ul,li{list-style-type: none;}
+em{font-style: normal;}
+a:link,a:visited,a:hover,a:active{text-decoration: none;}
+a{color:@FontColor_1;cursor:pointer;}
+a:hover{color: @MainColor_5;}
+/* avalon 防止闪屏 [ms-controller],*/
+[ms-controller],
+.ms-controller {
+  visibility: hidden;
+  display: none;
+}
+ 
+/* 自定义滚动条默认样式 */
+.divScroll {
+    background-color: #ddd;position: absolute;opacity: 0.5;filter: Alpha(opacity=50); z-index: 100;top: 0;
+     div {background-color: #2D9FD8;position: absolute; left: 0px;top: 0px; border-radius: 3px;
+}
+}
+@BHColor:#01a4d3;
+//   蓝色背景的默认按钮样式
+.D_B_H1{
+    background:#329fd9;
+      .border-radius(3px);
+      color:white !important;
+      text-align:center;
+    &:hover{
+        background:@BHColor;
+    }
+}
+//    白底蓝字的按钮默认样式
+.D_B_H2{
+    background:#FFF;
+    border:1px solid @BHColor;
+    color:@BHColor;
+    .border-radius(3px);
+    &:hover{
+        background:@BHColor;
+        color:white;
+    }
+}
+
+.DTitle{height: 40px; line-height: 40px;padding: 0 10px;
+       h2{float: left;}
+       p{width: 55px; float: right;font-size: 13px;text-align: right;
+         a{color:@FontColor_3;}
+       }
+}
+
+//  结束的按钮样式
+.D_B_O{
+    background:#bbbbbb;
+    color:white; 
+}
+
+// icon  链接
+
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1501911861310'); /* IE9*/
+  src: url('iconfont.eot?t=1501911861310#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1501911861310') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1501911861310') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1501911861310#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.clearfix { 
+
+  *zoom: 1; 
+
+} 
+
+.clearfix:before, 
+
+.clearfix:after { 
+
+  display: table; 
+
+  line-height: 0; 
+
+  content: ""; 
+
+} 
+.clearfix:after { 
+
+  clear: both; 
+
+} 
+//普通广告样式
+.adshow img{display:block; }
+.adms { display:none !important; position:absolute !important; left:0 !important; bottom:0 !important; width:30px !important; height:17px !important; border:none !important; z-index:666; display:block !important;}
+
+//icon  样式
+.iconfont{
+  font-family:"iconfont" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.icon-fenxiang:before { content: "\e60f"; }
+
+.icon-qq:before { content: "\e62b"; }
+
+.icon-qqkongjian:before { content: "\e64e"; }
+
+.icon-weixin1:before { content: "\e50a"; }
+
+.icon-552cd5bdeaada:before { content: "\e504"; }
+
+//loading
+.loading ._mask_loadDiv{
+    z-index:999 !important;
+}

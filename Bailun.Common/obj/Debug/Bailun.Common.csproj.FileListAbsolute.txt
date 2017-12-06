@@ -1,0 +1,9 @@
+D:\work\GIT\bailun\Bailun.Common\bin\Debug\Bailun.Common.dll
+D:\work\GIT\bailun\Bailun.Common\bin\Debug\Bailun.Common.pdb
+D:\work\GIT\bailun\Bailun.Common\bin\Debug\FX110.Cache.dll
+D:\work\GIT\bailun\Bailun.Common\bin\Debug\FX110.ClientSecurity.dll
+D:\work\GIT\bailun\Bailun.Common\bin\Debug\Newtonsoft.Json.dll
+D:\work\GIT\bailun\Bailun.Common\bin\Debug\Newtonsoft.Json.xml
+D:\work\GIT\bailun\Bailun.Common\obj\Debug\Bailun.Common.dll
+D:\work\GIT\bailun\Bailun.Common\obj\Debug\Bailun.Common.pdb
+D:\work\GIT\bailun\Bailun.Common\obj\Debug\Bailun.Common.csprojResolveAssemblyReference.cache

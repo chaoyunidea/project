@@ -1,0 +1,1 @@
+function onLine(e,t){var n={addHandler:function(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}};n.addHandler(window,"online",e),n.addHandler(window,"offline",t)};

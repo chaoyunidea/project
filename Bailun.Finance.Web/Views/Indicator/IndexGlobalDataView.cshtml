@@ -1,0 +1,91 @@
+﻿@using Bailun.Finance.Model.Indicator;
+@using Bailun.Common.Extensions;
+@{
+    Layout = null;
+    var model = Model as GlobalEconomicModel;
+    var GIdArr = ViewBag.GId as GlobalEconomicModel;
+}
+
+<div class="main">
+    <div class="main-title clearfix">
+        <h3>
+            全球经济
+        </h3>
+        <ul class="country-list clearfix">
+            @if (model != null && model.fields != null)
+            {
+                for (var i = 0; i < model.fields.Length; i++)
+                {
+                    <li><a href="/indicator/country/@(i + 1)" target="_blank">@(model.fields[i])</a></li>
+                }
+            }         
+        </ul>
+    </div>
+    <div class="content clearfix">
+        <div class="table-left item">
+            <dl class="title"><dd>热门指标</dd></dl>
+            @if (model!=null && model.items!=null)
+            {
+                for (var i = 0;i < model.names.Length;i++)
+                {
+                    <dl><dd>@(model.names[i])</dd></dl>
+                }
+            }          
+        </div>
+        <div class="scroll-bar clearfix" id="scroll-bar">
+            <i class="left" id="scroll-left"></i>
+            <i class="right" id="scroll-right"></i>
+        </div>
+        <div class="table-center item" id="scroll">
+
+            <table class="main-data" id="scroll-table">
+                <tr>
+                    @if (model != null && model.fields != null)
+                    {
+                        for (var i = 0; i < model.fields.Length; i++)
+                        {
+                            <th>@(model.fields[i])</th>
+                        }
+                    }                   
+                </tr>
+                @if (model != null && model.items != null)
+                {
+                    int indexEm = 0;
+                    foreach (IList<string[]> em in model.items)
+                    {
+                        //var index = model.items.IndexOf(em);
+                        string[] minMax = em.GeMaxMinValue();                        
+                        <tr>
+                            @for (var k = 0; k < em.Count; k++)
+                            {
+                                if (em[k][0] == minMax[0])
+                                {
+                                    <td class="last"><a href="/indicator/detail/@(em[k][1])" target="_blank">@(em[k][0] == "" ? "--" : em[k][0])</a></td>
+                                }
+                                else if (em[k][0] == minMax[1])
+                                {
+                                    <td class="top"><a href="/indicator/detail/@(em[k][1])" target="_blank">@(em[k][0] == "" ? "--" : em[k][0])</a></td>
+                                }
+                                else
+                                {
+                                    <td><a href="/indicator/detail/@(em[k][1])" target="_blank">@(em[k][0] == "" ? "--" : em[k][0])</a></td>
+                                }
+                            }
+                        </tr>
+                        indexEm++;
+                    }
+                }                
+            </table>
+        </div>
+        <div class="table-right item">
+            <dl class="title"><dd></dd></dl>
+            @if (model != null && model.items != null)
+            {
+                for (var i = 1; i <= model.items.Count; i++)
+                {
+                    <dl><dd id="chart@(i)" class="compare-chart"></dd></dl>
+                }
+            }          
+        </div>
+    </div>
+</div>

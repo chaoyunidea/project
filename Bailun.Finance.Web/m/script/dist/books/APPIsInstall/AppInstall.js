@@ -1,0 +1,1 @@
+function AppInstall(e,t,n){window.location.href=e,window.setTimeout(function(){t()},2e3)};

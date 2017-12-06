@@ -1,0 +1,23 @@
+//mode: 'click'  无刷新页面 多个导航栏  在click 里面写ajax方法
+    //实例   var的名字 要与 type 里面的一样
+    var newsPage = kkpager.deepCopy();
+    newsPage.generPageHtml({
+        type: "newsPage",
+        pagerid: "kkpager",
+        total: 6,
+        pno: 6,
+        isShowCurrPage: false,
+        isGoPage:false,
+        mode: 'click',
+        lang: {
+            firstPageText: "<<",
+            lastPageText: ">>",
+            prePageText: "<",
+            nextPageText:">"
+        },
+        click: function (n) {
+            //这里请求Ajax;
+            this.selectPage(n);
+            return false;
+        }
+    }, true);

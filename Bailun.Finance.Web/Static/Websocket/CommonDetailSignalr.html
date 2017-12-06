@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../../Scripts/glup/jquery/jquery-1.8.3.min.js?v=e128811631"></script>
+    
+    <script src="https://gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="https://gajsapi.fx110.com/script/public/signalr/signalr.1.0.1.min.js?2"></script>
+    <script>
+
+        var symbol = decodeURIComponent(GetQueryString('?symbol')), signalrServer;
+        var productJson = { 1: ['外汇', 'Forex'], 2: ['商品期货', 'CommodityFutures'], 3: ['股指', 'Major_indices'], 4: ['债券', 'Bonds'], 5: ['外汇期货', 'cfdindices'], 'ashares': ['沪深', 'ashares'], 'hkstock': ['港股', 'hkstock'], 'usstock': ['美股', 'usstock'], 9: ['比特币', 'BitCon'], 10: ['股指期货', 'IndexFutures'], 11: ['贵金属', 'MetalsFutures'] };
+
+        function singalr() {
+        signalrServer = new signalr(
+            {
+                hubjs: '/Scripts/glup/OCS/quotehubs.js?v=1ef29dcf33',
+                hubConnection: 'https://q' + (Math.floor(Math.random() * 30) + 1) + '.bailun.com/signalr',
+                createHubProxy: 'QuoteHub',
+                connHunProxyOn: 'Subscribe'
+            },
+            function (that) {
+                that.connHunProxy.invoke("WebSiteSubscribeSymbol", symbol);
+            },
+            function (json) {
+                var ar = json.split(',');
+                Vary = new createForexData(ar[0], ar[1], ar[2], ar[3], ar[4], ar[5], ar[6], ar[7], ar[8], ar[9], ar[10], ar[11], ar[12]);
+                window.parent.detailRefreshRender(Vary);
+            },
+           function (state) {//: 0正在连接 1已连接 2重新连接 4断开连接
+               if (state.newState == 4) {
+                   singalr();
+               }
+           })
+        }
+        singalr();
+       function createForexData(stockCode, stockName, bid, ask, open, close, high, low, spread, time, priceLimit, priceExchange,source) {
+            this.Code = stockCode;
+            this.Cn_Name = stockName;
+            this.CurrentPrice = source == 0 ? close : bid;
+            this.Ask = ask;
+            this.OpenPrice = open;
+            this.ClosePrice = close;
+            this.HighPrice = high;
+            this.LowPrice = low;
+            this.PriceLimit = priceLimit;
+            this.PriceExchange = priceExchange;
+            //this.点差 = BP1;
+        }
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

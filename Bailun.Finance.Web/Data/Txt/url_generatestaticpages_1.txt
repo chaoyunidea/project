@@ -1,0 +1,2 @@
+http://10.80.114.249:8021/News/GenerateStaticPageNewsIndex
+http://10.80.114.205:8021/News/GenerateStaticPageNewsIndex

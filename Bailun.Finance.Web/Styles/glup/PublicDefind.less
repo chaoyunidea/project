@@ -1,0 +1,207 @@
+﻿
+
+//图片路径设置
+@ImgUrl:'/Images/';
+@UploadImgUrl:"http://upload.fx110.com/";
+@DefindWidth:1170px;
+@DefindLeftWidth: 850px; 
+@DefindRightWidht:300px;
+@font-f:'微软雅黑','宋体,PingFang SC,Lantinghei SC,Helvetica Neue';
+
+
+@DefindSize:16px;
+
+//边框方法：
+@border_color:#ddd;
+
+
+//字体颜色
+@FontColor_1:#323232; //一级信息
+@FontColor_2:#636363; //二级信息
+@FontColor_3:#929292; //三级信息
+
+
+@Emphasize_red:#ff1a30; // 着重突出
+@Auxiliary_k:#feaf48;   // 辅助配色
+@Offer_b:#14b971;       // 报价辅助配色
+@Line:#eaeaea;          // 线
+@Default_bg:#f7f7f7;    // 背景色值
+
+
+@MainColor_1:#005269;  //暗蓝色
+@MainColor_2:#feaf48;  //黄色
+@MainColor_3:#14b971;  //绿色
+@MainColor_4:#323232;  //黑色
+@MainColor_5:#329fd9;  //蓝色
+@MainColor_6:#ff1a30;  //红色
+
+//  默认颜色 #ddd   默认尺寸：1px   默认样式：实线
+//  参数1  ==> @posi：边框位置 （all：所有边框   left：左边框  right：右边框  top：上边框  bottom：下边框）
+//  参数2  ==> @color：边框颜色  
+//  参数3  ==> @fz：边框大小 
+//  参数4  ==> @sty：边框样式
+.border(@posi, @color:@border_color,@fz:1px,@sty:solid) when (@posi=all) {
+    border:@fz @sty @color;
+}
+.border(@posi,@color:@border_color,@fz:1px,@sty:solid) when (@posi=left){
+    border-left:@fz @sty @color;
+} 
+.border(@posi,@color:@border_color,@fz:1px,@sty:solid) when (@posi=right){
+    border-right:@fz @sty @color;
+}
+.border(@posi,@color:@border_color,@fz:1px,@sty:solid) when (@posi=top){
+    border-top:@fz @sty @color;
+}
+.border(@posi,@color:@border_color,@fz:1px,@sty:solid) when (@posi=bottom){
+    border-bottom:@fz @sty @color; 
+}
+
+.ellipsis(){overflow:hidden;white-space:nowrap;text-overflow:ellipsis;word-wrap:normal;}
+
+
+//定位方法
+//  默认定位方式：绝对定位    默认定位偏移量：0  
+//  参数1  ==>@posi：定位位置 （left：左上   right：右上    bottom：右下    all：上下左右全设置）
+//  参数2和3设置定位的偏移量（all情况下需要传2/3/4/5，四个参数）   单位像素
+//  参数3设置定位方式   （默认绝对定位）
+.posi(@posi,@left:0px,@top:0px,@ways:absolute) when (@posi=left) {position:@ways;left:@left;top:@top;}
+.posi(@posi,@Right:0px,@top:0px,@ways:absolute) when (@posi=right) {position:@ways;right:@Right;top:@top;}
+.posi(@posi,@Right:0px,@botton:0px,@ways:absolute) when (@posi=bottom) {position:@ways;right:@Right;bottom:@botton;}
+.posi(@posi,@position:absolute,@Top:0px,@Right:0px,@Bottom:0px,@Left:0px) when (@posi=all){position:@position; top:@Top; right:@Right; bottom:@Bottom; left:@Left;}
+
+
+//使用CSS框架(例如bootstrap)时往往需要重置一下元素的margin  padding值；
+.reset(){padding:0;margin:0;line-height:0;border:0;}
+
+//兼容透明度的方法
+//参数：0到1（例如0.2）
+.opacity(@value: 0) {@ie6_value: (@value * 100);-khtml-opacity: @value;-moz-opacity: @value;opacity: @value;filter: ~'alpha(opacity=@{ie6_value})';}
+
+//兼容CSS3圆角的方法
+//参数：圆角尺寸
+.border-radius(@value){ -moz-border-radius: @value !important; -webkit-border-radius: @value !important; border-radius: @value !important;} 
+
+//兼容CSS3阴影的方法
+//h-shadow	必需。水平阴影的位置。允许负值。	
+//v-shadow	必需。垂直阴影的位置。允许负值。	
+//blur	    可选。模糊距离。	
+//color	    可选。阴影的颜色。
+//inset	    可选。将外部阴影 (outset) 改为内部阴影。  //不传默认
+
+//spread	可选。阴影的尺寸。	//不常用，未传，如需请使用单独样式设置
+.box-shadow(@h-shadow,@filter,@v-shadow,@blur,@color){-webkit-box-shadow: @h-shadow @filter @v-shadow @blur  @color ;-moz-box-shadow: @h-shadow @filter @v-shadow @blur @color ;box-shadow: @h-shadow @filter @v-shadow @blur @color ;} 
+
+//溢出隐藏显示...的方法
+.over_group(){white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow: hidden; }
+
+//设置宽高溢出隐藏
+.over(@width:auto,@height:auto){width:@width;height:@height;overflow:hidden;}
+
+//行内元素块状化并设置宽高；
+.inline_block(@width:auto;@height:auto){width:@width;height:@height;display:inline-block;}
+
+/* 图片100%宽高 */
+.img(){width:100%; height:100%;}
+
+//css三角形
+//参数   1：三角形朝向（up:上   down:下   left：左   right：右）
+//参数   2：三角形大小
+//参数   3：三角形颜色
+.triangle(@position, @triangle-height, @triangle-width,@triangle-color) when (@position=up){
+    border-color: transparent transparent @triangle-color transparent;
+    border-style: solid;
+    border-width: @triangle-height @triangle-width;
+    //.posi(right);
+}
+.triangle(@position, @triangle-height, @triangle-width,@triangle-color) when (@position=down){
+    border-color: @triangle-color transparent transparent transparent ;
+    border-style: solid;
+    border-width: @triangle-height @triangle-width;
+    // .posi(right);
+}
+.triangle(@position, @triangle-height, @triangle-width,@triangle-color) when (@position=left){
+    border-color: transparent @triangle-color transparent transparent;
+    border-style: solid;
+    border-width: @triangle-width @triangle-height;
+    // .posi(right);
+}
+.triangle(@position, @triangle-height, @triangle-width,@triangle-color) when (@position=right){
+    border-color: transparent transparent transparent @triangle-color;
+    border-style: solid;
+    border-width: @triangle-width @triangle-height;
+     //.posi(right);
+}
+//按钮移入点击改变背景的方法
+//参数  1：元素的背景颜色
+//参数  2：鼠标移入时的饱和度值  例：10%
+//参数  3：鼠标点击时的饱和度值  例：20%
+.botSaturate(@color,@hover_percentage,@active_percentage){
+    background-color:@color;
+      &:hover{
+          background-color:lighten(@color,@hover_percentage);
+      }
+      &:active{
+           background-color:darken(@color,@active_percentage);
+      }
+}
+
+//兼容的flex布局
+.flex(){display: flex; display: -webkit-flex;}
+
+//css3 带边框边框  总宽度不变的设置
+.box-sizing(){box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-o-box-sizing: border-box; -ms-box-sizing:border-box;}
+.flexSize(@size){ flex: @size; -webkit-flex: @size; }
+.flexGrow(@size){flex-grow:@size; -webkit-flex-grow: @size; -webkit-box-flex-group: @size;}
+
+.tapcolor(){
+    -moz-tap-highlight-color :rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color :rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color :rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color :rgba(0, 0, 0, 0);
+    
+    
+    animation-timing-function:@pattern;
+    -webkit-animation-timing-function:@pattern;
+    -moz-animation-timing-function: @pattern;
+    -o-animation-timing-function:@pattern;
+}
+
+//返回Icon公用方法
+.returnIcon(@size,@borderSize,@color){ 
+    width:@size; 
+    height:@size; 
+    border-left:@borderSize @color solid; 
+    border-bottom:@borderSize @color solid; 
+    transform:rotate(45deg); 
+    -ms-transform:rotate(45deg); /* Internet Explorer */
+    -moz-transform:rotate(45deg); /* Firefox */
+    -webkit-transform:rotate(45deg); /* Safari 和 Chrome */
+    -o-transform:rotate(45deg); /* Opera */
+    display:block;
+}
+
+//默认盒子阴影样式
+.box_shadow{
+    .box-shadow(0,0,0,5px,#d7d7d7);
+}
+
+//禁止选中文字
+.prohibit_text(){
+    moz-user-select: -moz-none; 
+    -moz-user-select: none; 
+    -o-user-select:none; 
+    -khtml-user-select:none; /* you could also put this in a class */ 
+    -webkit-user-select:none;/* and add the CSS class here instead */ 
+    -ms-user-select:none; 
+    user-select:none;/**禁止选中文字*/ 
+}
+
+// css的高斯模糊效果
+.filter(@size){
+-webkit-filter: blur(@size); /* Chrome, Opera */
+   -moz-filter: blur(@size);
+    -ms-filter: blur(@size);    
+        filter: blur(@size);
+
+filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=@size, MakeShadow=false); /* IE6~IE9 */
+}

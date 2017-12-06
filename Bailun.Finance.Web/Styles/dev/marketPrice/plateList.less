@@ -1,0 +1,61 @@
+﻿@import (reference) "../../glup/PublicDefind.less";//引入方法
+@import (reference) "../../glup/Animation.less";//引入方法
+@priceImg:'@{ImgUrl}/marketPrice/';
+body{background:@Default_bg;color:@FontColor_1;}
+
+.area{   
+    margin-bottom:25px; 
+    .heading{
+        border-top:1px solid @border_color;
+        h3{font-size:16px;font-weight:bold;padding:8px 17px;border-top:3px solid @MainColor_5;display: inline-block;position: relative;top: -1px;float:left;}
+        span{float:right;line-height:40px;color:@FontColor_3;}
+    }       
+}
+.main{
+    margin:20px auto;width:@DefindWidth;
+    .left{
+        width:100%;float:left;
+        .control-bar{width:auto;}
+        .bread{
+            padding:0 10px;margin:15px 0;height:20px;
+            span{
+                line-height:20px;float:left;margin-right:5px;
+            }
+            .plate-select{
+                margin-left:10px;padding:0 8px;background:#fff;.box-shadow(0 ,0 ,3.5px ,0 ,rgba(0, 0, 0, 0.13));cursor:pointer;position:relative;
+                img{width:10px;vertical-align:middle;}
+                em{color:#329fd9;margin-left:5px;line-height:20px;}
+                &.active{
+                    .set-box{display:block;}
+                }                
+                .set-box{
+                    position:absolute;left:0px;.box-shadow(0, 0 ,6.5px ,0, rgba(195, 195, 195, 0.4));margin-top: 10px;display:none;background:#f7f8f9;z-index:999;
+                    ul{
+                        li{
+                            a{display:block;}
+                            line-height:20px;padding:5px 10px;width:120px;  
+                            .more{text-align:center;color:#329fd9;}                                                     
+                        }
+                    }
+                    .shape{.triangle(up,7px,7px,#f7f8f9);position:absolute;top: -12px;left: 20px;}
+                }
+            }
+        }
+        .plate{
+            .content{
+                .box-shadow(0 ,0, 16px ,0 ,rgba(195, 195, 195, 0.18));padding-bottom:50px;background:#fff;min-height:800px;
+                .plateList{
+                    li{
+                        background: #fff; padding: 10px;border-bottom: 1px solid #ddd;
+                        a{
+                            float:left;margin:10px;width:120px;font-size:16px;color:#323232;font-weight:bold;.ellipsis();
+                            &:hover{color:@MainColor_5;}
+                        }
+                        &:hover{.box-shadow(0, 0 ,8px ,0, rgba(0, 0, 0, 0.12));position:relative;}
+                    }
+                }
+            }
+        }
+    }    
+}
+

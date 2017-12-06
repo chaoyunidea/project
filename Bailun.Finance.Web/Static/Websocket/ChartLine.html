@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="/Scripts/glup/jquery/jquery-1.8.3.min.js?v=e128811631"></script>
+    <script src="https://gajsapi.fx110.com/script/public/Compatible/Compatible.min.js"></script>
+    <script src="https://gajsapi.fx110.com/script/public/signalr/signalr.1.0.1.js?2"></script>
+</head>
+<body>
+    <script>
+        //signalr 的时间模型
+        var Timeframe = {
+            /// <summary>1 minute</summary>
+            /// 
+            PERIOD_M1: 1,
+
+            /// <summary>5 minutes</summary>
+            /// 
+            PERIOD_M5: 5,
+
+            /// <summary>15 minutes</summary>
+            /// 
+            PERIOD_M15: 15,
+
+            /// <summary>30 minutes</summary>
+            /// 
+            PERIOD_M30: 30,
+
+            /// <summary>1 hour</summary>
+            /// 
+            PERIOD_H1: 60,
+
+            /// <summary>4 hour</summary>
+            /// 
+            PERIOD_H4: 240,
+
+            /// <summary>1 Daily</summary>
+            /// 
+            PERIOD_D1: 1440,
+
+            /// <summary>Weekly</summary>
+            /// 
+            PERIOD_W1: 10080,
+
+            /// <summary>Monthly</summary>
+            /// 
+            PERIOD_MN1: 43200
+        },
+            ticker = decodeURI(GetQueryString('Ticker')), //品种id
+            Subscribed = decodeURI(GetQueryString("Varieties")), //当前signalr运行的品种名称
+            ajaxPoll,
+            resolutionT = timeConversion(GetQueryString("resolution")),//当前signalr运行的品种的分钟图
+            isPoll = true,
+            rangeStartDate = [0,0];
+        var pollingNews = (function () {
+            var ajax = function (time) {
+                $.ajax({
+                    type: 'get',
+                    url: '/chartdata/history?symbol=' + parseInt(ticker) + '&resolution=' + parseInt(resolutionT) + '&from=' +  LastTwoRangStartDate() + '&to=' + parseInt(new Date().getTime().toString().substr(0, 10)),
+                    success: function (data) {
+                       // console.log(data);
+                        if (data != "") {
+                            windowUpdate(data);
+                        }
+                    },
+                    //complete: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //    if (!isPoll) return;
+                    //    ajaxPoll = setTimeout(function () { ajax() }, 1000)
+                    //}
+                })
+            }
+            return {
+                start: function () {
+                    this.ajax()
+                },
+                stop: function () { clearInterval(ajaxPoll) },
+                ajax: ajax
+            }
+        })()
+
+        function LastTwoRangStartDate() {
+            return Math.max(parseInt(rangeStartDate[0]), parseInt(window.parent.windowRangTime[0]));
+        }
+
+        function LastRangStartDate() {
+            return Math.max(parseInt(rangeStartDate[1]), parseInt(window.parent.windowRangTime[1]));
+        }
+
+        function singalr() {
+            signalrServer = new signalr(
+           {
+               hubjs: "/Scripts/glup/OCS/quotehubs.js?v=1ef29dcf33",
+               hubConnection: 'https://q' + (Math.floor(Math.random() * 30) + 1) + '.bailun.com/signalr',
+               createHubProxy: 'QuoteHub',
+               connHunProxyOn: 'ChartBar',
+               disconnected: function () {
+               }
+           },
+           function (that) {
+               //that.connHunProxy.invoke("WebSiteSubscribeSymbol", priceArr.join('|'));
+               if (Subscribed === "" && resolutionT === 0) {
+                   Subscribed = decodeURI(GetQueryString("Varieties"));
+                   resolutionT = timeConversion(GetQueryString("resolution"));
+               }
+               that.connHunProxy.invoke('MobileSubscribeSymbol_ChartLine', Subscribed, resolutionT);
+           },
+           function (json) { 
+               windowUpdate(json);
+           },
+           function (state) {//: 0正在连接 1已连接 2重新连接 4断开连接
+               if(state.newState == 1){
+                   pollingNews.start();
+               } else if (state.newState == 4) {
+                   singalr();
+               }
+           })
+        }
+        singalr();
+
+
+      
+       function windowUpdate(json) {
+           try {
+               var data = JSON.parse(json);
+
+               if (typeof data === "string") {
+                   data = JSON.parse(data);
+                   if (data.t.length >= 2) {
+                       rangeStartDate[0] = data.t[data.t.length - 2];
+                       rangeStartDate[1] = data.t[data.t.length - 1];
+                       var gmt = 8 - parseInt(data.gmt);
+                       for (var cc = 0; cc  < data.c.length; cc++)
+                       {
+                       var times = parseInt(data.t[cc]) + (60 * 60 * gmt);
+                       var d = new TradingView([times], [data.c[cc]], [data.o[cc]], [data.l[cc]], [data.h[cc]], [data.v[0]], data.s, "0");
+                           parent.window.update(JSON.stringify(d));
+                       }
+                   }
+                  
+
+               } else {
+                   var time = data.Time.replace('T', ' ').replace('Z', '').replace(/-/g, "/");
+                   var gmt = 8 - parseInt(data.GMT);
+                   time = new Date(time).getTime().toString();
+                   times = parseInt(time.substr(0, time.length - 3)) + (60 * 60 * gmt);
+
+                   data = new TradingView([times], [data.Close.toString()], [data.Open.toString()], [data.Low.toString()], [data.High.toString()], ["0"], "ok", "0");
+
+                   if (parseInt(time.substr(0, time.length - 3)) > LastRangStartDate()) {
+                       rangeStartDate[0] = rangeStartDate[1];
+                       rangeStartDate[1] = parseInt(time.substr(0, time.length - 3));
+                   }
+                   parent.window.update(JSON.stringify(data));
+               }
+
+               
+
+              
+              
+           }
+           catch (e) { }
+        }
+          
+        /*
+         订阅
+         name 品种名称
+         resolution  时间
+        */
+        function connHunProxy(name, resolution) {
+            //取消订阅
+            if (Subscribed != "" || resolutionT != 0) signalrServer.connHunProxy().invoke('MobileDisSubscribeSymbol_ChartLine', Subscribed, resolutionT);
+
+            //发起订阅
+            signalrServer.connHunProxy().invoke('MobileSubscribeSymbol_ChartLine', name, timeConversion(resolution));
+            Subscribed = name;
+            resolutionT = timeConversion(resolution);
+        }
+
+        /* 
+            时间转化
+            1 5 15 30 60 240 D W M
+        */
+        function timeConversion(time) {
+            switch (time) {
+                case "1":
+                    return Timeframe.PERIOD_M1;
+                    break;
+                case "5":
+                    return Timeframe.PERIOD_M5;
+                    break;
+                case "15":
+                    return Timeframe.PERIOD_M15;
+                    break;
+                case "30":
+                    return Timeframe.PERIOD_M30;
+                    break;
+                case "60":
+                    return Timeframe.PERIOD_H1;
+                    break;
+                case "240":
+                    return Timeframe.PERIOD_H4;
+                    break;
+                case "D":
+                    return Timeframe.PERIOD_D1;
+                    break;
+                case "W":
+                    return Timeframe.PERIOD_W1;
+                    break;
+                case "M":
+                    return Timeframe.PERIOD_MN1;
+                    break;
+                default:
+                    console.log(time);
+                    return 0;
+                    break;
+            }
+
+        }
+
+       
+
+        //  tradingview 画图的模型
+        function TradingView(t,c,o,l,h,v,s,nextTime) {
+            this.t = t;
+            this.c = c;
+            this.o = o;
+            this.l = l;
+            this.h = h;
+            this.v = v;
+            this.s = s;
+            this.nextTime = nextTime;
+        }
+        // 1507174680
+        // 1507524180000
+            //{"t":[],"c":[],"o":[],"l":[],"h":[],"v":[],"s":"ok","nextTime":0}
+
+            //{"Ask":1.17379,"Bid":1.17365,
+        //"Close":1.17365,"High":1.17368,"Low":1.17363,"Open":1.17367,"Time":"2017-10-09T04:43:00Z"}
+
+        //accept-symbol
+    </script>
+</body>
+</html>
